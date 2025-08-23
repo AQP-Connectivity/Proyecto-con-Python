@@ -1,0 +1,11 @@
+Usar cmd
+
+-Instalar flask
+pip install flask
+-instalar opencv
+pip install opencv-python
+-Instalar Tesseract ocr
+pip install pytesseract
+https://github.com/UB-Mannheim/tesseract/wiki
+-Intalar flask con open
+pip install flask opencv-python pytesseract
