@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from controllers.placa_controller import procesar_placa, obtener_registros
 from database.conexion import init_db
 
@@ -9,7 +9,20 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # Inicializar DB
 init_db()
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+def root():
+    # Redirige a login
+    return redirect(url_for("login"))
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # Aquí puedes manejar el POST para validar usuario si quieres
+    if request.method == "POST":
+        # validación y lógica aquí
+        pass
+    return render_template("login.html")
+
+@app.route("/index", methods=["GET", "POST"])
 def index():
     placa_text = None
     if request.method == "POST":
