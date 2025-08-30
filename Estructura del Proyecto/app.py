@@ -6,7 +6,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# Inicializar DB
+# Inicializar DB sQLITE
 init_db()
 
 @app.route("/")
