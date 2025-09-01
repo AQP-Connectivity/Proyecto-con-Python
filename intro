@@ -1,1 +1,53 @@
-Un sistema de parking es una herramienta tecnológica que permite gestionar de forma eficiente los espacios de estacionamiento, controlando el acceso de vehículos, el tiempo de permanencia y la disponibilidad de plazas. Su implementación contribuye a optimizar recursos, mejorar la organización del tránsito interno y ofrecer mayor seguridad tanto a los usuarios como a la administración. Estos sistemas se apoyan en dispositivos electrónicos, software de control y, en algunos casos, sensores inteligentes que facilitan la automatización de los procesos.
+INTRODUCCIÓN
+
+En la actualidad, la gestión eficiente en los servicios de estacionamiento es fundamental para garantizar una atención rápida y segura a 
+los clientes. Muchas playas de estacionamiento todavía realizan el registro de vehículos de manera manual en papel, lo que ocasiona demoras, 
+errores en la transcripción y dificultades para el control histórico de la información.
+Este proyecto propone el desarrollo de un sistema informático para el registro de placas vehiculares que permita almacenar de forma digital 
+los datos de los clientes y las placas de sus automóviles. Además, el sistema incorporará la funcionalidad de capturar imágenes de las placas 
+y asociarlas al registro correspondiente, brindando así un control más preciso y reduciendo el riesgo de errores o fraudes.
+La implementación de esta solución mejorará la eficiencia operativa, incrementará la seguridad y permitirá un acceso rápido a la información
+mediante una base de datos centralizada.
+
+ABSTRACT
+
+This project focuses on the development of a license plate registration system for a parking lot, aimed at replacing the current manual process
+based on paper records. The proposed system will allow storing vehicle license plate information and customer data in a digital database, ensuring
+quick and accurate access to information. Additionally, it will include a feature for capturing photos of license plates and associating them with 
+the corresponding record, improving security and reducing transcription errors. The implementation of this system will optimize operational efficiency,
+provide better control of vehicle entries, and ensure reliable data management for the parking service.
+
+CAPÍTULO 1 - ASPECTOS GENERALES
+1.1 Definición del Problema
+
+Actualmente, la playa de estacionamiento registra los datos de los vehículos y clientes en formularios físicos. 
+Este método manual presenta varias limitaciones:
+
+  - Riesgo de pérdida o deterioro de la información en papel.
+
+  - Errores de transcripción en la escritura manual.
+
+  - Lentitud en el proceso de registro y búsqueda de datos históricos.
+
+  - Falta de integración para consultar información de manera rápida.
+
+Estas dificultades impactan negativamente en la eficiencia del servicio, la seguridad de los clientes y el control interno. Es necesario implementar un 
+sistema que digitalice estos procesos para optimizar el tiempo y minimizar errores.
+
+1.2 Definición de Objetivos
+Objetivo General
+
+Desarrollar un sistema informático que permita el registro digital de placas vehiculares y datos de clientes en una base de datos, incorporando la 
+funcionalidad de captura y almacenamiento de imágenes de las placas para mejorar la gestión y seguridad en la playa de estacionamiento.
+
+Objetivos Específicos
+
+  - Diseñar una interfaz que facilite el registro y consulta de información de los clientes y sus vehículos.
+
+  - Implementar un módulo para capturar y almacenar fotografías de las placas vehiculares.
+
+  - Crear una base de datos que organice y resguarde la información de manera segura y accesible.
+
+  - Reducir el tiempo de registro y búsqueda en comparación con el método manual.
+
+  - Garantizar la integridad y disponibilidad de la información mediante respaldos periódicos.
