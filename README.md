@@ -4,5 +4,5 @@
 
 - ✅ Choque Copaja, Elisvan Jhon
 - ✅ Quispe Diaz, Edu Gonzalo
-- ✅ Valdivia Quispe , Alexander Paul
-- ✅ Batallanos Cuti Anyela Jenifer
+- ✅ Valdivia Quispe, Alexander Paul
+- ✅ Batallanos Cuti, Anyela Jenifer
