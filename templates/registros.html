@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registros de Placas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📋 Registros de Vehículos</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Placa</th>
+                <th>Fecha y Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for id, numero, fecha_hora in registros %}
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ numero }}</td>
+                <td>{{ fecha_hora }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary">Descargar Reporte en PDF</a>
+        <a href="{{ url_for('index') }}" class="btn btn-primary w-100">⬅️ Volver al Inicio</a>
+    </div>
+</div>
+
+</body>
+</html>
