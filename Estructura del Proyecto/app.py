@@ -7,11 +7,11 @@ from flask import Response
 
 
 
-app = Flask(__name__)
+app = Flask(_name_)
 UPLOAD_FOLDER = "static"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# 👉 Hacer disponible `request` en todos los templates
+# 👉 Hacer disponible request en todos los templates
 @app.context_processor
 def inject_request():
     return dict(request=request)
@@ -72,6 +72,41 @@ def generar_frames():
             frame_bytes = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+            
+# ✅ Ruta del Estacionamiento
+@app.route("/estacionamiento", methods=["GET", "POST"])
+def estacionamiento():
+    mensaje = None
+    if request.method == "POST":
+        fecha = request.form.get("fecha")
+        hora = request.form.get("hora")
+        precio = request.form.get("precio")
+
+        # Aquí luego guardamos en SQLite; por ahora solo confirmamos en pantalla
+        if fecha and hora and precio:
+            mensaje = f"Estacionamiento guardado: {fecha} {hora} - S/. {precio}"
+        else:
+            mensaje = "Completa todos los campos."
+
+    return render_template("estacionamiento.html", mensaje=mensaje)
+
+
+# ✅ Ruta de Pagos
+@app.route("/pagos", methods=["GET", "POST"])
+def pagos():
+    mensaje = None
+    if request.method == "POST":
+        monto = request.form.get("monto")
+        metodo = request.form.get("metodo")
+        fecha = request.form.get("fecha")
+
+        if monto and metodo and fecha:
+            mensaje = f"Pago registrado: {monto} soles con {metodo} el {fecha}"
+        else:
+            mensaje = "Completa todos los campos."
+
+    return render_template("pagos.html", mensaje=mensaje)
+
 
 @app.route("/camara")
 def camara():
@@ -81,5 +116,5 @@ def camara():
 def video_feed():
     return Response(generar_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
