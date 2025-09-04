@@ -4,7 +4,7 @@ from database.conexion import init_db
 from utils.pdf_utils import generar_pdf
 import cv2
 from flask import Response
-
+from controllers.dashboard_controller import obtener_dashboard
 
 
 app = Flask(_name_)
@@ -59,6 +59,20 @@ def reporte_pdf():
     registros = obtener_registros()
     pdf = generar_pdf(registros)
     return send_file(pdf, as_attachment=True, download_name="reporte_placas.pdf", mimetype="application/pdf")
+
+
+
+
+@app.route("/dashboard")
+def dashboard():
+    fechas = ["2025-09-01", "2025-09-02"]
+    cantidades = [3, 5]
+
+    return render_template(
+        "dashboard.html",
+        fechas_json=json.dumps(fechas),
+        cantidades_json=json.dumps(cantidades)
+    )
 
 camera = cv2.VideoCapture(0)  # Cámara predeterminada
 
