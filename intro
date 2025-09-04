@@ -51,3 +51,22 @@ Objetivos Específicos
   - Reducir el tiempo de registro y búsqueda en comparación con el método manual.
 
   - Garantizar la integridad y disponibilidad de la información mediante respaldos periódicos.
+
+
+1.3 Justificación
+
+La implementación de un sistema informático para el registro digital de placas vehiculares responde a la necesidad de modernizar y optimizar la gestión en las playas de estacionamiento. El método manual actualmente utilizado, basado en formularios en papel, genera demoras, errores de transcripción y dificultades para mantener un historial confiable de los registros.
+
+Este proyecto busca solucionar dichas limitaciones mediante la incorporación de tecnologías como visión por computadora, bases de datos centralizadas y reconocimiento óptico de caracteres (OCR). Con ello, se garantiza una captura más rápida, precisa y segura de la información.
+
+La digitalización de los procesos no solo permitirá reducir los tiempos de atención y los errores humanos, sino que también brindará beneficios adicionales:
+
+- Eficiencia operativa: optimización en el control de ingresos y salidas de vehículos.
+
+- Seguridad: almacenamiento confiable de la información que facilita el rastreo de vehículos en caso de incidentes.
+
+- Acceso ágil a la información: consultas inmediatas sobre registros históricos sin depender de documentos físicos.
+
+- Escalabilidad: posibilidad de ampliar el sistema para integrar servicios adicionales, como generación de reportes, control de aforo, estadísticas o incluso pagos automatizados.
+
+En síntesis, este proyecto representa una mejora significativa frente a los métodos tradicionales, aportando valor tanto a los administradores del estacionamiento como a los clientes, al ofrecer un servicio moderno, seguro y confiable.
