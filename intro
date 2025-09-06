@@ -70,3 +70,61 @@ La digitalización de los procesos no solo permitirá reducir los tiempos de ate
 - Escalabilidad: posibilidad de ampliar el sistema para integrar servicios adicionales, como generación de reportes, control de aforo, estadísticas o incluso pagos automatizados.
 
 En síntesis, este proyecto representa una mejora significativa frente a los métodos tradicionales, aportando valor tanto a los administradores del estacionamiento como a los clientes, al ofrecer un servicio moderno, seguro y confiable.
+CAPÍTULO 2 – MARCO TEÓRICO
+2.1. Sistemas de Información en la Gestión Empresarial
+
+Los sistemas de información son herramientas diseñadas para recopilar, procesar, almacenar y distribuir información relevante para la toma de decisiones (Laudon & Laudon, 2020). En el ámbito empresarial, su implementación permite optimizar procesos, reducir costos operativos y mejorar la calidad del servicio.
+En el caso de las playas de estacionamiento, un sistema de información digital sustituye los métodos manuales de registro, eliminando los riesgos de pérdida de datos y aumentando la eficiencia en la atención al cliente.
+
+2.2. Digitalización de Procesos
+
+La digitalización consiste en transformar información analógica (como registros en papel) en datos digitales que pueden ser gestionados mediante tecnologías informáticas (Gartner, 2021).
+Este proceso ofrece beneficios como:
+
+Acceso inmediato a la información.
+
+Mayor precisión y confiabilidad en los datos.
+
+Disminución de errores humanos.
+En contextos modernos, digitalizar los registros vehiculares en playas de estacionamiento permite mantener un control histórico confiable y consultar información en tiempo real.
+
+2.3. Bases de Datos Relacionales
+
+Una base de datos relacional organiza la información en tablas que se relacionan entre sí a través de claves primarias y foráneas (Date, 2019).
+Para un sistema de estacionamiento, este modelo facilita:
+
+Almacenamiento estructurado de datos de clientes y vehículos.
+
+Consultas rápidas y seguras.
+
+Integridad y consistencia de la información.
+El uso de motores de bases de datos como MySQL, PostgreSQL o SQL Server asegura confiabilidad y escalabilidad.
+
+2.4. Visión por Computadora y OCR (Reconocimiento Óptico de Caracteres)
+
+La visión por computadora es una rama de la inteligencia artificial que permite a los sistemas interpretar imágenes y videos de manera automática (Goodfellow et al., 2016).
+Una de sus aplicaciones más utilizadas es el OCR (Optical Character Recognition), tecnología que extrae texto de imágenes y lo convierte en datos editables.
+En el contexto del estacionamiento, el OCR puede emplearse para reconocer automáticamente los caracteres de las placas vehiculares, reduciendo los errores de transcripción manual y agilizando el registro.
+
+2.5. Seguridad y Respaldo de la Información
+
+La seguridad informática garantiza la integridad, confidencialidad y disponibilidad de los datos (Stallings, 2018).
+En sistemas de gestión vehicular, resulta crucial implementar medidas como:
+
+Copias de seguridad periódicas.
+
+Control de accesos mediante usuarios y contraseñas.
+
+Protocolos de encriptación para la información sensible.
+De este modo, se minimizan riesgos de pérdida de datos o accesos no autorizados.
+
+2.6. Experiencias y Aplicaciones Similares
+
+Diversos países ya han implementado sistemas automatizados de control vehicular en estacionamientos y peajes. Estos proyectos demuestran que la digitalización:
+
+Aumenta la velocidad de registro de vehículos.
+
+Reduce errores humanos.
+
+Permite la integración con otros servicios, como reportes estadísticos o control de aforo.
+Estos antecedentes evidencian la viabilidad y necesidad de contar con un sistema de registro digital de placas vehiculares.
