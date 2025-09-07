@@ -70,6 +70,8 @@ La digitalización de los procesos no solo permitirá reducir los tiempos de ate
 - Escalabilidad: posibilidad de ampliar el sistema para integrar servicios adicionales, como generación de reportes, control de aforo, estadísticas o incluso pagos automatizados.
 
 En síntesis, este proyecto representa una mejora significativa frente a los métodos tradicionales, aportando valor tanto a los administradores del estacionamiento como a los clientes, al ofrecer un servicio moderno, seguro y confiable.
+
+
 CAPÍTULO 2 – MARCO TEÓRICO
 2.1. Sistemas de Información en la Gestión Empresarial
 
@@ -128,3 +130,49 @@ Reduce errores humanos.
 
 Permite la integración con otros servicios, como reportes estadísticos o control de aforo.
 Estos antecedentes evidencian la viabilidad y necesidad de contar con un sistema de registro digital de placas vehiculares.
+
+
+Capitulo 3.- Metodología
+
+- Análisis de requerimientos
+Se identificaron las limitaciones del proceso manual en el registro de placas vehiculares, como demoras, errores en la transcripción y falta de control histórico. Se definieron las necesidades principales: rapidez, digitalización de datos, seguridad y generación de reportes.
+
+- Diseño del sistema
+Se planteó una arquitectura basada en el framework Flask para la creación de la aplicación web, junto con SQLite como base de datos ligera y embebida. El sistema contempla módulos de registro, historial, generación de reportes en PDF, pagos y un dashboard para análisis gráfico.
+
+- Herramientas y librerías utilizadas
+
+Python 3.10+: Lenguaje principal de programación.
+
+Flask: Framework web para el desarrollo de la aplicación.
+
+OpenCV (cv2): Captura y procesamiento de imágenes desde la cámara.
+
+SQLite3: Base de datos para almacenamiento de placas y registros.
+
+ReportLab o FPDF: Generación de reportes en PDF.
+
+Jinja2: Motor de plantillas para las vistas HTML.
+
+Bootstrap (desde CDN): Diseño responsivo y componentes de interfaz.
+
+Chart.js: Visualización de datos estadísticos en el dashboard.
+
+- Desarrollo incremental
+La implementación se realizó de forma modular, integrando progresivamente:
+
+Registro de placas con carga de imágenes.
+
+Generación de reportes en PDF con los registros almacenados.
+
+Dashboard con estadísticas de uso y registros.
+
+Módulos de estacionamiento y pagos.
+
+Captura de video en tiempo real con OpenCV.
+
+- Pruebas y validación
+Se realizaron pruebas funcionales en cada módulo, verificando la persistencia de los registros en la base de datos, la correcta exportación de reportes en PDF y la visualización de datos en el dashboard.
+
+- Proyecciones futuras
+Se plantea integrar modelos de Machine Learning para el reconocimiento automático de placas, con librerías como TensorFlow, Keras o YOLOv5, y explorar la conexión con APIs oficiales para la validación de información vehicular.
