@@ -130,5 +130,6 @@ def camara():
 def video_feed():
     return Response(generar_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
+
