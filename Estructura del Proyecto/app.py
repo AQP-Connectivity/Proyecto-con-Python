@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, json, render_template, request, redirect, url_for, send_file
 from controllers.placa_controller import procesar_placa, obtener_registros
 from database.conexion import init_db
 from utils.pdf_utils import generar_pdf
@@ -7,7 +7,7 @@ from flask import Response
 from controllers.dashboard_controller import obtener_dashboard
 
 
-app = Flask(_name_)
+app = Flask(__name__)
 UPLOAD_FOLDER = "static"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -130,5 +130,5 @@ def camara():
 def video_feed():
     return Response(generar_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     app.run(debug=True)
