@@ -1,11 +1,9 @@
-from flask import Flask, json, render_template, request, redirect, url_for, send_file
+from flask import Flask, json, render_template, request, redirect, url_for, send_file, Response
 from controllers.placa_controller import procesar_placa, obtener_registros
 from database.conexion import init_db
 from utils.pdf_utils import generar_pdf
-import cv2
-from flask import Response
 from controllers.dashboard_controller import obtener_dashboard
-
+import cv2
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static"
@@ -27,13 +25,12 @@ def root():
 def login():
     if request.method == "POST":
         # lógica de autenticación aquí
-        pass
+        return redirect(url_for("index"))
     return render_template("login.html")
 
 @app.route("/mantenimiento")
 def mantenimiento():
     return render_template("mantenimiento.html")
-
 
 @app.route("/index", methods=["GET", "POST"])
 def index():
@@ -48,11 +45,11 @@ def index():
 def registros():
     datos = obtener_registros()
     return render_template("registros.html", registros=datos)
+
 @app.route("/historial")
 def historial():
     datos = obtener_registros()
     return render_template("historial.html", registros=datos)
-
 
 @app.route("/reporte_pdf")
 def reporte_pdf():
@@ -60,21 +57,18 @@ def reporte_pdf():
     pdf = generar_pdf(registros)
     return send_file(pdf, as_attachment=True, download_name="reporte_placas.pdf", mimetype="application/pdf")
 
-
-
-
 @app.route("/dashboard")
 def dashboard():
     fechas = ["2025-09-01", "2025-09-02"]
     cantidades = [3, 5]
-
     return render_template(
         "dashboard.html",
         fechas_json=json.dumps(fechas),
         cantidades_json=json.dumps(cantidades)
     )
 
-camera = cv2.VideoCapture(0)  # Cámara predeterminada
+# Cámara
+camera = cv2.VideoCapture(0)
 
 def generar_frames():
     while True:
@@ -86,41 +80,6 @@ def generar_frames():
             frame_bytes = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-            
-# ✅ Ruta del Estacionamiento
-@app.route("/estacionamiento", methods=["GET", "POST"])
-def estacionamiento():
-    mensaje = None
-    if request.method == "POST":
-        fecha = request.form.get("fecha")
-        hora = request.form.get("hora")
-        precio = request.form.get("precio")
-
-        # Aquí luego guardamos en SQLite; por ahora solo confirmamos en pantalla
-        if fecha and hora and precio:
-            mensaje = f"Estacionamiento guardado: {fecha} {hora} - S/. {precio}"
-        else:
-            mensaje = "Completa todos los campos."
-
-    return render_template("estacionamiento.html", mensaje=mensaje)
-
-
-# ✅ Ruta de Pagos
-@app.route("/pagos", methods=["GET", "POST"])
-def pagos():
-    mensaje = None
-    if request.method == "POST":
-        monto = request.form.get("monto")
-        metodo = request.form.get("metodo")
-        fecha = request.form.get("fecha")
-
-        if monto and metodo and fecha:
-            mensaje = f"Pago registrado: {monto} soles con {metodo} el {fecha}"
-        else:
-            mensaje = "Completa todos los campos."
-
-    return render_template("pagos.html", mensaje=mensaje)
-
 
 @app.route("/camara")
 def camara():
@@ -130,6 +89,33 @@ def camara():
 def video_feed():
     return Response(generar_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
+# ✅ Ruta Estacionamiento
+@app.route("/estacionamiento", methods=["GET", "POST"])
+def estacionamiento():
+    mensaje = None
+    if request.method == "POST":
+        fecha = request.form.get("fecha")
+        hora = request.form.get("hora")
+        precio = request.form.get("precio")
+        if fecha and hora and precio:
+            mensaje = f"Estacionamiento guardado: {fecha} {hora} - S/. {precio}"
+        else:
+            mensaje = "Completa todos los campos."
+    return render_template("estacionamiento.html", mensaje=mensaje)
+
+# ✅ Ruta Pagos
+@app.route("/pagos", methods=["GET", "POST"])
+def pagos():
+    mensaje = None
+    if request.method == "POST":
+        monto = request.form.get("monto")
+        metodo = request.form.get("metodo")
+        fecha = request.form.get("fecha")
+        if monto and metodo and fecha:
+            mensaje = f"Pago registrado: {monto} soles con {metodo} el {fecha}"
+        else:
+            mensaje = "Completa todos los campos."
+    return render_template("pagos.html", mensaje=mensaje)
+
 if __name__ == "__main__":
     app.run(debug=True)
-

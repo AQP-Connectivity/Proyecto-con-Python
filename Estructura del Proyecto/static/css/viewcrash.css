@@ -1,0 +1,69 @@
+body, html {
+  height: 100%;
+  background-color: #fff3cd; /* amarillo claro */
+  color: #856404; /* marrón oscuro para texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+.error-container {
+  text-align: center;
+  max-width: 420px;
+  padding: 30px;
+  background-color: #fff8e1; /* amarillo muy claro */
+  border: 2px solid #ffecb5; /* borde amarillo */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.5); /* sombra amarilla */
+}
+
+.error-container h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffca28; /* amarillo más intenso */
+  text-shadow: 1px 1px 2px #b28704;
+}
+
+.error-container h2 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.error-container p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.btn-retry {
+  background-color: #ffca28; /* amarillo */
+  color: #5d4037; /* marrón oscuro */
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(255, 202, 40, 0.5);
+}
+
+.btn-retry:hover {
+  background-color: #ffb300; /* amarillo más oscuro */
+  color: #3e2723;
+  text-decoration: none;
+  box-shadow: 0 6px 8px rgba(255, 179, 0, 0.7);
+}
+
+/* Icono de estacionamiento */
+.icon-parking {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  color: #ffca28;
+  text-shadow: 1px 1px 2px #b28704;
+}
