@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Placas{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/historial.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container historial-container">
+    <h2 class="text-center mb-4">📋 Historial de Vehículos</h2>
+
+    {% if registros %}
+      <table class="table table-bordered table-striped historial-table">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Fecha y Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for id, numero, fecha_hora in registros %}
+          <tr>
+            <td>{{ id }}</td>
+            <td>{{ numero }}</td>
+            <td>{{ fecha_hora }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning mt-3 text-center">
+        ⚠️ No hay registros en el historial.
+      </div>
+    {% endif %}
+
+    <div class="mt-4 botones">
+      <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary mb-2 w-100">📄 Descargar Reporte en PDF</a>
+      <a href="{{ url_for('inicio') }}" class="btn btn-outline-secondary w-100">⬅️ Volver al Inicio</a>
+    </div>
+  </div>
+{% endblock %}
