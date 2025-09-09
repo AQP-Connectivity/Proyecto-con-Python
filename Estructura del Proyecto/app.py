@@ -4,6 +4,7 @@ from database.conexion import init_db
 from utils.pdf_utils import generar_pdf
 from controllers.dashboard_controller import obtener_dashboard
 import cv2
+from controllers.salida_controller import registrar_salida
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static"
@@ -143,6 +144,19 @@ def usuarios():
         else:
             mensaje = "Completa todos los campos."
     return render_template("usuarios.html", mensaje=mensaje)
+
+
+
+@app.route("/salida", methods=["POST"])
+def salida():
+    placa = request.form.get("placa")
+    if placa:
+        mensaje = registrar_salida(placa)
+    else:
+        mensaje = "Debes ingresar una placa."
+
+    return render_template("salida.html", mensaje=mensaje)
+
 
 # 🚀 Iniciar servidor (SOLO UNA VEZ al final)
 if __name__ == "__main__":
