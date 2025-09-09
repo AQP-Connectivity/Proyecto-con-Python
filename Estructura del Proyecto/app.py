@@ -17,57 +17,70 @@ def inject_request():
 # Inicializar DB SQLite
 init_db()
 
+# ✅ Redirección al login
 @app.route("/")
 def root():
     return redirect(url_for("login"))
 
+# ✅ Login
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         # lógica de autenticación aquí
-        return redirect(url_for("index"))
+        return redirect(url_for("inicio"))
     return render_template("login.html")
 
-@app.route("/mantenimiento")
-def mantenimiento():
-    return render_template("mantenimiento.html")
-
-@app.route("/index", methods=["GET", "POST"])
-def index():
+# ✅ Página de inicio
+@app.route("/inicio", methods=["GET", "POST"])
+def inicio():
     placa_text = None
     if request.method == "POST":
         file = request.files["file"]
         if file:
             placa_text = procesar_placa(file)
-    return render_template("index.html", placa=placa_text)
+    return render_template("inicio.html", placa=placa_text)
 
+# ✅ Página de registros
 @app.route("/registros")
 def registros():
     datos = obtener_registros()
     return render_template("registros.html", registros=datos)
 
+# ✅ Página de historial
 @app.route("/historial")
 def historial():
     datos = obtener_registros()
     return render_template("historial.html", registros=datos)
 
+# ✅ Reporte PDF
 @app.route("/reporte_pdf")
 def reporte_pdf():
     registros = obtener_registros()
     pdf = generar_pdf(registros)
-    return send_file(pdf, as_attachment=True, download_name="reporte_placas.pdf", mimetype="application/pdf")
+    return send_file(
+        pdf,
+        as_attachment=True,
+        download_name="reporte_placas.pdf",
+        mimetype="application/pdf"
+    )
 
+# ✅ Dashboard con datos dinámicos
 @app.route("/dashboard")
 def dashboard():
-    fechas = ["2025-09-01", "2025-09-02"]
-    cantidades = [3, 5]
+    fechas = ["2025-09-01", "2025-09-02", "2025-09-03", "2025-09-04"]
+    cantidades = [3, 5, 7, 4]
     return render_template(
         "dashboard.html",
         fechas_json=json.dumps(fechas),
         cantidades_json=json.dumps(cantidades)
     )
 
-# Cámara
+# ✅ Mantenimiento
+@app.route("/mantenimiento")
+def mantenimiento():
+    return render_template("mantenimiento.html")
+
+# ✅ Cámara
 camera = cv2.VideoCapture(0)
 
 def generar_frames():
@@ -89,7 +102,7 @@ def camara():
 def video_feed():
     return Response(generar_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-# ✅ Ruta Estacionamiento
+# ✅ Estacionamiento
 @app.route("/estacionamiento", methods=["GET", "POST"])
 def estacionamiento():
     mensaje = None
@@ -103,7 +116,7 @@ def estacionamiento():
             mensaje = "Completa todos los campos."
     return render_template("estacionamiento.html", mensaje=mensaje)
 
-# ✅ Ruta Pagos
+# ✅ Pagos
 @app.route("/pagos", methods=["GET", "POST"])
 def pagos():
     mensaje = None
@@ -117,5 +130,20 @@ def pagos():
             mensaje = "Completa todos los campos."
     return render_template("pagos.html", mensaje=mensaje)
 
+# ✅ Usuarios
+@app.route("/usuarios", methods=["GET", "POST"])
+def usuarios():
+    mensaje = None
+    if request.method == "POST":
+        nombre = request.form.get("nombre")
+        correo = request.form.get("correo")
+        rol = request.form.get("rol")
+        if nombre and correo and rol:
+            mensaje = f"Usuario registrado: {nombre} ({rol}) - {correo}"
+        else:
+            mensaje = "Completa todos los campos."
+    return render_template("usuarios.html", mensaje=mensaje)
+
+# 🚀 Iniciar servidor (SOLO UNA VEZ al final)
 if __name__ == "__main__":
     app.run(debug=True)
