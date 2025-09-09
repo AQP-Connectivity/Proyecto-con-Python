@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Sistema de Parking{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h2 class="mb-4 fw-bold text-primary text-center">🚗 Sistema de Parking - Detector de Placas</h2>
+
+    <!-- 📤 Subida de imagen para detección -->
+    <div class="card shadow p-4 mb-4 mx-auto" style="max-width: 500px;">
+      <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="file" class="form-label fw-semibold">Subir Imagen del Vehículo</label>
+          <input type="file" class="form-control" id="file" name="file" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2">Detectar Placa</button>
+      </form>
+
+      <!-- 📷 Botón para activar cámara -->
+      <form action="{{ url_for('camara') }}" method="GET">
+        <button type="submit" class="btn btn-success w-100">📷 Activar Cámara</button>
+      </form>
+    </div>
+
+    <!-- ✅ Resultado de la detección -->
+    {% if placa %}
+    <div class="card shadow p-4 text-center mx-auto" style="max-width: 500px;">
+      <h4 class="text-success mb-3">✅ Placa Detectada:</h4>
+      <p class="display-6 fw-bold">{{ placa }}</p>
+      <img
+        src="{{ url_for('static', filename='placa_recortada.jpg') }}"
+        alt="Imagen de la placa detectada"
+        class="img-fluid border border-2 border-success mt-3"
+      />
+    </div>
+    {% endif %}
+
+    <!-- 📋 Ver registros -->
+    <div class="mt-4 text-center mx-auto" style="max-width: 500px;">
+      <a href="{{ url_for('historial') }}" class="btn btn-outline-secondary w-100">📋 Ver Registros Guardados</a>
+    </div>
+  </div>
+{% endblock %}
+

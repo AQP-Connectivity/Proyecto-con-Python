@@ -1,0 +1,22 @@
+.card {
+  border: none;
+  background: #fff;
+}
+
+h2 {
+  color: #333;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
+}
