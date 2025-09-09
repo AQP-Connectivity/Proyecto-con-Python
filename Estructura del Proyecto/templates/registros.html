@@ -14,19 +14,25 @@
         <!-- Tabla de registros -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped align-middle">
-                <thead class="table-dark">
+                <thead class="table-dark text-center">
                     <tr>
                         <th>ID</th>
                         <th>Placa</th>
-                        <th>Fecha y Hora</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Tiempo Total (min)</th>
+                        <th>Costo (S/.)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for id, numero, fecha_hora in registros %}
+                    {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
                     <tr>
-                        <td>{{ id }}</td>
-                        <td>{{ numero }}</td>
-                        <td>{{ fecha_hora }}</td>
+                        <td class="text-center">{{ id }}</td>
+                        <td class="text-uppercase text-center">{{ numero }}</td>
+                        <td class="text-center">{{ hora_entrada or '-' }}</td>
+                        <td class="text-center">{{ hora_salida or '-' }}</td>
+                        <td class="text-center">{{ tiempo_total if tiempo_total else '-' }}</td>
+                        <td class="text-center">{{ costo if costo else '-' }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
