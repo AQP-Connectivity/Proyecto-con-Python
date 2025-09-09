@@ -1,48 +1,40 @@
-body {
-  background-color: #f8f9fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ======== REGISTROS ======== */
+.card {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
 }
 
 h2 {
-  font-weight: 700;
-  color: #343a40;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 .table {
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .table th {
-  background-color: #212529 !important; /* encabezado oscuro */
-  color: #f8f9fa !important;
   text-align: center;
 }
 
 .table td {
-  vertical-align: middle;
   text-align: center;
-}
-
-.table tbody tr:hover {
-  background-color: #e9ecef; /* efecto hover */
+  vertical-align: middle;
 }
 
 .btn-primary {
-  background-color: #0d6efd;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
 .btn-primary:hover {
-  background-color: #0b5ed7;
-  transform: translateY(-2px);
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
 }
 
-.container {
-  max-width: 900px;
+.btn-outline-secondary {
+  border-radius: 8px;
 }
