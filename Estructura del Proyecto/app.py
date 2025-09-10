@@ -18,7 +18,7 @@ def inject_request():
 # Inicializar DB SQLite
 init_db()
 
-# ✅ Redirección al login
+# ✅ Redirección al login al iniciar el server
 @app.route("/")
 def root():
     return redirect(url_for("login"))
