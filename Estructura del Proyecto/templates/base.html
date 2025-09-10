@@ -12,6 +12,9 @@
   <!-- CSS principal -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
 
+<!-- Link favicon.ico error -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
   <!-- CSS específico de cada página -->
   {% block extra_css %}{% endblock %}
 </head>
