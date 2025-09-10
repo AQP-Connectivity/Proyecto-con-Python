@@ -176,3 +176,21 @@ Se realizaron pruebas funcionales en cada módulo, verificando la persistencia d
 
 - Proyecciones futuras
 Se plantea integrar modelos de Machine Learning para el reconocimiento automático de placas, con librerías como TensorFlow, Keras o YOLOv5, y explorar la conexión con APIs oficiales para la validación de información vehicular.
+
+
+
+Capitulo 4.- Resultados Esperados
+
+- Mejora en la eficiencia operativa al reducir significativamente el tiempo de registro de vehículos en comparación con el método manual.
+
+- Implementación de una base de datos centralizada, que permitirá un acceso más rápido, organizado y seguro a la información de clientes y vehículos.
+
+- Disminución de errores humanos gracias a la automatización del reconocimiento de placas y el almacenamiento digital de los datos.
+
+- Disponibilidad de un historial detallado de entradas y salidas, con posibilidad de generar reportes en PDF para auditorías o controles internos.
+
+- Mayor seguridad en el control vehicular, al asociar imágenes de las placas a cada registro, reduciendo la posibilidad de fraude o registros falsos.
+
+- Posibilidad de monitorear y analizar patrones de uso del estacionamiento mediante el dashboard, facilitando la toma de decisiones administrativas.
+
+- Sentar las bases para una futura integración con servicios de pago electrónico o APIs de validación oficial de placas.
