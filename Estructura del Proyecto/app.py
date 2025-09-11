@@ -65,7 +65,7 @@ def reporte_pdf():
         mimetype="application/pdf"
     )
 
-# ✅ Dashboard con datos dinámicos
+# ✅ Dashboard con datos dinámicosssssss
 @app.route("/dashboard")
 def dashboard():
     fechas = ["2025-09-01", "2025-09-02", "2025-09-03", "2025-09-04"]
