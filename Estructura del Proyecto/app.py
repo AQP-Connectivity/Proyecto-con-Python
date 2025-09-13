@@ -81,7 +81,7 @@ def dashboard():
 def mantenimiento():
     return render_template("mantenimiento.html")
 
-# ✅ Cámara
+# ✅ Se activa la Cámara
 camera = cv2.VideoCapture(0)
 
 def generar_frames():
