@@ -53,7 +53,7 @@ def historial():
     datos = obtener_registros()
     return render_template("historial.html", registros=datos)
 
-# ✅ Reporte PDF
+# ✅ Reporte PDF y descargar en .pdf
 @app.route("/reporte_pdf")
 def reporte_pdf():
     registros = obtener_registros()
