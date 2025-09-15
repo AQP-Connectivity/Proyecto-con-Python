@@ -33,7 +33,7 @@ def procesar_placa(file):
 
     return placa_text
 
-
+# ✅ Actualizacion de metodo
 def obtener_registros():
     conn = get_connection()
     cursor = conn.cursor()
