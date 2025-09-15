@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Sistema de Parking{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+{% endblock %}
+
+
+{% block content %}
+  <div class="container-fluid">
+    <h2 class="mb-4 fw-bold text-primary text-center">
+      🚗 Sistema de Parking - Detector de Placas
+    </h2>
+
+    <!-- Card: subir imagen -->
+    <div class="card shadow p-4 mb-4 mx-auto" style="max-width: 640px;">
+      <form method="POST" enctype="multipart/form-data" id="uploadForm">
+        <div class="mb-3">
+          <label for="file" class="form-label fw-semibold">Subir Imagen del Vehículo</label>
+          <input
+            type="file"
+            class="form-control"
+            id="file"
+            name="file"
+            accept="image/*"
+            required
+            onchange="previewImage(event)"
+          />
+        </div>
+
+        <!-- Preview -->
+        <div id="previewContainer" class="mb-3" style="display:none;">
+          <label class="form-label fw-semibold">Vista previa</label>
+          <div>
+            <img id="imgPreview" src="#" alt="Preview" class="img-fluid rounded" style="max-height:320px;">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mb-2">🔍 Detectar Placa</button>
+      </form>
+
+      <!-- Botón para activar cámara -->
+      <div class="mt-2">
+        <form action="{{ url_for('camara') }}" method="GET">
+          <button type="submit" class="btn btn-success w-100">📷 Activar Cámara</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Resultado de la detección -->
+    {% if placa %}
+    <div class="card shadow p-4 text-center mx-auto" style="max-width: 640px;">
+      <h4 class="text-success mb-3">✅ Placa Detectada:</h4>
+      <p class="display-6 fw-bold">{{ placa }}</p>
+      <img
+        src="{{ url_for('static', filename='placa_recortada.jpg') }}"
+        alt="Imagen de la placa detectada"
+        class="img-fluid border border-2 border-success mt-3 rounded"
+        style="max-height:360px;"
+      />
+    </div>
+    {% endif %}
+
+    <!-- Ver registros -->
+    <div class="mt-4 text-center mx-auto" style="max-width: 640px;">
+      <a href="{{ url_for('historial') }}" class="btn btn-outline-secondary w-100">📋 Ver Registros Guardados</a>
+    </div>
+  </div>
+
+  <!-- Small inline JS: preview de imagen (se inserta dentro del bloque content para no necesitar extra_js en base) -->
+  <script>
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const previewContainer = document.getElementById('previewContainer');
+      const imgPreview = document.getElementById('imgPreview');
+
+      if (!file) {
+        previewContainer.style.display = 'none';
+        imgPreview.src = '#';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imgPreview.src = e.target.result;
+        previewContainer.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // opcional: evitar que el formulario se envíe sin imagen (ya lo requiere el atributo required)
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      const fileInput = document.getElementById('file');
+      if (!fileInput.value) {
+        e.preventDefault();
+        alert('Selecciona una imagen antes de enviar.');
+      }
+    });
+  </script>
+{% endblock %}

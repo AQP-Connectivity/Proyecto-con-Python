@@ -1,0 +1,32 @@
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* Sidebar */
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #343a40;
+  color: white;
+  min-height: 100vh;
+}
+#sidebar .nav-link {
+  color: #adb5bd;
+}
+#sidebar .nav-link.active {
+  background-color: #495057;
+  color: white !important;
+  font-weight: 600;
+}
+#sidebar .nav-link:hover {
+  color: white;
+}
+
+/* Contenido principal */
+#content {
+  flex-grow: 1;
+  padding: 2rem;
+}

@@ -1,0 +1,70 @@
+/* ======== ESTACIONAMIENTO ======== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+#content {
+    padding: 30px;
+}
+
+/* Título */
+#content h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+/* Tarjeta */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Labels */
+.form-label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    padding: 8px;
+}
+
+.form-control:focus {
+    border-color: #2ecc71;
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+    outline: none;
+}
+
+/* Botón */
+.btn-success {
+    background: #27ae60;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-success:hover {
+    background: #219150;
+    cursor: pointer;
+}
+
+/* Alert */
+.alert-info {
+    border-radius: 8px;
+    font-size: 15px;
+}

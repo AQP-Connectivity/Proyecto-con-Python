@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema de Parking{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1 class="text-center text-primary mb-5">📊 Dashboard de Placas</h1>
+
+    <!-- Tarjetas (tomadas del primer dashboard, pero dinámicas) -->
+    <div class="row g-4 mb-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-secondary">Placas Registradas</h5>
+            <p class="display-5 text-success mb-0">{{ total }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-secondary">Últimas Placas</h5>
+            <p class="display-5 text-primary mb-0">{{ ultimas|length }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-secondary">Registros (Hoy)</h5>
+            <p class="display-5 text-warning mb-0">{{ registros_hoy }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-secondary">Comentarios</h5>
+            <p class="display-5 text-danger mb-0">87</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Últimas placas -->
+    <h3 class="mt-4">Últimas 5 placas</h3>
+    <table class="table table-striped table-hover shadow-sm">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Fecha y hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in ultimas %}
+        <tr>
+          <td>{{ u.numero }}</td>
+          <td>{{ u.fecha_hora }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Gráfico -->
+    <h3 class="mt-5">Registros por día</h3>
+    <div class="card shadow-sm p-3">
+      <canvas id="grafico" height="100"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('grafico').getContext('2d');
+    const etiquetas = {{ fechas_json|safe }};
+    const datos = {{ cantidades_json|safe }};
+    
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: etiquetas,
+        datasets: [{
+          label: 'Registros',
+          data: datos,
+          borderWidth: 1,
+          backgroundColor: 'rgba(54,162,235,0.5)',
+          borderColor: 'rgba(54,162,235,1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 } }
+        }
+      }
+    });
+  </script>
+{% endblock %}
