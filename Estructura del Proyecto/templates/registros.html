@@ -1,0 +1,80 @@
+{# -------------------------------------------------------- #}
+{# Heredamos la plantilla base.html                         #}
+{# -------------------------------------------------------- #}
+{% extends "base.html" %}
+
+{# -------------------------------------------------------- #}
+{# Definimos el título de la página                         #}
+{# -------------------------------------------------------- #}
+{% block title %}Registros de Placas{% endblock %}
+
+{# -------------------------------------------------------- #}
+{# Bloque para agregar estilos CSS adicionales              #}
+{# Se carga un archivo externo desde la carpeta /static/css #}
+{# -------------------------------------------------------- #}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registros.css') }}">
+{% endblock %}
+
+{# -------------------------------------------------------- #}
+{# Bloque principal de contenido de la página               #}
+{# -------------------------------------------------------- #}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        
+        {# Título principal de la página #}
+        <h2 class="text-center mb-4">📋 Registros de Vehículos</h2>
+
+        {# -------------------------------------------------------- #}
+        {# Sección: Tabla con los registros almacenados             #}
+        {# -------------------------------------------------------- #}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                
+                {# Encabezados de la tabla #}
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Placa</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Tiempo Total (min)</th>
+                        <th>Costo (S/.)</th>
+                    </tr>
+                </thead>
+
+                {# Cuerpo de la tabla con los registros iterados #}
+                <tbody>
+                    {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
+                    <tr>
+                        <td class="text-center">{{ id }}</td>
+                        <td class="text-uppercase text-center">{{ numero }}</td>
+                        <td class="text-center">{{ hora_entrada or '-' }}</td>
+                        <td class="text-center">{{ hora_salida or '-' }}</td>
+                        <td class="text-center">{{ tiempo_total if tiempo_total else '-' }}</td>
+                        <td class="text-center">{{ costo if costo else '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {# -------------------------------------------------------- #}
+        {# Sección: Botones de acción                               #}
+        {# -------------------------------------------------------- #}
+        <div class="mt-4 d-flex flex-column gap-2">
+            
+            {# Botón para descargar reporte en PDF #}
+            <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary">
+                📄 Descargar Reporte en PDF
+            </a>
+
+            {# Botón para volver a la página de inicio #}
+            <a href="{{ url_for('inicio') }}" class="btn btn-outline-secondary">
+                ⬅️ Volver al Inicio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
