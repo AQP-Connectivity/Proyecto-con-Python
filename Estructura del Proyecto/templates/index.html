@@ -1,129 +1,87 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sistema de Parking - Reconocimiento de Placas</title>
+{# ------------------------------------------ #}
+{# Heredamos la plantilla base.html           #}
+{# ------------------------------------------ #}
+{% extends "base.html" %}
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+{# ------------------------------------------ #}
+{# Definimos el título que se mostrará en la pestaña del navegador #}
+{# ------------------------------------------ #}
+{% block title %}Dashboard - Sistema de Parking{% endblock %}
 
-  <style>
-    body {
-      background-color: #f8f9fa;
-      min-height: 100vh;
-      display: flex;
-      overflow-x: hidden;
-    }
-    /* Sidebar */
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #343a40;
-      color: white;
-      min-height: 100vh;
-    }
-    #sidebar .nav-link {
-      color: #adb5bd;
-    }
-    #sidebar .nav-link.active {
-      background-color: #495057;
-      color: white;
-      font-weight: 600;
-    }
-    #sidebar .nav-link:hover {
-      color: white;
-    }
-    /* Contenido principal */
-    #content {
-      flex-grow: 1;
-      padding: 2rem;
-    }
-    .placa-img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
-      border-radius: 0.5rem;
-    }
-  </style>
-</head>
-<body>
+{# ------------------------------------------ #}
+{# Bloque principal de contenido de la página #}
+{# ------------------------------------------ #}
+{% block content %}
+  <div class="container-fluid">
+    
+    {# Título principal con estilos de Bootstrap #}
+    <h2 class="mb-4 fw-bold text-primary text-center">
+      🚗 Sistema de Parking - Detector de Placas
+    </h2>
 
-  <!-- Sidebar -->
-  <nav id="sidebar" class="d-flex flex-column p-3">
-    <h3 class="text-white mb-4 text-center">🚗 Parking Web</h3>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="{{ url_for('index') }}" class="nav-link active">
-          <i class="bi bi-speedometer2 me-2"></i> Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-clipboard-data me-2"></i> Estacionamientos
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-cash-stack me-2"></i> Pagos
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-tools me-2"></i> Mantenimiento
-        </a>
-      </li>
-      <li>
-        <a href="{{ url_for('registros') }}" class="nav-link">
-          <i class="bi bi-journal-text me-2"></i> Reporte de Pagos
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-people me-2"></i> Usuarios
-        </a>
-      </li>
-    </ul>
-  </nav>
+    {# -------------------------------------------------- #}
+    {# Sección 1: Subida de imagen para detección de placa #}
+    {# -------------------------------------------------- #}
+    <div class="card shadow p-4 mb-4 mx-auto" style="max-width: 500px;">
+      
+      {# Formulario para subir imagen desde la PC #}
+      {# method="POST": se envían datos al servidor #}
+      {# enctype="multipart/form-data": necesario para subir archivos #}
+      <form method="POST" enctype="multipart/form-data">
+        
+        {# Campo de selección de archivo (imagen del vehículo) #}
+        <div class="mb-3">
+          <label for="file" class="form-label fw-semibold">Subir Imagen del Vehículo</label>
+          <input type="file" class="form-control" id="file" name="file" required />
+        </div>
 
-  <!-- Contenido principal -->
-  <div id="content">
-    <div class="container-fluid">
-      <h2 class="mb-4 fw-bold text-primary text-center">🚗 Sistema de Parking - Detector de Placas</h2>
+        {# Botón para enviar la imagen y ejecutar la detección de la placa #}
+        <button type="submit" class="btn btn-primary w-100 mb-2">
+          Detectar Placa
+        </button>
+      </form>
 
-      <div class="card shadow p-4 mb-4 mx-auto" style="max-width: 500px;">
-        <form method="POST" enctype="multipart/form-data">
-          <div class="mb-3">
-            <label for="file" class="form-label fw-semibold">Subir Imagen del Vehículo</label>
-            <input type="file" class="form-control" id="file" name="file" required />
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Detectar Placa</button>
-        </form>
-      </div>
-
-      {% if placa %}
-      <div class="card shadow p-4 text-center mx-auto" style="max-width: 500px;">
-        <h4 class="text-success mb-3">✅ Placa Detectada:</h4>
-        <p class="display-6 fw-bold">{{ placa }}</p>
-        <img
-          src="{{ url_for('static', filename='placa_recortada.jpg') }}"
-          alt="Imagen de la placa detectada"
-          class="placa-img border border-2 border-success mt-3"
-        />
-      </div>
-      {% endif %}
-
-      <div class="mt-4 text-center mx-auto" style="max-width: 500px;">
-        <a href="{{ url_for('registros') }}" class="btn btn-outline-secondary w-100">📋 Ver Registros Guardados</a>
-      </div>
+      {# -------------------------------------------------- #}
+      {# Sección 2: Botón para activar la cámara en tiempo real #}
+      {# -------------------------------------------------- #}
+      {# Este formulario envía una petición GET a la ruta 'camara' #}
+      <form action="{{ url_for('camara') }}" method="GET">
+        <button type="submit" class="btn btn-success w-100">
+          📷 Activar Cámara
+        </button>
+      </form>
     </div>
-  </div>
 
-  <!-- Bootstrap JS + Bootstrap Icons -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-  />
-</body>
-</html>
+    {# -------------------------------------------------- #}
+    {# Sección 3: Resultado de la detección de la placa   #}
+    {# -------------------------------------------------- #}
+    {# Esto solo se muestra si existe la variable 'placa' enviada desde Flask #}
+    {% if placa %}
+    <div class="card shadow p-4 text-center mx-auto" style="max-width: 500px;">
+      
+      {# Mensaje de éxito indicando que se detectó la placa #}
+      <h4 class="text-success mb-3">✅ Placa Detectada:</h4>
+
+      {# Mostramos el número de placa detectado #}
+      <p class="display-6 fw-bold">{{ placa }}</p>
+
+      {# Mostramos la imagen de la placa recortada que se guarda en static #}
+      <img
+        src="{{ url_for('static', filename='placa_recortada.jpg') }}"
+        alt="Imagen de la placa detectada"
+        class="img-fluid border border-2 border-success mt-3"
+      />
+    </div>
+    {% endif %}
+
+    {# -------------------------------------------------- #}
+    {# Sección 4: Botón para ver el historial de registros guardados #}
+    {# -------------------------------------------------- #}
+    <div class="mt-4 text-center mx-auto" style="max-width: 500px;">
+      <a href="{{ url_for('historial') }}" class="btn btn-outline-secondary w-100">
+        📋 Ver Registros Guardados
+      </a>
+    </div>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,196 @@
+INTRODUCCIÓN
+
+En la actualidad, la gestión eficiente en los servicios de estacionamiento es fundamental para garantizar una atención rápida y segura a 
+los clientes. Muchas playas de estacionamiento todavía realizan el registro de vehículos de manera manual en papel, lo que ocasiona demoras, 
+errores en la transcripción y dificultades para el control histórico de la información.
+Este proyecto propone el desarrollo de un sistema informático para el registro de placas vehiculares que permita almacenar de forma digital 
+los datos de los clientes y las placas de sus automóviles. Además, el sistema incorporará la funcionalidad de capturar imágenes de las placas 
+y asociarlas al registro correspondiente, brindando así un control más preciso y reduciendo el riesgo de errores o fraudes.
+La implementación de esta solución mejorará la eficiencia operativa, incrementará la seguridad y permitirá un acceso rápido a la información
+mediante una base de datos centralizada.
+
+ABSTRACT
+
+This project focuses on the development of a license plate registration system for a parking lot, aimed at replacing the current manual process
+based on paper records. The proposed system will allow storing vehicle license plate information and customer data in a digital database, ensuring
+quick and accurate access to information. Additionally, it will include a feature for capturing photos of license plates and associating them with 
+the corresponding record, improving security and reducing transcription errors. The implementation of this system will optimize operational efficiency,
+provide better control of vehicle entries, and ensure reliable data management for the parking service.
+
+CAPÍTULO 1 - ASPECTOS GENERALES
+1.1 Definición del Problema
+
+Actualmente, la playa de estacionamiento registra los datos de los vehículos y clientes en formularios físicos. 
+Este método manual presenta varias limitaciones:
+
+  - Riesgo de pérdida o deterioro de la información en papel.
+
+  - Errores de transcripción en la escritura manual.
+
+  - Lentitud en el proceso de registro y búsqueda de datos históricos.
+
+  - Falta de integración para consultar información de manera rápida.
+
+Estas dificultades impactan negativamente en la eficiencia del servicio, la seguridad de los clientes y el control interno. Es necesario implementar un 
+sistema que digitalice estos procesos para optimizar el tiempo y minimizar errores.
+
+1.2 Definición de Objetivos
+Objetivo General
+
+Desarrollar un sistema informático que permita el registro digital de placas vehiculares y datos de clientes en una base de datos, incorporando la 
+funcionalidad de captura y almacenamiento de imágenes de las placas para mejorar la gestión y seguridad en la playa de estacionamiento.
+
+Objetivos Específicos
+
+  - Diseñar una interfaz que facilite el registro y consulta de información de los clientes y sus vehículos.
+
+  - Implementar un módulo para capturar y almacenar fotografías de las placas vehiculares.
+
+  - Crear una base de datos que organice y resguarde la información de manera segura y accesible.
+
+  - Reducir el tiempo de registro y búsqueda en comparación con el método manual.
+
+  - Garantizar la integridad y disponibilidad de la información mediante respaldos periódicos.
+
+
+1.3 Justificación
+
+La implementación de un sistema informático para el registro digital de placas vehiculares responde a la necesidad de modernizar y optimizar la gestión en las playas de estacionamiento. El método manual actualmente utilizado, basado en formularios en papel, genera demoras, errores de transcripción y dificultades para mantener un historial confiable de los registros.
+
+Este proyecto busca solucionar dichas limitaciones mediante la incorporación de tecnologías como visión por computadora, bases de datos centralizadas y reconocimiento óptico de caracteres (OCR). Con ello, se garantiza una captura más rápida, precisa y segura de la información.
+
+La digitalización de los procesos no solo permitirá reducir los tiempos de atención y los errores humanos, sino que también brindará beneficios adicionales:
+
+- Eficiencia operativa: optimización en el control de ingresos y salidas de vehículos.
+
+- Seguridad: almacenamiento confiable de la información que facilita el rastreo de vehículos en caso de incidentes.
+
+- Acceso ágil a la información: consultas inmediatas sobre registros históricos sin depender de documentos físicos.
+
+- Escalabilidad: posibilidad de ampliar el sistema para integrar servicios adicionales, como generación de reportes, control de aforo, estadísticas o incluso pagos automatizados.
+
+En síntesis, este proyecto representa una mejora significativa frente a los métodos tradicionales, aportando valor tanto a los administradores del estacionamiento como a los clientes, al ofrecer un servicio moderno, seguro y confiable.
+
+
+CAPÍTULO 2 – MARCO TEÓRICO
+2.1. Sistemas de Información en la Gestión Empresarial
+
+Los sistemas de información son herramientas diseñadas para recopilar, procesar, almacenar y distribuir información relevante para la toma de decisiones (Laudon & Laudon, 2020). En el ámbito empresarial, su implementación permite optimizar procesos, reducir costos operativos y mejorar la calidad del servicio.
+En el caso de las playas de estacionamiento, un sistema de información digital sustituye los métodos manuales de registro, eliminando los riesgos de pérdida de datos y aumentando la eficiencia en la atención al cliente.
+
+2.2. Digitalización de Procesos
+
+La digitalización consiste en transformar información analógica (como registros en papel) en datos digitales que pueden ser gestionados mediante tecnologías informáticas (Gartner, 2021).
+Este proceso ofrece beneficios como:
+
+Acceso inmediato a la información.
+
+Mayor precisión y confiabilidad en los datos.
+
+Disminución de errores humanos.
+En contextos modernos, digitalizar los registros vehiculares en playas de estacionamiento permite mantener un control histórico confiable y consultar información en tiempo real.
+
+2.3. Bases de Datos Relacionales
+
+Una base de datos relacional organiza la información en tablas que se relacionan entre sí a través de claves primarias y foráneas (Date, 2019).
+Para un sistema de estacionamiento, este modelo facilita:
+
+Almacenamiento estructurado de datos de clientes y vehículos.
+
+Consultas rápidas y seguras.
+
+Integridad y consistencia de la información.
+El uso de motores de bases de datos como MySQL, PostgreSQL o SQL Server asegura confiabilidad y escalabilidad.
+
+2.4. Visión por Computadora y OCR (Reconocimiento Óptico de Caracteres)
+
+La visión por computadora es una rama de la inteligencia artificial que permite a los sistemas interpretar imágenes y videos de manera automática (Goodfellow et al., 2016).
+Una de sus aplicaciones más utilizadas es el OCR (Optical Character Recognition), tecnología que extrae texto de imágenes y lo convierte en datos editables.
+En el contexto del estacionamiento, el OCR puede emplearse para reconocer automáticamente los caracteres de las placas vehiculares, reduciendo los errores de transcripción manual y agilizando el registro.
+
+2.5. Seguridad y Respaldo de la Información
+
+La seguridad informática garantiza la integridad, confidencialidad y disponibilidad de los datos (Stallings, 2018).
+En sistemas de gestión vehicular, resulta crucial implementar medidas como:
+
+Copias de seguridad periódicas.
+
+Control de accesos mediante usuarios y contraseñas.
+
+Protocolos de encriptación para la información sensible.
+De este modo, se minimizan riesgos de pérdida de datos o accesos no autorizados.
+
+2.6. Experiencias y Aplicaciones Similares
+
+Diversos países ya han implementado sistemas automatizados de control vehicular en estacionamientos y peajes. Estos proyectos demuestran que la digitalización:
+
+Aumenta la velocidad de registro de vehículos.
+
+Reduce errores humanos.
+
+Permite la integración con otros servicios, como reportes estadísticos o control de aforo.
+Estos antecedentes evidencian la viabilidad y necesidad de contar con un sistema de registro digital de placas vehiculares.
+
+
+Capitulo 3.- Metodología
+
+- Análisis de requerimientos
+Se identificaron las limitaciones del proceso manual en el registro de placas vehiculares, como demoras, errores en la transcripción y falta de control histórico. Se definieron las necesidades principales: rapidez, digitalización de datos, seguridad y generación de reportes.
+
+- Diseño del sistema
+Se planteó una arquitectura basada en el framework Flask para la creación de la aplicación web, junto con SQLite como base de datos ligera y embebida. El sistema contempla módulos de registro, historial, generación de reportes en PDF, pagos y un dashboard para análisis gráfico.
+
+- Herramientas y librerías utilizadas
+
+Python 3.10+: Lenguaje principal de programación.
+
+Flask: Framework web para el desarrollo de la aplicación.
+
+OpenCV (cv2): Captura y procesamiento de imágenes desde la cámara.
+
+SQLite3: Base de datos para almacenamiento de placas y registros.
+
+ReportLab o FPDF: Generación de reportes en PDF.
+
+Jinja2: Motor de plantillas para las vistas HTML.
+
+Bootstrap (desde CDN): Diseño responsivo y componentes de interfaz.
+
+Chart.js: Visualización de datos estadísticos en el dashboard.
+
+- Desarrollo incremental
+La implementación se realizó de forma modular, integrando progresivamente:
+
+Registro de placas con carga de imágenes.
+
+Generación de reportes en PDF con los registros almacenados.
+
+Dashboard con estadísticas de uso y registros.
+
+Módulos de estacionamiento y pagos.
+
+Captura de video en tiempo real con OpenCV.
+
+- Pruebas y validación
+Se realizaron pruebas funcionales en cada módulo, verificando la persistencia de los registros en la base de datos, la correcta exportación de reportes en PDF y la visualización de datos en el dashboard.
+
+- Proyecciones futuras
+Se plantea integrar modelos de Machine Learning para el reconocimiento automático de placas, con librerías como TensorFlow, Keras o YOLOv5, y explorar la conexión con APIs oficiales para la validación de información vehicular.
+
+
+
+Capitulo 4.- Resultados Esperados
+
+- Mejora en la eficiencia operativa al reducir significativamente el tiempo de registro de vehículos en comparación con el método manual.
+
+- Implementación de una base de datos centralizada, que permitirá un acceso más rápido, organizado y seguro a la información de clientes y vehículos.
+
+- Disminución de errores humanos gracias a la automatización del reconocimiento de placas y el almacenamiento digital de los datos.
+
+- Disponibilidad de un historial detallado de entradas y salidas, con posibilidad de generar reportes en PDF para auditorías o controles internos.
+
+- Mayor seguridad en el control vehicular, al asociar imágenes de las placas a cada registro, reduciendo la posibilidad de fraude o registros falsos.
+
+- Posibilidad de monitorear y analizar patrones de uso del estacionamiento mediante el dashboard, facilitando la toma de decisiones administrativas.
+
+- Sentar las bases para una futura integración con servicios de pago electrónico o APIs de validación oficial de placas.

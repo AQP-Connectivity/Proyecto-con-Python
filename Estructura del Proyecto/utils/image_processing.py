@@ -3,7 +3,7 @@ import pytesseract
 import os
 
 # Configuración de Tesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"C:\Users\user\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 
 def detectar_placa(filepath, upload_folder):
     imagen = cv2.imread(filepath)
