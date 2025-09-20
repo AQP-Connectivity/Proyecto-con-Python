@@ -10,7 +10,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# 👉 Hacer disponible request en todos los templates
+# 👉 Hacer disponible request en todos los templatess
 @app.context_processor
 def inject_request():
     return dict(request=request)
