@@ -1,0 +1,27 @@
+Uso de YOLO para Reconocimiento de Placas Vehiculares
+1. Introducción
+
+El reconocimiento automático de placas vehiculares (ALPR, por sus siglas en inglés) es una aplicación de Visión por Computadora que combina técnicas de detección de objetos y reconocimiento óptico de caracteres (OCR).
+El objetivo es identificar y leer las matrículas de los automóviles en imágenes o videos de forma automática.
+
+En este informe se describe cómo aplicar YOLO (You Only Look Once) como modelo de detección de placas y posteriormente emplear un motor OCR para extraer el texto.
+
+2. Fundamentos teóricos
+2.1 Machine Learning y Deep Learning
+
+Machine Learning (ML): área de la Inteligencia Artificial donde los sistemas aprenden patrones a partir de datos sin ser programados explícitamente con reglas fijas.
+
+Deep Learning (DL): subcampo de ML basado en redes neuronales profundas, que se utilizan para procesar datos complejos como imágenes.
+
+En este proyecto, se aplica Deep Learning supervisado, ya que se entrena un modelo con imágenes de autos y las etiquetas de las placas.
+
+2.2 YOLO (You Only Look Once)
+
+YOLO es una arquitectura de redes neuronales convolucionales especializada en detección de objetos en tiempo real.
+Características principales:
+
+Analiza la imagen completa de una sola vez (“look once”).
+
+Predice simultáneamente las cajas delimitadoras (bounding boxes) y la clase del objeto.
+
+Es rápido y preciso, ideal para aplicaciones en video o cámaras en vivo.
