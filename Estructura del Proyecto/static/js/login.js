@@ -38,7 +38,7 @@ form.addEventListener('submit', (e) => {
     alerta.textContent = '¡Inicio de sesión exitoso! Redirigiendo…';
 
     setTimeout(() => {
-      window.location.href = "/inicio"; // ✅ redirige al dashboard principal
+      window.location.href = "/index"; // ✅ redirige al dashboard principal
     }, 800);
   } else {
     alerta.classList.remove('d-none', 'alert-success');

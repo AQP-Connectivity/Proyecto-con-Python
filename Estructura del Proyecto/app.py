@@ -28,18 +28,18 @@ def root():
 def login():
     if request.method == "POST":
         # lógica de autenticación aquí
-        return redirect(url_for("inicio"))
+        return redirect(url_for("index"))
     return render_template("login.html")
 
 # ✅ Página de inicio
-@app.route("/inicio", methods=["GET", "POST"])
-def inicio():
+@app.route("/index", methods=["GET", "POST"])
+def index():
     placa_text = None
     if request.method == "POST":
         file = request.files["file"]
         if file:
             placa_text = procesar_placa(file)
-    return render_template("inicio.html", placa=placa_text)
+    return render_template("index.html", placa=placa_text)
 
 # ✅ Página de registros
 @app.route("/registros")
