@@ -55,7 +55,7 @@ def obtener_registros():
             t_salida = datetime.strptime(salida, formato)
             tiempo_total = str(t_salida - t_entrada)
         else:
-            tiempo_total = "En curso"  # si aún no hay salida
+            tiempo_total = "En curso"  # si el vehiculo aun no sale
 
         registros.append((id_, numero, entrada, salida, tiempo_total, costo))
 
