@@ -25,3 +25,45 @@ Analiza la imagen completa de una sola vez (“look once”).
 Predice simultáneamente las cajas delimitadoras (bounding boxes) y la clase del objeto.
 
 Es rápido y preciso, ideal para aplicaciones en video o cámaras en vivo.
+
+2.3 Reconocimiento Óptico de Caracteres (OCR)
+
+Explica brevemente qué es OCR.
+
+Ejemplo: Tesseract como herramienta open source ampliamente usada.
+
+Señalar que después de detectar la placa con YOLO, el OCR se encarga de extraer el texto.
+
+2.4 Dataset y Etiquetado
+
+Importancia de contar con un conjunto de imágenes variadas (diferentes ángulos, iluminaciones, tipos de placas).
+
+Uso de herramientas como LabelImg para anotar las placas (coordenadas de las bounding boxes).
+
+División en entrenamiento, validación y prueba.
+
+2.5 Evaluación del Modelo
+
+Explicar métricas como Precisión (Precision), Recall, IoU (Intersection over Union), y mAP (mean Average Precision).
+
+Justificar por qué son importantes para medir la calidad de detección.
+
+2.6 Aplicaciones del ALPR
+
+Control de acceso vehicular.
+
+Peajes y estacionamientos automatizados.
+
+Seguridad ciudadana (detección de vehículos sospechosos).
+
+Gestión de tráfico en ciudades inteligentes.
+
+2.7 Retos y Limitaciones
+
+Variaciones en la iluminación (día/noche).
+
+Placas sucias, dañadas o cubiertas.
+
+Diferentes formatos de placas según el país.
+
+Requerimientos de hardware (GPU para tiempo real).
