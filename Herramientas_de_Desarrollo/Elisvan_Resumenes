@@ -1,0 +1,46 @@
+Trabajo Colaborativo con Sistema de Control de Versiones en la Nube
+🔹 ¿Qué es?
+
+Es una forma de trabajo donde varias personas colaboran en un mismo proyecto digital (código, documentos, diseños, etc.) usando herramientas en la nube como GitHub o GitLab, que permiten:
+
+Guardar todas las versiones de los archivos.
+
+Trabajar simultáneamente sin sobrescribir cambios.
+
+Acceder al proyecto desde cualquier lugar con internet.
+
+🔹 Conceptos Básicos
+
+Repositorio (Repo):
+Carpeta especial en la nube que guarda el proyecto y todo el historial de cambios.
+👉 Ejemplo: Repositorio de un sistema de votaciones en Java.
+
+Commit:
+Es un “punto de guardado” con un mensaje que describe lo que hiciste.
+👉 Ejemplo: Commit: "Agregué función de registro de usuarios".
+
+Push y Pull:
+
+Push: Subir tus cambios al repositorio en la nube.
+
+Pull: Descargar los cambios más recientes del repositorio.
+👉 Ejemplo: Juan hace pull para traer los cambios de Ana antes de continuar programando.
+
+🔹 Flujo de trabajo colaborativo (Ejemplo real: Tienda Online)
+
+Inicio:
+Ana crea el repo TiendaOnline. Carlos y Diana se unen.
+
+Trabajo simultáneo:
+
+Ana → Página principal.
+
+Carlos → Carrito de compras.
+
+Diana → Diseño CSS.
+
+Sincronización:
+Todos hacen commit y luego push para compartir avances.
+
+Resolución de conflictos:
+Si dos editan lo mismo, Git avisa y el equipo decide qué versión mantener.
