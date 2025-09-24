@@ -1,0 +1,22 @@
+GitHub es una plataforma en la nube que permite guardar, compartir y trabajar en código de manera colaborativa.
+Funciona como una red social para programadores y está basada en Git, que es el sistema de control de versiones que guarda el historial de los cambios.
+
+
+1.- ELEMENTOS 
+- Repositorio (repo): el “proyecto” donde se almacena el código, archivos y el historial de cambios.
+
+- Branch (rama): una línea de trabajo independiente dentro del repo (ej. main, develop, feature).
+
+- Commit: un “guardado” de los cambios con un mensaje que describe qué se hizo.
+
+- Pull Request (PR): solicitud para fusionar (mergear) los cambios de una rama a otra, normalmente después de revisión.
+
+- Merge: la acción de unir los cambios aprobados a otra rama (por ejemplo, a main).
+
+
+2.- FLUJO DE TRABAJO 
+1️⃣ Clonar o crear un repositorio.
+2️⃣ Crear una rama para tus cambios.
+3️⃣ Hacer commits (guardados) con descripciones claras.
+4️⃣ Crear un Pull Request para que revisen tu trabajo.
+5️⃣ Revisar, aprobar y mergear a la rama principal.
