@@ -1,0 +1,8 @@
+pip install opencv-python
+pip install opencv-python-headless
+
+- YOLO
+
+pip install pillow
+pip install easyorc
+pip install ultralytics
