@@ -67,3 +67,86 @@ Placas sucias, dañadas o cubiertas.
 Diferentes formatos de placas según el país.
 
 Requerimientos de hardware (GPU para tiempo real).
+
+nforme: Entrenamiento de YOLO para Reconocimiento de Placas Vehiculares
+1. Introducción
+
+El reconocimiento automático de placas vehiculares, conocido como ANPR (Automatic Number Plate Recognition), es una tecnología aplicada en sistemas de seguridad, control de tráfico, peajes y estacionamientos inteligentes.
+El modelo YOLO (You Only Look Once) se utiliza en este proyecto por su alta velocidad y precisión en la detección de objetos en imágenes y videos.
+
+Este informe presenta los pasos necesarios para entrenar un modelo YOLO orientado a la detección de placas vehiculares.
+
+2. Preparación del Dataset
+
+El primer paso en el entrenamiento consiste en la construcción de un conjunto de datos adecuado.
+
+2.1 Recolección de Imágenes
+
+Se requiere reunir imágenes de vehículos en distintos contextos:
+
+Diferentes tipos de placas (nacionales e internacionales).
+
+Diversas condiciones de iluminación (día, noche, lluvia, sombras).
+
+Múltiples posiciones y ángulos de cámara.
+
+2.2 Anotación de Datos
+
+Cada imagen debe ser etiquetada delimitando la ubicación de la placa.
+Este proceso se realiza con herramientas de anotación como LabelImg, Roboflow o CVAT.
+El etiquetado permite que el modelo aprenda a reconocer el patrón de la placa en cualquier imagen.
+
+3. Organización de los Datos
+
+El dataset debe estar estructurado en carpetas que separen las imágenes de entrenamiento y de validación.
+Adicionalmente, se define un archivo de configuración que incluye:
+
+La ruta de las imágenes.
+
+El número de clases a detectar (en este caso, una sola: “placa”).
+
+El nombre asignado a la clase.
+
+Esta organización asegura que el modelo pueda entrenarse de manera ordenada y reproducible.
+
+4. Configuración del Modelo YOLO
+
+Para iniciar el entrenamiento, se utiliza una versión preentrenada de YOLO como base.
+Esto permite aprovechar conocimientos previos adquiridos en bases de datos más amplias (por ejemplo, COCO dataset) y adaptarlos a la nueva tarea de detección de placas.
+
+Los parámetros de configuración más relevantes son:
+
+Número de épocas: cantidad de veces que el modelo recorre el dataset durante el entrenamiento.
+
+Tamaño de las imágenes: resolución estandarizada para todas las entradas.
+
+Tasa de aprendizaje: velocidad con la que el modelo ajusta sus parámetros.
+
+5. Proceso de Entrenamiento
+
+Durante el entrenamiento, el modelo analiza las imágenes del dataset y ajusta sus pesos internos para mejorar su capacidad de identificar placas.
+El aprendizaje se guía mediante el cálculo de un error que se va reduciendo con cada iteración.
+
+El entrenamiento requiere recursos computacionales significativos, por lo que se recomienda utilizar una tarjeta gráfica (GPU) para acelerar el proceso.
+
+6. Validación
+
+Mientras se entrena, una parte del dataset se reserva para la validación, con el fin de evaluar el comportamiento del modelo en imágenes que no se han utilizado en el aprendizaje.
+Esto ayuda a evitar el sobreajuste y permite medir el desempeño real del sistema.
+
+7. Posibles Mejoras
+
+Una vez finalizado el entrenamiento inicial, el modelo puede perfeccionarse aplicando técnicas adicionales:
+
+Ampliación del dataset: incorporar más imágenes con distintos contextos y escenarios.
+
+Aumento de datos (Data Augmentation): generar variaciones de las imágenes originales (rotación, recorte, cambios de iluminación) para enriquecer el aprendizaje.
+
+Uso de modelos más complejos: entrenar versiones más grandes de YOLO para mejorar la precisión.
+
+Optimización para dispositivos embebidos: adaptar el modelo para que funcione en sistemas de vigilancia o cámaras inteligentes.
+
+8. Conclusiones
+
+El entrenamiento de YOLO para la detección de placas vehiculares es un proceso que requiere un dataset bien diseñado, una adecuada anotación de datos y una configuración precisa del modelo.
+Al seguir estos pasos, es posible desarrollar un sistema capaz de reconocer placas en diversas condiciones, con aplicaciones directas en la gestión de tránsito, control de accesos y seguridad.
