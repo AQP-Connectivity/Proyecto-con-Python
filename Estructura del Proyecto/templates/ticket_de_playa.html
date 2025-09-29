@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Estacionamiento Playa</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      color: #00695c;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    #ticket {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px dashed #00796b;
+      background-color: #f9f9f9;
+    }
+    .ticket-line {
+      display: flex;
+      justify-content: space-between;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-top: 10px;
+      color: #d32f2f;
+    }
+    @media print {
+      body {
+        background: white;
+        height: auto;
+      }
+      .container {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Estacionamiento Playa</h2>
+
+    <div id="form-section">
+      <input type="text" id="placa" placeholder="Placa del vehículo (ej. ABC123)" maxlength="10" />
+      <input type="text" id="puesto" placeholder="Número de puesto (ej. P-05)" maxlength="10" />
+      <input type="number" id="costo" placeholder="Costo por hora ($)" min="0.1" step="0.01" value="2.50" />
+
+      <button onclick="registrarEntrada()">Registrar Entrada</button>
+    </div>
+
+    <div id="salida-section" style="display:none;">
+      <p id="mensaje-entrada"></p>
+      <button onclick="generarTicket()">Retirar Vehículo y Generar Ticket</button>
+    </div>
+
+    <div id="ticket"></div>
+  </div>
+
+  <script>
+    let horaEntrada = null;
+
+    function registrarEntrada() {
+      const placa = document.getElementById("placa").value.trim().toUpperCase();
+      const puesto = document.getElementById("puesto").value.trim();
+      const costo = parseFloat(document.getElementById("costo").value);
+
+      if (!placa || !puesto || isNaN(costo) || costo <= 0) {
+        alert("Por favor, complete todos los campos correctamente.");
+        return;
+      }
+
+      horaEntrada = new Date();
+      const entradaStr = horaEntrada.toLocaleString('es-ES');
+
+      document.getElementById("mensaje-entrada").textContent = 
+        `✅ Entrada registrada a las: ${entradaStr}\nPlaca: ${placa} | Puesto: ${puesto}`;
+      
+      document.getElementById("form-section").style.display = "none";
+      document.getElementById("salida-section").style.display = "block";
+    }
+
+    function generarTicket() {
+      if (!horaEntrada) return;
+
+      const placa = document.getElementById("placa").value.trim().toUpperCase();
+      const puesto = document.getElementById("puesto").value.trim();
+      const costoPorHora = parseFloat(document.getElementById("costo").value);
+
+      const horaSalida = new Date();
+      const diffMs = horaSalida - horaEntrada;
+      const minutos = Math.floor(diffMs / 60000);
+      const horasTotales = diffMs / (1000 * 60 * 60); // en horas
+      const horasCobradas = Math.ceil(horasTotales);
+      const total = (horasCobradas * costoPorHora).toFixed(2);
+
+      const entradaStr = horaEntrada.toLocaleString('es-ES');
+      const salidaStr = horaSalida.toLocaleString('es-ES');
+
+      const ticketHTML = `
+        <h3 style="text-align:center;">TICKET DE ESTACIONAMIENTO</h3>
+        <div class="ticket-line"><span>Placa:</span><span>${placa}</span></div>
+        <div class="ticket-line"><span>Puesto:</span><span>${puesto}</span></div>
+        <div class="ticket-line"><span>Entrada:</span><span>${entradaStr}</span></div>
+        <div class="ticket-line"><span>Salida:</span><span>${salidaStr}</span></div>
+        <div class="ticket-line"><span>Tiempo:</span><span>${minutos} min (${horasCobradas} h cobradas)</span></div>
+        <div class="ticket-line"><span>Costo/hora:</span><span>$${costoPorHora.toFixed(2)}</span></div>
+        <div class="ticket-line total"><span>TOTAL A PAGAR:</span><span>$${total}</span></div>
+        <hr>
+        <p style="text-align:center; font-size:0.9em;">¡Gracias por su visita! 🌊</p>
+      `;
+
+      document.getElementById("ticket").innerHTML = ticketHTML;
+      document.getElementById("ticket").style.display = "block";
+
+      // Opcional: enfocar para impresión
+      window.print(); // Esto abrirá el diálogo de impresión automáticamente
+    }
+  </script>
+</body>
+</html>
