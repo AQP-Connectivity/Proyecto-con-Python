@@ -1,152 +1,72 @@
 Uso de YOLO para Reconocimiento de Placas Vehiculares
+
 1. Introducción
 
-El reconocimiento automático de placas vehiculares (ALPR, por sus siglas en inglés) es una aplicación de Visión por Computadora que combina técnicas de detección de objetos y reconocimiento óptico de caracteres (OCR).
-El objetivo es identificar y leer las matrículas de los automóviles en imágenes o videos de forma automática.
+El reconocimiento automático de placas vehiculares (ALPR) combina detección de objetos y OCR para identificar matrículas en imágenes o video en tiempo real.
+En este proyecto se emplea YOLO para detectar placas y un motor OCR (Tesseract) para extraer el texto, integrándose con otros módulos como pagos, notificaciones y backups, lo que permite automatizar procesos de control y seguridad.
 
-En este informe se describe cómo aplicar YOLO (You Only Look Once) como modelo de detección de placas y posteriormente emplear un motor OCR para extraer el texto.
-
-2. Fundamentos teóricos
+2. Fundamentos Teóricos
 2.1 Machine Learning y Deep Learning
 
-Machine Learning (ML): área de la Inteligencia Artificial donde los sistemas aprenden patrones a partir de datos sin ser programados explícitamente con reglas fijas.
-
-Deep Learning (DL): subcampo de ML basado en redes neuronales profundas, que se utilizan para procesar datos complejos como imágenes.
-
-En este proyecto, se aplica Deep Learning supervisado, ya que se entrena un modelo con imágenes de autos y las etiquetas de las placas.
+Se utiliza Deep Learning supervisado con redes neuronales para aprender patrones de placas a partir de imágenes etiquetadas.
 
 2.2 YOLO (You Only Look Once)
 
-YOLO es una arquitectura de redes neuronales convolucionales especializada en detección de objetos en tiempo real.
-Características principales:
+Modelo de detección de objetos que analiza la imagen completa en una sola pasada, prediciendo simultáneamente cajas delimitadoras y clases, ideal para aplicaciones en tiempo real como cámaras en vivo.
 
-Analiza la imagen completa de una sola vez (“look once”).
+2.3 OCR
 
-Predice simultáneamente las cajas delimitadoras (bounding boxes) y la clase del objeto.
-
-Es rápido y preciso, ideal para aplicaciones en video o cámaras en vivo.
-
-2.3 Reconocimiento Óptico de Caracteres (OCR)
-
-Explica brevemente qué es OCR.
-
-Ejemplo: Tesseract como herramienta open source ampliamente usada.
-
-Señalar que después de detectar la placa con YOLO, el OCR se encarga de extraer el texto.
+Tras la detección, el motor OCR (ej. Tesseract) extrae el texto de la placa para su posterior registro en el sistema.
 
 2.4 Dataset y Etiquetado
 
-Importancia de contar con un conjunto de imágenes variadas (diferentes ángulos, iluminaciones, tipos de placas).
+El modelo requiere imágenes variadas (ángulos, iluminación, tipos de placa) anotadas con herramientas como LabelImg, divididas en entrenamiento, validación y prueba.
 
-Uso de herramientas como LabelImg para anotar las placas (coordenadas de las bounding boxes).
+2.5 Evaluación
 
-División en entrenamiento, validación y prueba.
+Se mide precisión, recall, IoU y mAP para garantizar una detección confiable.
 
-2.5 Evaluación del Modelo
+2.6 Aplicaciones
 
-Explicar métricas como Precisión (Precision), Recall, IoU (Intersection over Union), y mAP (mean Average Precision).
+Control de accesos, peajes, seguridad ciudadana, estacionamientos inteligentes y gestión de tráfico.
 
-Justificar por qué son importantes para medir la calidad de detección.
+2.7 Retos
 
-2.6 Aplicaciones del ALPR
+Iluminación variable, placas dañadas o cubiertas, diferentes formatos y necesidad de GPU para tiempo real.
 
-Control de acceso vehicular.
-
-Peajes y estacionamientos automatizados.
-
-Seguridad ciudadana (detección de vehículos sospechosos).
-
-Gestión de tráfico en ciudades inteligentes.
-
-2.7 Retos y Limitaciones
-
-Variaciones en la iluminación (día/noche).
-
-Placas sucias, dañadas o cubiertas.
-
-Diferentes formatos de placas según el país.
-
-Requerimientos de hardware (GPU para tiempo real).
-
-nforme: Entrenamiento de YOLO para Reconocimiento de Placas Vehiculares
+Entrenamiento de YOLO para Reconocimiento de Placas
 1. Introducción
 
-El reconocimiento automático de placas vehiculares, conocido como ANPR (Automatic Number Plate Recognition), es una tecnología aplicada en sistemas de seguridad, control de tráfico, peajes y estacionamientos inteligentes.
-El modelo YOLO (You Only Look Once) se utiliza en este proyecto por su alta velocidad y precisión en la detección de objetos en imágenes y videos.
-
-Este informe presenta los pasos necesarios para entrenar un modelo YOLO orientado a la detección de placas vehiculares.
+El entrenamiento de YOLO permite adaptar un modelo preentrenado a la tarea de detectar placas, asegurando alta velocidad y precisión.
 
 2. Preparación del Dataset
 
-El primer paso en el entrenamiento consiste en la construcción de un conjunto de datos adecuado.
+Recolección de imágenes: vehículos en distintos contextos, iluminaciones y ángulos.
 
-2.1 Recolección de Imágenes
+Anotación: delimitación de placas con herramientas como LabelImg o Roboflow.
 
-Se requiere reunir imágenes de vehículos en distintos contextos:
+3. Organización de Datos
 
-Diferentes tipos de placas (nacionales e internacionales).
+Separar imágenes en entrenamiento y validación e indicar rutas, número de clases y nombres en el archivo de configuración.
 
-Diversas condiciones de iluminación (día, noche, lluvia, sombras).
+4. Configuración del Modelo
 
-Múltiples posiciones y ángulos de cámara.
+Aprovechar pesos preentrenados de YOLO, definiendo parámetros como épocas, resolución y tasa de aprendizaje.
 
-2.2 Anotación de Datos
+5. Entrenamiento y Validación
 
-Cada imagen debe ser etiquetada delimitando la ubicación de la placa.
-Este proceso se realiza con herramientas de anotación como LabelImg, Roboflow o CVAT.
-El etiquetado permite que el modelo aprenda a reconocer el patrón de la placa en cualquier imagen.
+El modelo ajusta sus pesos usando GPU para acelerar el proceso. Una parte del dataset se reserva para validación y evitar sobreajuste.
 
-3. Organización de los Datos
+6. Mejoras
 
-El dataset debe estar estructurado en carpetas que separen las imágenes de entrenamiento y de validación.
-Adicionalmente, se define un archivo de configuración que incluye:
+Ampliación del dataset, data augmentation (rotaciones, recortes, cambios de luz) y uso de versiones más robustas de YOLO para mayor precisión.
 
-La ruta de las imágenes.
+7. Conclusiones
 
-El número de clases a detectar (en este caso, una sola: “placa”).
+Con un dataset bien diseñado y una configuración adecuada, YOLO puede detectar placas en tiempo real e integrarse con:
 
-El nombre asignado a la clase.
+Pagos automáticos (peajes/estacionamientos).
 
-Esta organización asegura que el modelo pueda entrenarse de manera ordenada y reproducible.
+Notificaciones a usuarios o autoridades.
 
-4. Configuración del Modelo YOLO
-
-Para iniciar el entrenamiento, se utiliza una versión preentrenada de YOLO como base.
-Esto permite aprovechar conocimientos previos adquiridos en bases de datos más amplias (por ejemplo, COCO dataset) y adaptarlos a la nueva tarea de detección de placas.
-
-Los parámetros de configuración más relevantes son:
-
-Número de épocas: cantidad de veces que el modelo recorre el dataset durante el entrenamiento.
-
-Tamaño de las imágenes: resolución estandarizada para todas las entradas.
-
-Tasa de aprendizaje: velocidad con la que el modelo ajusta sus parámetros.
-
-5. Proceso de Entrenamiento
-
-Durante el entrenamiento, el modelo analiza las imágenes del dataset y ajusta sus pesos internos para mejorar su capacidad de identificar placas.
-El aprendizaje se guía mediante el cálculo de un error que se va reduciendo con cada iteración.
-
-El entrenamiento requiere recursos computacionales significativos, por lo que se recomienda utilizar una tarjeta gráfica (GPU) para acelerar el proceso.
-
-6. Validación
-
-Mientras se entrena, una parte del dataset se reserva para la validación, con el fin de evaluar el comportamiento del modelo en imágenes que no se han utilizado en el aprendizaje.
-Esto ayuda a evitar el sobreajuste y permite medir el desempeño real del sistema.
-
-7. Posibles Mejoras
-
-Una vez finalizado el entrenamiento inicial, el modelo puede perfeccionarse aplicando técnicas adicionales:
-
-Ampliación del dataset: incorporar más imágenes con distintos contextos y escenarios.
-
-Aumento de datos (Data Augmentation): generar variaciones de las imágenes originales (rotación, recorte, cambios de iluminación) para enriquecer el aprendizaje.
-
-Uso de modelos más complejos: entrenar versiones más grandes de YOLO para mejorar la precisión.
-
-Optimización para dispositivos embebidos: adaptar el modelo para que funcione en sistemas de vigilancia o cámaras inteligentes.
-
-8. Conclusiones
-
-El entrenamiento de YOLO para la detección de placas vehiculares es un proceso que requiere un dataset bien diseñado, una adecuada anotación de datos y una configuración precisa del modelo.
-Al seguir estos pasos, es posible desarrollar un sistema capaz de reconocer placas en diversas condiciones, con aplicaciones directas en la gestión de tránsito, control de accesos y seguridad.
+Backups automáticos de registros y evidencias.
