@@ -9,14 +9,6 @@
 {% block title %}Registros de Placas{% endblock %}
 
 {# -------------------------------------------------------- #}
-{# Bloque para agregar estilos CSS adicionales              #}
-{# Se carga un archivo externo desde la carpeta /static/css #}
-{# -------------------------------------------------------- #}
-{% block extra_css %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/registros.css') }}">
-{% endblock %}
-
-{# -------------------------------------------------------- #}
 {# Bloque principal de contenido de la página               #}
 {# -------------------------------------------------------- #}
 {% block content %}
