@@ -1,92 +1,119 @@
 {% extends "base.html" %}
 
-{% block title %}Mantenimiento - Sistema de Parking{% endblock %}
+{% block title %}Estacionamiento{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estacionamiento.css') }}">
+{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h2 class="text-center mb-4">🛠️ Página de Mantenimiento</h2>
-    <p class="text-center">Aquí puedes gestionar el mantenimiento de los estacionamientos.</p>
+  <div class="container mt-4" id="content">
+    <h2 class="mb-4">🚗 Registrar Estacionamiento</h2>
 
-    <!-- Acciones de mantenimiento -->
-    <div class="card p-4 mb-4">
-      <h5>Acciones rápidas</h5>
-      <ul>
-        <li>Revisar estado de cámaras de seguridad</li>
-        <li>Actualizar tarifas de estacionamiento</li>
-        <li>Gestionar personal de mantenimiento</li>
-        <li>Registrar incidencias de equipos</li>
-        <li>Control de iluminación y señalización</li>
-        <li>Supervisión de limpieza y orden</li>
-      </ul>
-    </div>
-
-    <!-- Formulario para registrar mantenimiento -->
-    <div class="card p-4 mb-4">
-      <h5>📋 Registrar nuevo mantenimiento</h5>
-      <form>
+    <div class="card p-4 shadow-sm">
+      <form method="POST">
+        <!-- Fecha -->
         <div class="mb-3">
-          <label for="tipo" class="form-label">Tipo de mantenimiento</label>
-          <select class="form-select" id="tipo">
-            <option>Preventivo</option>
-            <option>Correctivo</option>
-            <option>Emergencia</option>
+          <label for="fecha" class="form-label">Fecha:</label>
+          <input type="date" name="fecha" class="form-control" required>
+        </div>
+
+        <!-- Hora -->
+        <div class="mb-3">
+          <label for="hora" class="form-label">Hora:</label>
+          <input type="time" name="hora" class="form-control" required>
+        </div>
+
+        <!-- Placa -->
+        <div class="mb-3">
+          <label for="placa" class="form-label">Placa del vehículo:</label>
+          <input type="text" name="placa" class="form-control" placeholder="ABC-123" required>
+        </div>
+
+        <!-- Tipo de vehículo -->
+        <div class="mb-3">
+          <label for="tipo" class="form-label">Tipo de vehículo:</label>
+          <select name="tipo" class="form-select" required>
+            <option value="">Seleccione...</option>
+            <option value="auto">Auto</option>
+            <option value="moto">Moto</option>
+            <option value="camioneta">Camioneta</option>
           </select>
         </div>
+
+        <!-- Nivel / Zona -->
         <div class="mb-3">
-          <label for="descripcion" class="form-label">Descripción</label>
-          <textarea class="form-control" id="descripcion" rows="3" placeholder="Ejemplo: revisar cámaras del nivel 2..."></textarea>
+          <label for="zona" class="form-label">Zona / Nivel:</label>
+          <select name="zona" class="form-select" required>
+            <option value="Piso 1">Piso 1</option>
+            <option value="Piso 2">Piso 2</option>
+            <option value="Sótano 1">Sótano 1</option>
+          </select>
         </div>
+
+        <!-- Número de espacio -->
         <div class="mb-3">
-          <label for="fecha" class="form-label">Fecha programada</label>
-          <input type="date" class="form-control" id="fecha">
+          <label for="espacio" class="form-label">Número de espacio:</label>
+          <input type="number" name="espacio" class="form-control" min="1" required>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+
+        <!-- Precio -->
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio (S/.):</label>
+          <input type="number" step="0.01" name="precio" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">💾 Guardar</button>
       </form>
     </div>
 
-    <!-- Tabla de mantenimientos recientes -->
-    <div class="card p-4 mb-4">
-      <h5>📊 Historial de mantenimientos</h5>
+    <!-- Mensaje de confirmación -->
+    {% if mensaje %}
+      <div class="alert alert-success mt-3 text-center">
+        ✅ <strong>{{ mensaje }}</strong>
+      </div>
+    {% endif %}
+
+    <!-- Tabla de registros recientes -->
+    <div class="card p-4 shadow-sm mt-4">
+      <h5>📋 Registros recientes</h5>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Tipo</th>
-            <th>Descripción</th>
             <th>Fecha</th>
-            <th>Estado</th>
+            <th>Hora</th>
+            <th>Placa</th>
+            <th>Tipo</th>
+            <th>Zona</th>
+            <th>Espacio</th>
+            <th>Precio (S/.)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>001</td>
-            <td>Preventivo</td>
-            <td>Revisión de cámaras piso 1</td>
-            <td>2025-09-20</td>
-            <td><span class="badge bg-success">Completado</span></td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Correctivo</td>
-            <td>Reparación de barrera entrada</td>
-            <td>2025-09-25</td>
-            <td><span class="badge bg-warning">En proceso</span></td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Emergencia</td>
-            <td>Fallo en sistema de luces</td>
             <td>2025-09-28</td>
-            <td><span class="badge bg-danger">Pendiente</span></td>
+            <td>10:30</td>
+            <td>ABC-123</td>
+            <td>Auto</td>
+            <td>Piso 1</td>
+            <td>15</td>
+            <td>5.00</td>
+          </tr>
+          <tr>
+            <td>2025-09-28</td>
+            <td>11:00</td>
+            <td>XYZ-987</td>
+            <td>Moto</td>
+            <td>Sótano 1</td>
+            <td>3</td>
+            <td>2.50</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    <!-- Alertas de mantenimiento -->
-    <div class="alert alert-info mt-4" role="alert">
-      🔔 Recuerda programar mantenimientos preventivos cada 15 días para garantizar la seguridad del parking.
-    </div>
   </div>
 {% endblock %}
+
+
+
 
