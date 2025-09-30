@@ -1,6 +1,6 @@
 /* ===== Estilo Elegante Moderno (Degradado Azul-Púrpura) ===== */
 body {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Degradado elegante */
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #f5f5f5;
   min-height: 100vh;
   display: flex;
@@ -12,8 +12,8 @@ body {
 /* ===== Sidebar ===== */
 #sidebar {
   width: 250px;
-  background: linear-gradient(180deg, #1f1c2c, #928dab); /* Azul a púrpura */
-  color: #f8f9fa; /* Texto más claro */
+  background: linear-gradient(180deg, #1f1c2c, #928dab);
+  color: #f8f9fa;
   position: fixed;
   top: 0;
   left: 0;
@@ -26,28 +26,28 @@ body {
 
 /* Links del sidebar */
 #sidebar .nav-link {
-  color: #f1f1f1; /* Más blanco para mejor contraste */
+  color: #f1f1f1;
   border-radius: 6px;
   margin-bottom: 8px;
   padding: 10px 15px;
   display: block;
   transition: all 0.3s ease;
-  font-weight: 500; /* Un poco más grueso para que resalte */
+  font-weight: 500;
   text-decoration: none;
 }
 
 #sidebar .nav-link.active {
-  background: linear-gradient(135deg, #00c6ff, #0072ff); /* Azul vibrante */
-  color: #0a0a0a !important; /* Negro fuerte en el activo */
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #0a0a0a !important;
   font-weight: 700;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 #sidebar .nav-link:hover {
-  color: #ffffff; /* Blanco total al pasar el mouse */
+  color: #ffffff;
   background: rgba(255, 255, 255, 0.15);
-  transform: scale(1.05); /* Efecto moderno */
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6); /* ✨ Brillo sutil */
+  transform: scale(1.05);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 /* ===== Contenido principal ===== */
@@ -55,9 +55,117 @@ body {
   margin-left: 250px;
   flex-grow: 1;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05); /* Fondo translúcido */
-  backdrop-filter: blur(6px);            /* Efecto vidrio */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
   min-height: 100vh;
   transition: margin-left 0.3s ease;
   border-radius: 12px 0 0 12px;
+}
+
+/* ===== Cards ===== */
+.card {
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  color: #f1f1f1;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+}
+
+/* Títulos */
+h2, .card h2 {
+  color: #00c6ff;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0,198,255,0.45);
+}
+
+/* ===== Formularios ===== */
+.form-control, .form-select {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.9);
+  color: #212529;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #00c6ff;
+  box-shadow: 0 0 8px rgba(0,198,255,0.5);
+}
+
+/* ===== Botones ===== */
+.btn {
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 18px;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #36d1dc, #5b86e5);
+  border: none;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  transform: scale(1.07);
+  background: linear-gradient(90deg, #5b86e5, #36d1dc);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #38ef7d, #11998e);
+  border: none;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: linear-gradient(90deg, #11998e, #38ef7d);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn-outline-secondary {
+  border-radius: 10px;
+  color: #e0e0e0;
+  border: 1px solid #aaa;
+}
+
+.btn-outline-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* ===== Tablas ===== */
+.table {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  color: #f5f5f5;
+}
+
+.table th {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===== Gráficos ===== */
+#grafico {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+  width: 100% !important;
 }
