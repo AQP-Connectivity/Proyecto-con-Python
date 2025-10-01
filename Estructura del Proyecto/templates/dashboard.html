@@ -16,7 +16,7 @@
       <div class="card text-center shadow-sm border-0">
         <div class="card-body">
           <h6 class="text-secondary">Placas Registradas</h6>
-          <h3 class="fw-bold text-primary">120</h3>
+          <h3 class="fw-bold text-primary">{{ total_placas }}</h3>
         </div>
       </div>
     </div>
@@ -24,23 +24,31 @@
       <div class="card text-center shadow-sm border-0">
         <div class="card-body">
           <h6 class="text-secondary">Últimas Placas</h6>
-          <h3 class="fw-bold text-success">{{ ultimas|length }}</h3>
+          <h3 class="fw-bold text-success">{{ ultimas_placas|length }}</h3>
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-3">
       <div class="card text-center shadow-sm border-0">
         <div class="card-body">
-          <h6 class="text-secondary">Registros (Hoy)</h6>
-          <h3 class="fw-bold text-warning">{{ registros_hoy }}</h3>
+          <h6 class="text-secondary">Pagos Realizados</h6>
+          <h3 class="fw-bold text-warning">{{ total_pagos }}</h3>
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-3">
       <div class="card text-center shadow-sm border-0">
         <div class="card-body">
-          <h6 class="text-secondary">Comentarios</h6>
-          <h3 class="fw-bold text-danger">87</h3>
+          <h6 class="text-secondary">Notificaciones</h6>
+          <h3 class="fw-bold text-danger">{{ total_notificaciones }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card text-center shadow-sm border-0">
+        <div class="card-body">
+          <h6 class="text-secondary">Backups</h6>
+          <h3 class="fw-bold text-info">{{ total_backups }}</h3>
         </div>
       </div>
     </div>
@@ -57,7 +65,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for u in ultimas %}
+        {% for u in ultimas_placas %}
         <tr>
           <td>{{ u.numero }}</td>
           <td>{{ u.fecha_hora }}</td>
@@ -67,8 +75,31 @@
     </table>
   </div>
 
+  <!-- Últimos pagos -->
+  <h4 class="mt-5">Últimos 5 pagos</h4>
+  <div class="table-responsive shadow-sm">
+    <table class="table table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in ultimos_pagos %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>S/. {{ p.monto }}</td>
+          <td>{{ p.fecha_hora }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
   <!-- Gráfico -->
-  <h4 class="mt-5">Registros por día</h4>
+  <h4 class="mt-5">Registros de placas por día</h4>
   <div class="card shadow-sm p-3">
     <canvas id="grafico" height="100"></canvas>
   </div>
@@ -87,7 +118,7 @@
     data: {
       labels: etiquetas,
       datasets: [{
-        label: 'Registros',
+        label: 'Registros de placas',
         data: datos,
         borderWidth: 1,
         backgroundColor: 'rgba(54,162,235,0.5)',
