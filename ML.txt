@@ -70,3 +70,45 @@ Pagos automáticos (peajes/estacionamientos).
 Notificaciones a usuarios o autoridades.
 
 Backups automáticos de registros y evidencias.
+
+3. Limitaciones del Sistema
+
+A pesar de los buenos resultados que ofrece YOLO combinado con OCR, existen factores que pueden afectar la precisión del sistema:
+
+Condiciones de iluminación: exceso de brillo, reflejos o escenas nocturnas dificultan la detección.
+
+Placas deterioradas o sucias: impiden que el OCR extraiga el texto correctamente.
+
+Ocultamiento parcial de la placa: en algunos casos, la detección falla si la matrícula está cubierta por objetos.
+
+Diferentes formatos de placas: tamaños, colores y tipografías variables entre países.
+
+Requerimientos computacionales: para lograr detección en tiempo real se recomienda el uso de GPU.
+
+4. Aplicaciones Futuras
+
+El sistema de detección de placas basado en YOLO y OCR puede evolucionar hacia aplicaciones más avanzadas:
+
+Integración con sistemas de ciudad inteligente: monitoreo de tránsito, conteo de vehículos y control de accesos.
+
+Sistemas de seguridad vial: detección de infracciones, vehículos robados o sin autorización.
+
+Gestión automatizada de estacionamientos: ingreso y salida de vehículos sin intervención humana.
+
+Control fronterizo y peajes inteligentes: procesamiento automático de grandes volúmenes de tránsito.
+
+Análisis predictivo de tráfico: integración con Big Data para generar reportes y tendencias en movilidad urbana.
+
+5. Conclusiones Generales
+
+El uso de YOLO como modelo de detección de objetos, en conjunto con motores de OCR como Tesseract, constituye una solución robusta y eficiente para el reconocimiento automático de placas vehiculares.
+
+La efectividad del sistema depende principalmente de:
+
+La calidad y variedad del dataset utilizado.
+
+La correcta anotación de los datos.
+
+La optimización del modelo con técnicas de aumento y ajuste de hiperparámetros.
+
+Este enfoque no solo permite detectar y registrar placas en tiempo real, sino que también abre la posibilidad de integrar la tecnología en sistemas de seguridad, gestión de tráfico, control de accesos y ciudades inteligentes.
