@@ -98,3 +98,17 @@ Gestión automatizada de estacionamientos: ingreso y salida de vehículos sin in
 Control fronterizo y peajes inteligentes: procesamiento automático de grandes volúmenes de tránsito.
 
 Análisis predictivo de tráfico: integración con Big Data para generar reportes y tendencias en movilidad urbana.
+
+5. Conclusiones Generales
+
+El uso de YOLO como modelo de detección de objetos, en conjunto con motores de OCR como Tesseract, constituye una solución robusta y eficiente para el reconocimiento automático de placas vehiculares.
+
+La efectividad del sistema depende principalmente de:
+
+La calidad y variedad del dataset utilizado.
+
+La correcta anotación de los datos.
+
+La optimización del modelo con técnicas de aumento y ajuste de hiperparámetros.
+
+Este enfoque no solo permite detectar y registrar placas en tiempo real, sino que también abre la posibilidad de integrar la tecnología en sistemas de seguridad, gestión de tráfico, control de accesos y ciudades inteligentes.
