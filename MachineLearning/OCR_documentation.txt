@@ -1,0 +1,79 @@
+Uso de OCR en el Reconocimiento Automático de Placas Vehiculares
+1. Introducción
+
+El Reconocimiento Óptico de Caracteres (OCR, por sus siglas en inglés) es una tecnología que permite convertir texto presente en imágenes o documentos escaneados en texto digital editable.
+
+En el contexto del reconocimiento automático de placas vehiculares (ALPR), el OCR es un componente esencial, ya que después de que un modelo de detección (por ejemplo, YOLO) localiza la placa en la imagen, el OCR se encarga de leer y extraer los caracteres alfanuméricos de la matrícula.
+
+Su integración con sistemas de seguridad, control de accesos o gestión de tránsito permite automatizar procesos que anteriormente requerían intervención humana.
+
+2. Fundamentos Teóricos del OCR
+2.1 Definición
+
+El OCR es un proceso que transforma imágenes de texto (fotografías, documentos, placas) en datos legibles por máquina. Esto se logra a través de algoritmos de visión artificial y aprendizaje automático que reconocen patrones en los caracteres.
+
+2.2 Funcionamiento Básico
+
+El flujo general del OCR incluye:
+
+Preprocesamiento de la imagen: mejora de contraste, reducción de ruido, binarización.
+
+Segmentación: localización de las áreas donde se encuentran los caracteres.
+
+Reconocimiento: comparación de los caracteres detectados con un modelo entrenado.
+
+Postprocesamiento: corrección de errores y generación del texto final.
+
+2.3 Herramientas y Tecnologías
+
+Existen diversos motores de OCR, siendo los más utilizados:
+
+Tesseract OCR: de código abierto, ampliamente utilizado en proyectos académicos e industriales.
+
+Google Vision API: OCR en la nube con alto nivel de precisión.
+
+ABBYY FineReader: solución comercial de alta calidad.
+
+En aplicaciones de ALPR, Tesseract es uno de los más populares debido a su flexibilidad y facilidad de integración.
+
+3. Uso del OCR en el Reconocimiento de Placas
+
+En un sistema de detección de placas vehiculares, el OCR cumple el siguiente rol:
+
+Detección de la placa: un modelo de visión artificial como YOLO localiza la región de interés.
+
+Recorte de la imagen: se extrae únicamente la parte de la matrícula.
+
+Aplicación de OCR: el motor OCR analiza la imagen y convierte los caracteres en texto digital.
+
+Registro en el sistema: los datos extraídos se almacenan en bases de datos y pueden cruzarse con sistemas de seguridad, pagos o monitoreo.
+
+4. Retos del OCR en Placas Vehiculares
+
+Aunque el OCR es muy útil, enfrenta desafíos en aplicaciones reales:
+
+Iluminación deficiente: puede dificultar la lectura de caracteres.
+
+Suciedad o deterioro de la placa: reduce la precisión del reconocimiento.
+
+Distorsiones ópticas: ángulos de cámara poco adecuados o movimiento del vehículo.
+
+Variaciones en el formato: distintos tamaños, fuentes y colores de placas según el país.
+
+5. Aplicaciones
+
+El OCR aplicado a placas vehiculares tiene un amplio rango de aplicaciones:
+
+Control de accesos: ingreso automático a estacionamientos o edificios.
+
+Peajes electrónicos: cobro automático sin necesidad de detener el vehículo.
+
+Seguridad pública: identificación de vehículos robados o sospechosos.
+
+Gestión de tráfico: monitoreo del flujo vehicular y generación de estadísticas.
+
+Ciudades inteligentes: integración con sistemas de movilidad y vigilancia.
+
+6. Conclusiones
+
+El OCR es una tecnología fundamental en los sistemas modernos de reconocimiento automático de placas vehiculares.
