@@ -1,0 +1,67 @@
+Informe: Solicitudes Pull y Flujos de Trabajo en Git
+1. Introducción
+
+En el desarrollo de software colaborativo, es común que varios integrantes de un equipo trabajen simultáneamente sobre un mismo proyecto. Para mantener la organización, asegurar la calidad del código y evitar errores, se utilizan herramientas como Git y GitHub, las cuales permiten aplicar metodologías de integración continua a través de pull requests, flujos de trabajo, fusiones y releases.
+
+Este informe resume los conceptos principales trabajados en la Semana 08: Solicitudes Pull y Flujos de Trabajo.
+
+2. Solicitudes Pull (Pull Requests - PR)
+
+Una pull request es una solicitud para integrar cambios de una rama secundaria a la rama principal (por ejemplo, de feature/login hacia main).
+
+Objetivo: facilitar la revisión del código antes de fusionarlo, garantizando calidad y colaboración.
+
+Ejemplo: Una desarrolladora crea la rama feature/agregar-carrito, sube sus cambios y abre un PR en GitHub. El equipo revisa el código, hace observaciones, y al aprobarlo se integra al proyecto principal.
+
+3. Flujos de Trabajo (Workflows)
+
+Los flujos de trabajo son estrategias para organizar la integración del código. Uno de los más utilizados es Git Flow, que se estructura de la siguiente manera:
+
+main: rama principal con código estable en producción.
+
+develop: rama de integración para nuevas funcionalidades.
+
+feature/*: ramas para el desarrollo de nuevas características.
+
+release/*: ramas destinadas a preparar versiones previas al lanzamiento.
+
+hotfix/*: ramas usadas para aplicar correcciones urgentes en producción.
+
+Ejemplo: Un desarrollador trabaja en feature/pagos-paypal dentro de develop. Una vez finalizado, se fusiona con develop. Posteriormente, se crea release/2.0 para pruebas, antes de fusionar en main.
+
+4. Merge (Fusión)
+
+El merge es la acción de integrar los cambios de una rama en otra.
+
+Tipos de merge:
+
+Fast-forward: la rama destino no tiene cambios nuevos y simplemente se actualiza el puntero.
+
+Merge commit: se genera un commit adicional cuando existen divergencias entre las ramas.
+
+5. Conflictos (Conflicts)
+
+Un conflicto ocurre cuando dos ramas modifican la misma línea de un archivo y Git no puede decidir cuál conservar.
+
+Resolución: el equipo debe editar manualmente el archivo en conflicto y definir qué versión de los cambios se mantendrá.
+
+Ejemplo: si Ana cambia un valor en app.js a 90 y Carlos lo cambia a 80 en otra rama, al hacer merge Git pedirá que elijan entre ambas opciones o definan un nuevo valor.
+
+6. Release (Lanzamiento)
+
+El release consiste en preparar y entregar una versión estable del software.
+
+Pasos principales:
+
+Crear una rama release/X.Y desde develop.
+
+Corregir errores menores sin añadir nuevas funciones.
+
+Fusionar la rama en main y etiquetar la versión (ejemplo: v2.0).
+
+Fusionar nuevamente en develop para mantener consistencia.
+
+7. Conclusión
+
+La correcta gestión de pull requests, flujos de trabajo, merges, conflictos y releases permite trabajar de manera ordenada, colaborativa y segura en proyectos de software.
+El dominio de estas prácticas no solo evita errores comunes, sino que también fortalece la integración del equipo y asegura la calidad de las entregas.
