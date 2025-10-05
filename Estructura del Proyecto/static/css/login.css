@@ -1,54 +1,98 @@
 :root {
+  --primary: #0d6efd;
+  --primary-light: #0d6efd10;
   --bg-gradient: radial-gradient(1200px 600px at 100% 0%, #eef2ff 0%, #ffffff 40%);
+  --text-muted: #6c757d;
+  --border-color: #e9ecef;
 }
 
+/* Fondo general */
 body {
   min-height: 100vh;
   background: var(--bg-gradient);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #212529;
 }
 
+/* Card principal */
 .auth-card {
   border: none;
   border-radius: 1.25rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.auth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Logo circular */
 .brand-circle {
   width: 56px;
   height: 56px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: #0d6efd10;
-  color: #0d6efd;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
+/* Inputs */
+.form-control {
+  border-radius: .75rem;
+  padding: .8rem 1rem;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+}
+
+/* Label flotante */
+.form-floating > label {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.form-floating > .form-control:focus ~ label {
+  color: var(--primary);
+}
+
+/* Checkbox */
 .form-check-input:focus {
   box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
 }
 
+/* Botones */
 .btn-lg {
   border-radius: .9rem;
+  padding: .8rem 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
 
+.btn-lg:hover {
+  transform: translateY(-2px);
+}
+
+/* Input group */
 .input-group .btn {
   border-top-right-radius: .75rem;
   border-bottom-right-radius: .75rem;
 }
 
-.form-control {
-  border-radius: .75rem;
-}
-
-.form-floating > label {
-  color: #6c757d;
-}
-
+/* Divider con líneas */
 .divider {
   display: flex;
   align-items: center;
   gap: .75rem;
-  color: #6c757d;
+  color: var(--text-muted);
+  font-size: .9rem;
 }
 
 .divider::before,
@@ -56,5 +100,5 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: #e9ecef;
+  background: var(--border-color);
 }
