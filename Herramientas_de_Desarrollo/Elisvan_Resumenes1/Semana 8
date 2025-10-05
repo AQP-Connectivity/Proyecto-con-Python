@@ -1,0 +1,112 @@
+Informe: Solicitudes Pull y Flujos de Trabajo en Git
+1. Introducción
+
+El control de versiones es una herramienta esencial en el desarrollo de software moderno. En esta sesión se abordaron conceptos fundamentales sobre solicitudes Pull (Pull Requests), flujos de trabajo (Workflows) y la resolución de conflictos de merge en Git, habilidades clave para la colaboración efectiva en equipos de desarrollo.
+
+El aprendizaje central fue la capacidad de resolver conflictos al fusionar ramas, garantizando la integridad y calidad del código compartido en proyectos colaborativos.
+
+2. Solicitudes Pull (Pull Requests)
+
+Las Pull Requests (PR) permiten proponer la integración de cambios desde una rama secundaria hacia la principal. Su propósito es revisar y validar código antes de fusionarlo, promoviendo la colaboración y evitando errores en el código principal.
+
+Ventajas de usar PR:
+
+Fomenta la revisión por pares (code review).
+
+Mejora la calidad del software.
+
+Facilita la comunicación entre desarrolladores.
+
+Permite rastrear el historial de decisiones.
+
+Ejemplo:
+Un desarrollador crea una rama feature/login, implementa la funcionalidad y abre una PR hacia main. Otros compañeros revisan, comentan y aprueban antes de la fusión.
+
+3. Flujos de Trabajo (Workflows)
+
+Los flujos de trabajo definen cómo se organizan las ramas dentro de un repositorio Git. Uno de los más usados es Git Flow, que estructura el desarrollo para mayor control y orden.
+
+Estructura de Git Flow:
+
+main: Contiene el código estable y listo para producción.
+
+develop: Rama de integración de nuevas funciones.
+
+feature/*: Ramas para desarrollar nuevas características.
+
+release/*: Ramas de preparación antes de lanzar una versión.
+
+hotfix/*: Correcciones urgentes en producción.
+
+Ejemplo:
+Si se desarrolla una nueva función de pagos, se trabaja en feature/pagos-paypal, luego se fusiona a develop, y finalmente se prepara la versión en release/2.0 antes de lanzarla a producción.
+
+4. Fusión (Merge) y Resolución de Conflictos
+
+El merge es el proceso de combinar el contenido de dos ramas.
+Existen dos tipos principales:
+
+Fast-forward: No hay cambios nuevos en la rama de destino.
+
+Merge commit: Se crea un commit adicional cuando ambas ramas tienen cambios diferentes.
+
+Los conflictos surgen cuando dos desarrolladores editan la misma línea de código o archivo.
+Solución: se deben editar manualmente los archivos involucrados, decidir qué cambios conservar y luego confirmar el merge.
+
+Ejemplo:
+Si Ana y Carlos modifican la misma línea de app.js con valores distintos, Git solicitará resolver el conflicto antes de fusionar.
+
+5. Lanzamiento (Release)
+
+Un release es la entrega oficial de una versión estable del software.
+Pasos generales:
+
+Crear una rama release/x.y desde develop.
+
+Corregir errores menores y probar el sistema.
+
+Fusionar a main y etiquetar (por ejemplo, v2.0).
+
+Fusionar los cambios nuevamente en develop.
+
+Esto permite mantener versiones estables y un ciclo de desarrollo controlado.
+
+6. Conclusiones
+
+El manejo de Pull Requests, Workflows y Merge Conflicts representa una competencia esencial para cualquier desarrollador profesional, ya que:
+
+Promueve el trabajo colaborativo estructurado.
+
+Mejora la trazabilidad del código.
+
+Reduce el riesgo de errores en producción.
+
+Aumenta la productividad del equipo.
+
+7. Recomendaciones para complementar tu formación
+
+Para reforzar tu dominio en este tema, se recomienda:
+
+a) Práctica técnica
+
+Usar GitHub o GitLab para practicar creación y revisión de Pull Requests.
+
+Simular conflictos de merge y resolverlos manualmente.
+
+Implementar Git Flow completo en un proyecto personal.
+
+b) Formación complementaria
+
+Cursos sobre DevOps y CI/CD (Integración y Despliegue Continuo).
+
+Aprender GitHub Actions o GitLab CI para automatizar pruebas y despliegues.
+
+Participar en proyectos de software colaborativo (open source).
+
+c) Habilidades blandas
+
+Desarrollar comunicación efectiva en equipos.
+
+Fomentar revisiones constructivas y trabajo en equipo.
+
+Documentar procesos y decisiones de desarrollo.
