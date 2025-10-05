@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Administrar Sedes{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-3">🏢 Sedes del Estacionamiento</h2>
+  <a href="{{ url_for('sede.nuevo') }}" class="btn btn-primary mb-3">➕ Nueva Sede</a>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>Capacidad</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sede in sedes %}
+      <tr>
+        <td>{{ sede.id }}</td>
+        <td>{{ sede.nombre }}</td>
+        <td>{{ sede.direccion }}</td>
+        <td>{{ sede.telefono }}</td>
+        <td>{{ sede.capacidad }}</td>
+        <td>
+          <a href="{{ url_for('sede.eliminar', id=sede.id) }}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
