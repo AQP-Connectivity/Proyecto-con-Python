@@ -3,35 +3,60 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="mb-4 text-center">Gestión de Usuarios</h2>
-
-        <form method="POST">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="correo" name="correo" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="rol" class="form-label">Rol</label>
-                <select class="form-select" id="rol" name="rol" required>
-                    <option value="">Seleccione...</option>
-                    <option value="Administrador">Administrador</option>
-                    <option value="Usuario">Usuario</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Registrar Usuario</button>
-        </form>
-
-        {% if mensaje %}
-            <div class="alert alert-info mt-3">{{ mensaje }}</div>
-        {% endif %}
+  <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 600px;">
+    
+    <!-- Encabezado -->
+    <div class="card-header bg-primary text-white text-center fw-bold fs-4 rounded-top-4">
+      👥 Gestión de Usuarios
     </div>
+
+    <div class="card-body p-4">
+      <form method="POST" class="needs-validation" novalidate>
+        
+        <!-- Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label fw-semibold">Nombre</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre completo" required>
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="mb-3">
+          <label for="correo" class="form-label fw-semibold">Correo Electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
+          </div>
+        </div>
+
+        <!-- Rol -->
+        <div class="mb-4">
+          <label for="rol" class="form-label fw-semibold">Rol</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-shield-lock"></i></span>
+            <select class="form-select" id="rol" name="rol" required>
+              <option value="">Seleccione un rol...</option>
+              <option value="Administrador">Administrador</option>
+              <option value="Usuario">Usuario</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <button type="submit" class="btn btn-primary w-100 btn-lg fw-semibold">
+          ➕ Registrar Usuario
+        </button>
+      </form>
+
+      <!-- Mensaje -->
+      {% if mensaje %}
+        <div class="alert alert-info mt-4 text-center rounded-3 shadow-sm">
+          {{ mensaje }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock %}
