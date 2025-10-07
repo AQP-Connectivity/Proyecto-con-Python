@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plaza de Estacionamiento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .parking-lot {
+      display: grid;
+      grid-template-columns: repeat(5, 80px); /* 5 columnas */
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .spot {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .spot.free {
+      background-color: #4CAF50; /* Verde */
+      color: white;
+    }
+
+    .spot.occupied {
+      background-color: #f44336; /* Rojo */
+      color: white;
+    }
+
+    .spot:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Plaza de Estacionamiento</h1>
+  <div class="parking-lot" id="parkingLot"></div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #4CAF50;"></div>
+      <span>Libre</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #f44336;"></div>
+      <span>Ocupado</span>
+    </div>
+  </div>
+
+  <script>
+    // Configuración inicial: 20 plazas (puedes cambiar este número)
+    const totalSpots = 20;
+    const parkingLot = document.getElementById('parkingLot');
+
+    // Estado inicial: todas libres (puedes modificar según necesites)
+    let spots = Array(totalSpots).fill(false); // false = libre, true = ocupado
+
+    function renderParking() {
+      parkingLot.innerHTML = '';
+      spots.forEach((isOccupied, index) => {
+        const spot = document.createElement('div');
+        spot.className = `spot ${isOccupied ? 'occupied' : 'free'}`;
+        spot.textContent = index + 1;
+        spot.dataset.index = index;
+
+        spot.addEventListener('click', () => {
+          // Alternar estado
+          spots[index] = !spots[index];
+          renderParking(); // Re-renderizar
+        });
+
+        parkingLot.appendChild(spot);
+      });
+    }
+
+    // Inicializar
+    renderParking();
+  </script>
+</body>
+</html>
