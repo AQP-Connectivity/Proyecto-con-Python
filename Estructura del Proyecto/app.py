@@ -158,6 +158,14 @@ def salida():
     return render_template("salida.html", mensaje=mensaje)
 
 
+@app.route("/ver_sedes")
+def ver_sedes():
+    """
+    Redirige a la lista de sedes del sistema.
+    """
+    return render_template("sedes.html")
+
+
 # 🚀 Iniciar servidor (SOLO UNA VEZ al final)
 if __name__ == "__main__":
     app.run(debug=True)
