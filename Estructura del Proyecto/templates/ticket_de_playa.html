@@ -13,6 +13,7 @@
       --color-text: #263238;
       --color-success: #388e3c;
       --color-total: #d32f2f;
+      --color-error: #d32f2f;
       --shadow: 0 4px 12px rgba(0,0,0,0.1);
       --radius: 12px;
     }
@@ -81,8 +82,13 @@
       transition: background 0.3s ease;
     }
 
-    button:hover {
+    button:hover:not(:disabled) {
       background-color: #004d40;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #salida-section p {
@@ -127,6 +133,13 @@
       margin: 12px 0;
     }
 
+    .error {
+      color: var(--color-error);
+      font-size: 0.9em;
+      margin-top: -8px;
+      margin-bottom: 8px;
+    }
+
     @media print {
       body {
         background: white;
@@ -138,8 +151,14 @@
         padding: 15px;
         border-radius: 0;
       }
-      button {
-        display: none;
+      button, .error {
+        display: none !important;
+      }
+      #form-section, #salida-section {
+        display: none !important;
+      }
+      #ticket {
+        display: block !important;
       }
     }
   </style>
@@ -149,16 +168,20 @@
     <h2>🏖️ Estacionamiento Playa</h2>
 
     <div id="form-section">
-      <input type="text" id="placa" placeholder="Placa del vehículo (ej. ABC123)" maxlength="10" />
-      <input type="text" id="puesto" placeholder="Número de puesto (ej. P-05)" maxlength="10" />
+      <input type="text" id="placa" placeholder="Placa del vehículo (ej. ABC123)" maxlength="10" autocomplete="off" />
+      <div class="error" id="error-placa" style="display:none;">Formato inválido. Solo letras y números (máx. 10 caracteres).</div>
+
+      <input type="text" id="puesto" placeholder="Número de puesto (ej. P-05)" maxlength="10" autocomplete="off" />
+      <div class="error" id="error-puesto" style="display:none;">Ingrese un número de puesto válido.</div>
+
       <input type="number" id="costo" placeholder="Costo por hora ($)" min="0.1" step="0.01" value="2.50" />
 
-      <button onclick="registrarEntrada()">✅ Registrar Entrada</button>
+      <button id="btn-entrada" onclick="registrarEntrada()">✅ Registrar Entrada</button>
     </div>
 
     <div id="salida-section" style="display:none;">
       <p id="mensaje-entrada"></p>
-      <button onclick="generarTicket()">🚗 Retirar Vehículo y Generar Ticket</button>
+      <button id="btn-salida" onclick="generarTicket()">🚗 Retirar Vehículo y Generar Ticket</button>
     </div>
 
     <div id="ticket"></div>
@@ -167,15 +190,54 @@
   <script>
     let horaEntrada = null;
 
-    function registrarEntrada() {
-      const placa = document.getElementById("placa").value.trim().toUpperCase();
-      const puesto = document.getElementById("puesto").value.trim();
-      const costo = parseFloat(document.getElementById("costo").value);
+    // Validación básica de placa: solo letras y números, sin espacios
+    function validarPlaca(placa) {
+      const regex = /^[A-Z0-9]{1,10}$/;
+      return regex.test(placa);
+    }
 
-      if (!placa || !puesto || isNaN(costo) || costo <= 0) {
-        alert("⚠️ Por favor, complete todos los campos correctamente.");
+    // Validación básica de puesto
+    function validarPuesto(puesto) {
+      return puesto.length > 0 && puesto.trim().length > 0;
+    }
+
+    function registrarEntrada() {
+      const placaInput = document.getElementById("placa");
+      const puestoInput = document.getElementById("puesto");
+      const costoInput = document.getElementById("costo");
+      const btn = document.getElementById("btn-entrada");
+
+      // Limpiar errores
+      document.getElementById("error-placa").style.display = "none";
+      document.getElementById("error-puesto").style.display = "none";
+
+      let placa = placaInput.value.trim().toUpperCase().replace(/\s+/g, '');
+      let puesto = puestoInput.value.trim();
+      const costo = parseFloat(costoInput.value);
+
+      // Validaciones
+      if (!placa) {
+        document.getElementById("error-placa").textContent = "La placa es obligatoria.";
+        document.getElementById("error-placa").style.display = "block";
         return;
       }
+      if (!validarPlaca(placa)) {
+        document.getElementById("error-placa").textContent = "Formato inválido. Solo letras y números (máx. 10 caracteres).";
+        document.getElementById("error-placa").style.display = "block";
+        return;
+      }
+      if (!validarPuesto(puesto)) {
+        document.getElementById("error-puesto").textContent = "El número de puesto es obligatorio.";
+        document.getElementById("error-puesto").style.display = "block";
+        return;
+      }
+      if (isNaN(costo) || costo <= 0) {
+        alert("⚠️ El costo por hora debe ser un número válido mayor que 0.");
+        return;
+      }
+
+      // Desactivar botón para evitar doble envío
+      btn.disabled = true;
 
       horaEntrada = new Date();
       const entradaStr = horaEntrada.toLocaleString('es-ES', {
@@ -191,10 +253,20 @@
       
       document.getElementById("form-section").style.display = "none";
       document.getElementById("salida-section").style.display = "block";
+
+      // Actualizar valores en campos (para uso posterior)
+      placaInput.value = placa;
+      puestoInput.value = puesto;
     }
 
     function generarTicket() {
-      if (!horaEntrada) return;
+      if (!horaEntrada) {
+        alert("⚠️ No hay entrada registrada.");
+        return;
+      }
+
+      const btn = document.getElementById("btn-salida");
+      btn.disabled = true;
 
       const placa = document.getElementById("placa").value.trim().toUpperCase();
       const puesto = document.getElementById("puesto").value.trim();
@@ -233,9 +305,23 @@
       ticketEl.innerHTML = ticketHTML;
       ticketEl.style.display = "block";
 
-      // Opcional: imprimir automáticamente
-      setTimeout(() => window.print(), 300);
+      // Imprimir después de un breve retraso
+      setTimeout(() => {
+        window.print();
+        // Opcional: reiniciar formulario tras impresión
+        setTimeout(() => {
+          location.reload(); // o resetear manualmente si prefieres
+        }, 1000);
+      }, 300);
     }
+
+    // Opcional: evitar recargar accidentalmente
+    // window.addEventListener('beforeunload', function (e) {
+    //   if (horaEntrada && document.getElementById("ticket").style.display !== "block") {
+    //     e.preventDefault();
+    //     e.returnValue = '';
+    //   }
+    // });
   </script>
 </body>
 </html>
