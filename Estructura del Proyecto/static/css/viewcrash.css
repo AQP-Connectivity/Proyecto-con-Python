@@ -1,69 +1,125 @@
-body, html {
+:root {
+  /* Colores base (tema amarillo/ocre) */
+  --bg-body: #fff3cd;
+  --bg-card: #fff8e1;
+  --border-color: #ffecb5;
+  --text-primary: #5d4037; /* marrón oscuro legible */
+  --text-secondary: #856404;
+  --accent-yellow: #ffca28;
+  --accent-yellow-dark: #ffb300;
+  --shadow-light: rgba(255, 193, 7, 0.4);
+  --shadow-btn: rgba(255, 202, 40, 0.5);
+  --shadow-btn-hover: rgba(255, 179, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   height: 100%;
-  background-color: #fff3cd; /* amarillo claro */
-  color: #856404; /* marrón oscuro para texto */
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-body);
+  color: var(--text-secondary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
+  line-height: 1.6;
 }
 
 .error-container {
   text-align: center;
   max-width: 420px;
-  padding: 30px;
-  background-color: #fff8e1; /* amarillo muy claro */
-  border: 2px solid #ffecb5; /* borde amarillo */
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 193, 7, 0.5); /* sombra amarilla */
+  width: 90%;
+  padding: 32px;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px var(--shadow-light);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.icon-parking {
+  font-size: 4.5rem;
+  margin-bottom: 20px;
+  color: var(--accent-yellow);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  display: block;
 }
 
 .error-container h1 {
-  font-size: 6rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #ffca28; /* amarillo más intenso */
-  text-shadow: 1px 1px 2px #b28704;
+  font-size: 5.5rem;
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: var(--accent-yellow);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 1;
 }
 
 .error-container h2 {
+  font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
+  margin: 0 0 16px;
+  color: var(--text-primary);
 }
 
 .error-container p {
   font-size: 1.1rem;
-  margin-bottom: 25px;
+  margin: 0 0 28px;
+  color: var(--text-secondary);
 }
 
 .btn-retry {
-  background-color: #ffca28; /* amarillo */
-  color: #5d4037; /* marrón oscuro */
+  background-color: var(--accent-yellow);
+  color: var(--text-primary);
   border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
-  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   text-decoration: none;
   display: inline-block;
-  font-weight: 600;
-  box-shadow: 0 4px 6px rgba(255, 202, 40, 0.5);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 8px var(--shadow-btn);
+  /* Accesibilidad */
+  outline: none;
 }
 
 .btn-retry:hover {
-  background-color: #ffb300; /* amarillo más oscuro */
+  background-color: var(--accent-yellow-dark);
   color: #3e2723;
-  text-decoration: none;
-  box-shadow: 0 6px 8px rgba(255, 179, 0, 0.7);
+  box-shadow: 0 6px 12px var(--shadow-btn-hover);
+  transform: translateY(-2px);
 }
 
-/* Icono de estacionamiento */
-.icon-parking {
-  font-size: 5rem;
-  margin-bottom: 20px;
-  color: #ffca28;
-  text-shadow: 1px 1px 2px #b28704;
+.btn-retry:focus {
+  box-shadow: 0 0 0 3px rgba(255, 202, 40, 0.4), 0 4px 8px var(--shadow-btn);
+}
+
+/* Responsive: ajuste en pantallas pequeñas */
+@media (max-width: 480px) {
+  .error-container {
+    padding: 24px;
+  }
+
+  .error-container h1 {
+    font-size: 4.2rem;
+  }
+
+  .icon-parking {
+    font-size: 3.8rem;
+  }
+
+  .btn-retry {
+    width: 100%;
+    padding: 14px;
+  }
 }
