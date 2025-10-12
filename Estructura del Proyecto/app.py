@@ -5,6 +5,7 @@ from utils.pdf_utils import generar_pdf
 from controllers.dashboard_controller import obtener_dashboard
 import cv2
 from controllers.salida_controller import registrar_salida
+from controllers.sede_controller import sede_bp
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static"
@@ -158,13 +159,7 @@ def salida():
     return render_template("salida.html", mensaje=mensaje)
 
 
-@app.route("/ver_sedes")
-def ver_sedes():
-    """
-    Redirige a la lista de sedes del sistema.
-    """
-    return render_template("sedes.html")
-
+app.register_blueprint(sede_bp) 
 
 # 🚀 Iniciar servidor (SOLO UNA VEZ al final)
 if __name__ == "__main__":

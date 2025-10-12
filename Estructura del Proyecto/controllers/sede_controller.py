@@ -5,7 +5,7 @@
 # Controlador para manejar las sedes del estacionamiento (CRUD completo)
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-import models.sede_model as Sede
+from database.model import sede_model  as Sede
 
 # Blueprint para modularizar las rutas relacionadas con "sedes"
 sede_bp = Blueprint("sede", __name__)
