@@ -7,45 +7,70 @@
 
 {% block content %}
 <div class="container mt-5">
-  <div class="card shadow-lg border-0 p-4">
+  <div class="card shadow-lg border-0 rounded-3 p-4">
     <h2 class="text-center mb-4 text-danger">
       <i class="bi bi-box-arrow-right me-2"></i> Registrar Salida
     </h2>
 
-    <form method="POST" action="{{ url_for('salida') }}">
+    <form method="POST" action="{{ url_for('salida') }}" novalidate>
       <!-- Placa -->
       <div class="mb-3">
-        <label class="form-label fw-bold">Placa del Vehículo</label>
-        <input type="text" name="placa" class="form-control text-uppercase" placeholder="Ej: ABC-123" required>
+        <label for="placa" class="form-label fw-bold">Placa del Vehículo</label>
+        <input
+          type="text"
+          id="placa"
+          name="placa"
+          class="form-control text-uppercase"
+          placeholder="Ej: ABC-123"
+          maxlength="10"
+          required
+          autofocus
+        >
         <div class="form-text">Ingrese la placa tal como aparece en el ticket de entrada.</div>
       </div>
 
       <!-- Hora de salida automática -->
       <div class="mb-3">
         <label class="form-label fw-bold">Hora de Salida</label>
-        <input type="text" class="form-control" value="{{ hora_actual }}" readonly>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ hora_actual }}"
+          readonly
+          aria-readonly="true"
+        >
       </div>
 
       <!-- Botón registrar -->
-      <button type="submit" class="btn btn-danger w-100 fw-bold">
+      <button type="submit" class="btn btn-danger w-100 fw-bold py-2">
         <i class="bi bi-check-circle me-2"></i> Confirmar Salida
       </button>
     </form>
 
-    <!-- Resumen si existe -->
+    <!-- Resumen del ticket (si existe) -->
     {% if ticket %}
-    <div class="alert alert-secondary mt-4">
+    <div class="alert alert-success mt-4 rounded-3 shadow-sm">
       <h5 class="mb-2"><i class="bi bi-receipt me-2"></i> Resumen del Ticket</h5>
-      <p><strong>Placa:</strong> {{ ticket.numero }}</p>
-      <p><strong>Hora de Entrada:</strong> {{ ticket.hora_entrada }}</p>
-      <p><strong>Tiempo Total:</strong> {{ ticket.tiempo_total }}</p>
-      <p><strong>Costo Estimado:</strong> S/. {{ ticket.costo }}</p>
+      <ul class="mb-0 ps-3">
+        <li><strong>Placa:</strong> {{ ticket.numero }}</li>
+        <li><strong>Hora de Entrada:</strong> {{ ticket.hora_entrada }}</li>
+        <li><strong>Tiempo Total:</strong> {{ ticket.tiempo_total }}</li>
+        <li><strong>Costo Estimado:</strong> S/. {{ "%.2f"|format(ticket.costo|float) }}</li>
+      </ul>
     </div>
     {% endif %}
 
-    <!-- Mensaje de confirmación -->
+    <!-- Mensajes de retroalimentación -->
     {% if mensaje %}
-      <div class="alert alert-info mt-3 text-center">{{ mensaje }}</div>
+      <div class="alert alert-info mt-3 text-center rounded-3">
+        <i class="bi bi-info-circle me-1"></i> {{ mensaje }}
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="alert alert-danger mt-3 text-center rounded-3">
+        <i class="bi bi-exclamation-triangle me-1"></i> {{ error }}
+      </div>
     {% endif %}
   </div>
 </div>
