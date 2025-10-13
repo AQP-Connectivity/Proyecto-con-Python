@@ -1,1 +1,111 @@
 /* UNIFICACION DE CODIGO */
+/* registros.css */
+
+/* Fondo general */
+body {
+  background: linear-gradient(135deg, #e8f5e9, #ffffff);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Tarjeta del formulario */
+.card {
+  border: none;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  animation: slideIn 0.6s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título principal */
+.card h2 {
+  text-align: center;
+  color: #2e7d32;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Etiquetas */
+.form-label {
+  font-weight: 500;
+  color: #444;
+}
+
+/* Campos de texto */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+}
+
+/* Botones */
+.btn-success {
+  background-color: #2e7d32;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  background-color: #1b5e20;
+  transform: scale(1.03);
+}
+
+/* Mensajes */
+.alert-success {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Inputs en columnas (si usas varias filas) */
+.row .col-md-6 {
+  margin-bottom: 1rem;
+}
+
+/* Placeholder más suave */
+::placeholder {
+  color: #aaa;
+}
+
+/* Bordes suaves para selects */
+select.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%232e7d32' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
