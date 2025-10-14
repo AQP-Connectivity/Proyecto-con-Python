@@ -13,60 +13,55 @@
 {# -------------------------------------------------------- #}
 {% block content %}
 <div class="container mt-5">
-    <div class="card shadow p-4">
-        
-        {# Título principal de la página #}
-        <h2 class="text-center mb-4">📋 Registros de Vehículos</h2>
+  <div class="card shadow-sm p-4">
+    <!-- Título principal -->
+    <h1 class="text-center mb-4">📋 Registros de Vehículos</h1>
 
-        {# -------------------------------------------------------- #}
-        {# Sección: Tabla con los registros almacenados             #}
-        {# -------------------------------------------------------- #}
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped align-middle">
-                
-                {# Encabezados de la tabla #}
-                <thead class="table-dark text-center">
-                    <tr>
-                        <th>ID</th>
-                        <th>Placa</th>
-                        <th>Hora Entrada</th>
-                        <th>Hora Salida</th>
-                        <th>Tiempo Total (min)</th>
-                        <th>Costo (S/.)</th>
-                    </tr>
-                </thead>
-
-                {# Cuerpo de la tabla con los registros iterados #}
-                <tbody>
-                    {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
-                    <tr>
-                        <td class="text-center">{{ id }}</td>
-                        <td class="text-uppercase text-center">{{ numero }}</td>
-                        <td class="text-center">{{ hora_entrada or '-' }}</td>
-                        <td class="text-center">{{ hora_salida or '-' }}</td>
-                        <td class="text-center">{{ tiempo_total if tiempo_total else '-' }}</td>
-                        <td class="text-center">{{ costo if costo else '-' }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <!-- Tabla de registros -->
+    <div class="table-responsive">
+      {% if registros %}
+        <table class="table table-bordered table-striped align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Placa</th>
+              <th scope="col">Hora de Entrada</th>
+              <th scope="col">Hora de Salida</th>
+              <th scope="col">Tiempo Total (min)</th>
+              <th scope="col">Costo (S/.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
+              <tr>
+                <td class="text-center">{{ id }}</td>
+                <td class="text-uppercase text-center">{{ numero }}</td>
+                <td class="text-center">{{ hora_entrada or '—' }}</td>
+                <td class="text-center">{{ hora_salida or '—' }}</td>
+                <td class="text-center">{{ tiempo_total if tiempo_total is not none else '—' }}</td>
+                <td class="text-center">{{ "%.2f"|format(costo) if costo is not none else '—' }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="text-center py-4">
+          <p class="text-muted">No hay registros de vehículos disponibles.</p>
         </div>
-
-        {# -------------------------------------------------------- #}
-        {# Sección: Botones de acción                               #}
-        {# -------------------------------------------------------- #}
-        <div class="mt-4 d-flex flex-column gap-2">
-            
-            {# Botón para descargar reporte en PDF #}
-            <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary">
-                📄 Descargar Reporte en PDF
-            </a>
-
-            {# Botón para volver a la página de inicio #}
-            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
-                ⬅️ Volver al Inicio
-            </a>
-        </div>
+      {% endif %}
     </div>
+
+    <!-- Botones de acción -->
+    <div class="mt-4 d-flex flex-column flex-md-row gap-2 justify-content-center">
+      <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+        <i class="bi bi-file-earmark-pdf"></i>
+        Descargar Reporte en PDF
+      </a>
+      <a href="{{ url_for('index') }}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2">
+        <i class="bi bi-arrow-left"></i>
+        Volver al Inicio
+      </a>
+    </div>
+  </div>
 </div>
 {% endblock %}
