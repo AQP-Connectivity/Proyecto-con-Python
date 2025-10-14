@@ -1,1 +1,117 @@
-UNIFICACION DE CODIGO CSS
+/* usuario.css */
+
+/* Fondo general */
+body {
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Tarjeta principal */
+.card {
+  background: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  color: #0d47a1;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Etiquetas */
+.form-label {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Campos de texto y select */
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d47a1;
+  box-shadow: 0 0 6px rgba(13, 71, 161, 0.3);
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: #0d47a1;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #08306b;
+  transform: scale(1.03);
+}
+
+/* Mensaje de información */
+.alert-info {
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  color: #0d47a1;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Mejor apariencia para placeholders */
+::placeholder {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+/* Ícono personalizado para el select */
+select.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%230d47a1' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
