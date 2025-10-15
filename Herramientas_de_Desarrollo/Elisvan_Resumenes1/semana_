@@ -1,0 +1,37 @@
+1. Introducción
+Las herramientas de gestión de actividades son aplicaciones o software diseñados para apoyar a los equipos de desarrollo de software en la planificación, organización, seguimiento y control de las tareas necesarias para llevar a cabo un proyecto con éxito. Estas herramientas promueven la colaboración, aumentan la visibilidad del progreso del trabajo y optimizan la productividad del equipo.
+
+2. Objetivo de la Sesión
+Al finalizar la sesión, el estudiante debe ser capaz de enunciar dos criterios simples para elegir una herramienta de gestión de actividades al iniciar un proyecto de software, considerando:
+
+El propósito del proyecto
+El tamaño del equipo
+3. Tipos de Herramientas de Gestión de Actividades
+3.1. Herramientas de Gestión de Proyectos
+Ejemplo: Trello
+
+Basada en tableros y tarjetas organizadas en columnas (Por Hacer, En Progreso, Completado).
+Uso en desarrollo de software: Ideal para visualizar historias de usuario o tareas individuales, asignar responsables y fechas, y monitorear el flujo de trabajo.
+Beneficio principal: Visualización clara del estado del proyecto y colaboración en tiempo real.
+3.2. Herramientas de Seguimiento de Tareas
+Ejemplo: Asana
+
+Permite crear, asignar y rastrear tareas con dependencias, fechas límite y comentarios.
+Uso en desarrollo de software: Gestión detallada de funcionalidades, asignación de tareas a miembros del equipo y seguimiento del avance.
+Beneficio principal: Mejora la comunicación y el control granular de cada actividad.
+3.3. Herramientas de Planificación de Proyectos
+Ejemplo: Microsoft Project
+
+Herramienta avanzada para cronogramas detallados, asignación de recursos y ajuste dinámico del plan.
+Uso en desarrollo de software: Útil para gerentes de proyecto que deben coordinar fases, recursos humanos y plazos complejos.
+Beneficio principal: Visión integral del cronograma y gestión eficiente de recursos.
+3.4. Herramientas de Gestión de Issues
+Ejemplo: Jira
+
+Diseñada específicamente para entornos de desarrollo de software.
+Uso en desarrollo de software: Gestión de errores (bugs), tareas técnicas, mejoras y solicitudes de cambio, con priorización y seguimiento.
+Beneficio principal: Integración con flujos de trabajo ágiles y soporte para metodologías como Scrum o Kanban.
+4. Conclusión
+La elección adecuada de una herramienta de gestión de actividades depende fundamentalmente del propósito del proyecto y del tamaño del equipo. No existe una herramienta universalmente óptima; por ello, es esencial evaluar las necesidades específicas del proyecto antes de seleccionar la plataforma que mejor se adapte a los objetivos y dinámicas del equipo.
+
+Se recomienda aplicar estos criterios en el desarrollo de proyectos reales, asegurando una gestión eficaz, transparente y alineada con las metas del software a construir.
