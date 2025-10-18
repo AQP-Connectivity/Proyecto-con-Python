@@ -15,49 +15,62 @@
 <div class="container mt-5">
   <div class="card shadow-sm p-4">
     <!-- Título principal -->
-    <h1 class="text-center mb-4">📋 Registros de Vehículos</h1>
+    <h1 class="text-center mb-4">
+      <i class="bi bi-car-front me-2"></i>Registros de Vehículos
+    </h1>
 
     <!-- Tabla de registros -->
     <div class="table-responsive">
       {% if registros %}
         <table class="table table-bordered table-striped align-middle">
-          <thead class="table-dark text-center">
+          <thead class="table-dark">
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Placa</th>
-              <th scope="col">Hora de Entrada</th>
-              <th scope="col">Hora de Salida</th>
-              <th scope="col">Tiempo Total (min)</th>
-              <th scope="col">Costo (S/.)</th>
+              <th scope="col" class="text-center">#</th>
+              <th scope="col" class="text-center">Placa</th>
+              <th scope="col" class="text-center">Entrada</th>
+              <th scope="col" class="text-center">Salida</th>
+              <th scope="col" class="text-center">Tiempo (min)</th>
+              <th scope="col" class="text-center">Costo</th>
             </tr>
           </thead>
           <tbody>
             {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
               <tr>
-                <td class="text-center">{{ id }}</td>
-                <td class="text-uppercase text-center">{{ numero }}</td>
+                <td class="text-center fw-medium">{{ id }}</td>
+                <td class="text-uppercase text-center">{{ numero or '—' }}</td>
                 <td class="text-center">{{ hora_entrada or '—' }}</td>
                 <td class="text-center">{{ hora_salida or '—' }}</td>
                 <td class="text-center">{{ tiempo_total if tiempo_total is not none else '—' }}</td>
-                <td class="text-center">{{ "%.2f"|format(costo) if costo is not none else '—' }}</td>
+                <td class="text-center">
+                  {% if costo is not none %}
+                    S/ {{ "%.2f"|format(costo) }}
+                  {% else %}
+                    —
+                  {% endif %}
+                </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       {% else %}
-        <div class="text-center py-4">
-          <p class="text-muted">No hay registros de vehículos disponibles.</p>
+        <div class="text-center py-5">
+          <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+          <p class="text-muted fs-5">No se encontraron registros de vehículos.</p>
         </div>
       {% endif %}
     </div>
 
     <!-- Botones de acción -->
-    <div class="mt-4 d-flex flex-column flex-md-row gap-2 justify-content-center">
-      <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-        <i class="bi bi-file-earmark-pdf"></i>
+    <div class="mt-5 d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
+      <a href="{{ url_for('reporte_pdf') }}" 
+         class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2"
+         aria-label="Descargar reporte en PDF">
+        <i class="bi bi-file-earmark-pdf-fill"></i>
         Descargar Reporte en PDF
       </a>
-      <a href="{{ url_for('index') }}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2">
+      <a href="{{ url_for('index') }}" 
+         class="btn btn-outline-secondary btn-lg d-flex align-items-center justify-content-center gap-2"
+         aria-label="Volver al inicio">
         <i class="bi bi-arrow-left"></i>
         Volver al Inicio
       </a>
