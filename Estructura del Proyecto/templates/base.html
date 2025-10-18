@@ -9,17 +9,20 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
   <!-- Favicon -->
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
   {% block extra_css %}{% endblock %}
 </head>
 <body>
-  <div class="d-flex" id="wrapper">
 
+  <div class="d-flex w-100">
     <!-- Sidebar -->
-    <nav id="sidebar" class="bg-dark text-white p-3 vh-100 position-fixed shadow">
-      <div class="d-flex justify-content-between align-items-center mb-4">
+    <nav id="sidebar">
+      <div class="sidebar-header d-flex justify-content-between align-items-center mb-4">
         <h4 class="fw-bold text-white mb-0"><i class="bi bi-car-front-fill me-2"></i>ParkingWeb</h4>
         <button class="btn btn-outline-light btn-sm d-lg-none" id="sidebarToggle">
           <i class="bi bi-list"></i>
@@ -28,42 +31,42 @@
 
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="{{ url_for('index') }}" class="nav-link text-white {% if request.path == '/index' %}active{% endif %}">
+          <a href="{{ url_for('index') }}" class="nav-link {% if request.path == '/index' %}active{% endif %}">
             <i class="bi bi-house-door me-2"></i>Inicio
           </a>
         </li>
         <li>
-          <a href="{{ url_for('dashboard') }}" class="nav-link text-white {% if request.path == '/dashboard' %}active{% endif %}">
+          <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.path == '/dashboard' %}active{% endif %}">
             <i class="bi bi-speedometer2 me-2"></i>Dashboard
           </a>
         </li>
         <li>
-          <a href="{{ url_for('estacionamiento') }}" class="nav-link text-white {% if request.path == '/estacionamiento' %}active{% endif %}">
+          <a href="{{ url_for('estacionamiento') }}" class="nav-link {% if request.path == '/estacionamiento' %}active{% endif %}">
             <i class="bi bi-clipboard-data me-2"></i>Estacionamientos
           </a>
         </li>
         <li>
-          <a href="{{ url_for('pagos') }}" class="nav-link text-white {% if request.path == '/pagos' %}active{% endif %}">
+          <a href="{{ url_for('pagos') }}" class="nav-link {% if request.path == '/pagos' %}active{% endif %}">
             <i class="bi bi-cash-stack me-2"></i>Pagos
           </a>
         </li>
         <li>
-          <a href="{{ url_for('mantenimiento') }}" class="nav-link text-white {% if request.path == '/mantenimiento' %}active{% endif %}">
+          <a href="{{ url_for('mantenimiento') }}" class="nav-link {% if request.path == '/mantenimiento' %}active{% endif %}">
             <i class="bi bi-tools me-2"></i>Mantenimiento
           </a>
         </li>
         <li>
-          <a href="{{ url_for('historial') }}" class="nav-link text-white {% if request.path == '/historial' %}active{% endif %}">
+          <a href="{{ url_for('historial') }}" class="nav-link {% if request.path == '/historial' %}active{% endif %}">
             <i class="bi bi-clock-history me-2"></i>Historial
           </a>
         </li>
         <li>
-          <a href="{{ url_for('registros') }}" class="nav-link text-white {% if request.path == '/registros' %}active{% endif %}">
+          <a href="{{ url_for('registros') }}" class="nav-link {% if request.path == '/registros' %}active{% endif %}">
             <i class="bi bi-journal-text me-2"></i>Reporte de Placas
           </a>
         </li>
         <li>
-          <a href="{{ url_for('usuarios') }}" class="nav-link text-white {% if request.path == '/usuarios' %}active{% endif %}">
+          <a href="{{ url_for('usuarios') }}" class="nav-link {% if request.path == '/usuarios' %}active{% endif %}">
             <i class="bi bi-people me-2"></i>Usuarios
           </a>
         </li>
@@ -79,7 +82,7 @@
     </nav>
 
     <!-- Contenido principal -->
-    <div id="content" class="flex-grow-1 p-4 ms-lg-5">
+    <div id="content" class="flex-grow-1">
       {% block content %}{% endblock %}
     </div>
   </div>
@@ -102,4 +105,3 @@
   {% block scripts %}{% endblock %}
 </body>
 </html>
-
