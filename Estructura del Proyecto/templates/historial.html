@@ -2,52 +2,56 @@
 
 {% block title %}Historial de Placas{% endblock %}
 
-{% block head %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/historial.css') }}">
-{% endblock %}
-
 {% block content %}
-  <div class="container historial-container">
-    <h2 class="text-center mb-4">📋 Historial de Vehículos</h2>
-
-    {% if registros %}
-      <table class="table table-bordered table-striped historial-table">
-        <thead class="table-dark text-center">
-          <tr>
-            <th>ID</th>
-            <th>Placa</th>
-            <th>Hora Entrada</th>
-            <th>Hora Salida</th>
-            <th>Tiempo Total (min)</th>
-            <th>Costo (S/.)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
-          <tr>
-            <td class="text-center">{{ id }}</td>
-            <td class="text-uppercase text-center">{{ numero }}</td>
-            <td class="text-center">{{ hora_entrada or '-' }}</td>
-            <td class="text-center">{{ hora_salida or '-' }}</td>
-            <td class="text-center">{{ tiempo_total if tiempo_total else '-' }}</td>
-            <td class="text-center">{{ costo if costo else '-' }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% else %}
-      <div class="alert alert-warning mt-3 text-center">
-        ⚠️ No hay registros en el historial.
-      </div>
-    {% endif %}
-
-    <div class="mt-4 botones">
-      <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary mb-2 w-100">
-        📄 Descargar Reporte en PDF
-      </a>
-      <a href="{{ url_for('index') }}" class="btn btn-outline-secondary w-100">
-        ⬅️ Volver al Inicio
-      </a>
-    </div>
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-primary">📋 Historial de Vehículos</h2>
+    <p class="text-muted">Consulta todos los registros de ingreso y salida</p>
   </div>
+
+  {% if registros %}
+    <div class="card shadow border-0 rounded-4">
+      <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>ID</th>
+              <th>Placa</th>
+              <th>Hora Entrada</th>
+              <th>Hora Salida</th>
+              <th>Tiempo Total (min)</th>
+              <th>Costo (S/.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for id, numero, hora_entrada, hora_salida, tiempo_total, costo in registros %}
+              <tr class="text-center">
+                <td>{{ id }}</td>
+                <td class="fw-semibold text-uppercase">{{ numero }}</td>
+                <td>{{ hora_entrada or '-' }}</td>
+                <td>{{ hora_salida or '-' }}</td>
+                <td>{{ tiempo_total if tiempo_total else '-' }}</td>
+                <td>{{ costo if costo else '-' }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-warning text-center mt-4 shadow-sm rounded-3">
+      ⚠️ No hay registros en el historial.
+    </div>
+  {% endif %}
+
+  <div class="mt-4 text-center">
+    <a href="{{ url_for('reporte_pdf') }}" class="btn btn-primary me-2">
+      📄 Descargar Reporte en PDF
+    </a>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+      ⬅️ Volver al Inicio
+    </a>
+  </div>
+</div>
 {% endblock %}
+
