@@ -4,10 +4,13 @@
 body {
   background: linear-gradient(135deg, #f0f4ff, #ffffff);
   min-height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* Contenedor principal */
@@ -20,14 +23,15 @@ body {
 .card {
   background: #ffffff;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   padding: 2rem;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: fadeIn 0.6s ease-out;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 /* Título */
@@ -36,52 +40,81 @@ h2 {
   color: #0d47a1;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  font-size: 1.75rem;
 }
 
 /* Etiquetas */
 .form-label {
   font-weight: 500;
-  color: #333;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 /* Campos de texto y select */
 .form-control,
 .form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cbd5e0;
+  font-size: 1rem;
   transition: all 0.3s ease;
+  background-color: #fff;
 }
 
 .form-control:focus,
 .form-select:focus {
+  outline: none;
   border-color: #0d47a1;
-  box-shadow: 0 0 6px rgba(13, 71, 161, 0.3);
+  box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
+}
+
+/* Select personalizado */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%230d47a1' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px 16px;
+  padding-right: 2.75rem; /* espacio extra para el ícono */
 }
 
 /* Botón principal */
 .btn-primary {
   background-color: #0d47a1;
+  color: white;
   border: none;
   border-radius: 10px;
   padding: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
   background-color: #08306b;
-  transform: scale(1.03);
+  transform: scale(1.02);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #0d47a1;
+  outline-offset: 2px;
 }
 
 /* Mensaje de información */
 .alert-info {
   background-color: #e3f2fd;
-  border: 1px solid #90caf9;
+  border: 1px solid #bbdefb;
   color: #0d47a1;
   border-radius: 10px;
   text-align: center;
   font-weight: 500;
+  padding: 0.75rem 1rem;
   margin-top: 1rem;
+  font-size: 0.95rem;
 }
 
 /* Animación de aparición */
@@ -96,22 +129,24 @@ h2 {
   }
 }
 
-.card {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Mejor apariencia para placeholders */
+/* Placeholder mejorado */
 ::placeholder {
-  color: #aaa;
+  color: #a0aec0;
   font-size: 0.95rem;
+  opacity: 1; /* Firefox lo reduce por defecto */
 }
 
-/* Ícono personalizado para el select */
-select.form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg fill='%230d47a1' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1rem;
-  padding-right: 2.5rem;
+/* Responsive para móviles */
+@media (max-width: 576px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary {
+    padding: 14px;
+  }
 }
