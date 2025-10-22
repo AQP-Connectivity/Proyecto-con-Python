@@ -1,16 +1,36 @@
 /* usuario.css */
 
+/* Variables de diseño para reutilización y mantenimiento */
+:root {
+  --primary-color: #0d47a1;
+  --primary-hover: #08306b;
+  --primary-light: #e3f2fd;
+  --primary-border: #bbdefb;
+  --text-color: #2d3748;
+  --placeholder-color: #a0aec0;
+  --border-color: #cbd5e0;
+  --bg-gradient-start: #f0f4ff;
+  --bg-gradient-end: #ffffff;
+  --card-bg: #ffffff;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  --focus-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
+  --border-radius: 16px;
+  --input-radius: 10px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 /* Fondo general */
 body {
-  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
   min-height: 100vh;
-  font-family: "Poppins", system-ui, -apple-system, sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
   padding: 1rem;
   box-sizing: border-box;
+  color: var(--text-color);
 }
 
 /* Contenedor principal */
@@ -21,12 +41,12 @@ body {
 
 /* Tarjeta principal */
 .card {
-  background: #ffffff;
+  background: var(--card-bg);
   border: none;
-  border-radius: 16px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   padding: 2rem;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: var(--transition);
   animation: fadeIn 0.6s ease-out;
 }
 
@@ -37,16 +57,17 @@ body {
 /* Título */
 h2 {
   text-align: center;
-  color: #0d47a1;
+  color: var(--primary-color);
   font-weight: 600;
   margin-bottom: 1.5rem;
   font-size: 1.75rem;
+  line-height: 1.3;
 }
 
 /* Etiquetas */
 .form-label {
   font-weight: 500;
-  color: #2d3748;
+  color: var(--text-color);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -56,18 +77,19 @@ h2 {
 .form-select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #cbd5e0;
+  border-radius: var(--input-radius);
+  border: 1px solid var(--border-color);
   font-size: 1rem;
-  transition: all 0.3s ease;
-  background-color: #fff;
+  transition: var(--transition);
+  background-color: var(--card-bg);
+  box-sizing: border-box;
 }
 
 .form-control:focus,
 .form-select:focus {
   outline: none;
-  border-color: #0d47a1;
-  box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: var(--focus-shadow);
 }
 
 /* Select personalizado */
@@ -77,44 +99,46 @@ h2 {
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 16px 16px;
-  padding-right: 2.75rem; /* espacio extra para el ícono */
+  padding-right: 2.75rem;
 }
 
 /* Botón principal */
 .btn-primary {
-  background-color: #0d47a1;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--input-radius);
   padding: 12px;
   font-weight: 600;
   font-size: 1rem;
   width: 100%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+  font-family: inherit;
 }
 
 .btn-primary:hover {
-  background-color: #08306b;
+  background-color: var(--primary-hover);
   transform: scale(1.02);
 }
 
 .btn-primary:focus-visible {
-  outline: 2px solid #0d47a1;
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
 /* Mensaje de información */
 .alert-info {
-  background-color: #e3f2fd;
-  border: 1px solid #bbdefb;
-  color: #0d47a1;
-  border-radius: 10px;
+  background-color: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  color: var(--primary-color);
+  border-radius: var(--input-radius);
   text-align: center;
   font-weight: 500;
   padding: 0.75rem 1rem;
   margin-top: 1rem;
   font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 /* Animación de aparición */
@@ -131,9 +155,9 @@ h2 {
 
 /* Placeholder mejorado */
 ::placeholder {
-  color: #a0aec0;
+  color: var(--placeholder-color);
   font-size: 0.95rem;
-  opacity: 1; /* Firefox lo reduce por defecto */
+  opacity: 1; /* Asegura consistencia en todos los navegadores */
 }
 
 /* Responsive para móviles */
@@ -148,5 +172,10 @@ h2 {
 
   .btn-primary {
     padding: 14px;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 1rem;
   }
 }
