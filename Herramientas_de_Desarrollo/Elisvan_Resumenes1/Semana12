@@ -1,0 +1,20 @@
+Sistemas de Seguimiento de Incidentes
+Un sistema de seguimiento de incidentes es una herramienta esencial en el desarrollo y mantenimiento de software, cuya función principal es registrar, organizar y comunicar cualquier problema o funcionalidad pendiente dentro de un proyecto. Estos problemas se gestionan como tickets (o issues), elementos únicos identificados con un número, que contienen al menos tres componentes esenciales:
+
+ID del ticket (identificador único),
+Descripción del problema (título y detalles),
+Estado (posición actual en su ciclo de vida).
+Los estados típicos de un ticket incluyen: Open, In Progress, Resolved y Closed. Además, cada ticket puede tener asociados atributos como prioridad (importancia para el negocio) y severidad (impacto en el usuario), así como una asignación a un miembro del equipo responsable de resolverlo.
+
+La comunicación alrededor del ticket se registra de forma cronológica mediante comentarios, capturas de pantalla, archivos adjuntos y actualizaciones de estado, lo que garantiza trazabilidad y colaboración eficaz, incluso en equipos distribuidos geográficamente.
+
+El flujo típico comienza con la creación del ticket por parte de un usuario o soporte, continúa con su revisión, asignación, resolución por parte del desarrollador y verificación por QA, y finaliza con su cierre. En caso de reincidencia, el mismo ticket puede reabrirse sin perder su historial.
+
+Entre las principales ventajas de usar un sistema de seguimiento de incidentes se destacan:
+
+Evitar que los problemas se pierdan,
+Brindar visibilidad del progreso del trabajo,
+Facilitar métricas básicas (como cantidad de bugs abiertos),
+Permitir colaboración remota sincronizada.
+Este enfoque estructurado no solo mejora la calidad del software, sino que también optimiza la gestión de tareas en entornos académicos y profesionales.
+
