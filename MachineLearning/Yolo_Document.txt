@@ -1,114 +1,126 @@
-Uso de YOLO para Reconocimiento de Placas Vehiculares
-
+Reconocimiento Automático de Placas Vehiculares mediante YOLO y OCR
 1. Introducción
+El Reconocimiento Automático de Placas Vehiculares (ALPR, por sus siglas en inglés Automatic License Plate Recognition) es una tecnología fundamental en sistemas modernos de movilidad inteligente, seguridad vial y gestión de accesos. Este sistema combina dos etapas clave: (1) la detección de la placa vehicular en una imagen o flujo de video, y (2) el reconocimiento del texto contenido en dicha placa mediante técnicas de visión por computadora y procesamiento de lenguaje.
 
-El reconocimiento automático de placas vehiculares (ALPR) combina detección de objetos y OCR para identificar matrículas en imágenes o video en tiempo real.
-En este proyecto se emplea YOLO para detectar placas y un motor OCR (Tesseract) para extraer el texto, integrándose con otros módulos como pagos, notificaciones y backups, lo que permite automatizar procesos de control y seguridad.
+En este trabajo se propone una solución basada en el modelo de detección de objetos YOLOv8 (You Only Look Once v8) y el motor de reconocimiento óptico de caracteres Tesseract OCR. Esta combinación permite lograr alta precisión y rendimiento en tiempo real, facilitando su integración en aplicaciones como peajes automáticos, control de accesos, estacionamientos inteligentes y sistemas de vigilancia urbana.
 
 2. Fundamentos Teóricos
-2.1 Machine Learning y Deep Learning
+2.1 Visión por Computadora y Aprendizaje Profundo
+El sistema se sustenta en redes neuronales convolucionales (CNNs) entrenadas mediante aprendizaje supervisado. A partir de un conjunto de imágenes etiquetadas, el modelo aprende a identificar patrones visuales característicos de las placas vehiculares, independientemente de factores como el ángulo de visión, la iluminación o el entorno circundante.
 
-Se utiliza Deep Learning supervisado con redes neuronales para aprender patrones de placas a partir de imágenes etiquetadas.
+2.2 YOLOv8 para Detección de Objetos
+YOLOv8, desarrollado por Ultralytics, es un algoritmo de detección de objetos de última generación que procesa toda la imagen en una única pasada, prediciendo simultáneamente las coordenadas de las cajas delimitadoras y las clases correspondientes. Sus ventajas incluyen:
 
-2.2 YOLO (You Only Look Once)
+Alta velocidad de inferencia (hasta 100+ FPS en GPU).
+Precisión competitiva medida en mAP (mean Average Precision).
+Soporte nativo para entrenamiento personalizado y exportación a formatos eficientes (ONNX, TensorRT).
+2.3 Reconocimiento Óptico de Caracteres (OCR)
+Una vez localizada la placa, se extrae la región de interés (ROI) y se aplica Tesseract OCR, un motor de código abierto ampliamente utilizado. Para maximizar la precisión del reconocimiento, se recomienda:
 
-Modelo de detección de objetos que analiza la imagen completa en una sola pasada, prediciendo simultáneamente cajas delimitadoras y clases, ideal para aplicaciones en tiempo real como cámaras en vivo.
+Aplicar preprocesamiento de la imagen (binarización, corrección de perspectiva, eliminación de ruido).
+Configurar parámetros específicos como --psm 8 (modo de una sola palabra) y limitar el conjunto de caracteres permitidos según el formato nacional de placas.
+2.4 Dataset y Anotación
+La calidad del modelo depende directamente de la diversidad y representatividad del conjunto de datos. Se requieren imágenes que cubran variaciones en:
 
-2.3 OCR
+Iluminación (día, noche, contraluz).
+Ángulos de captura (frontal, lateral, inclinado).
+Estados de la placa (limpia, sucia, parcialmente oculta).
+Formatos regionales (diferentes países o jurisdicciones).
+Las imágenes deben ser anotadas en formato YOLO, donde cada archivo de etiqueta (.txt) contiene una línea por objeto con la estructura:
+<class_id> <x_center> <y_center> <width> <height>
+(coordenadas normalizadas entre 0 y 1).
 
-Tras la detección, el motor OCR (ej. Tesseract) extrae el texto de la placa para su posterior registro en el sistema.
+Herramientas como LabelImg o Roboflow facilitan este proceso y permiten aplicar técnicas de aumento de datos (data augmentation).
 
-2.4 Dataset y Etiquetado
+2.5 Evaluación del Modelo
+El desempeño del sistema se evalúa mediante métricas estándar:
 
-El modelo requiere imágenes variadas (ángulos, iluminación, tipos de placa) anotadas con herramientas como LabelImg, divididas en entrenamiento, validación y prueba.
+mAP@0.5 : precisión promedio con umbral de IoU (Intersection over Union) ≥ 0.5.
+Recall: proporción de placas reales correctamente detectadas.
+Precisión del OCR: porcentaje de caracteres correctamente reconocidos respecto al total.
+FPS (Frames por segundo): indicador de capacidad para operar en tiempo real.
+3. Metodología de Implementación
+3.1 Preparación del Dataset
+Se organizó el conjunto de datos en la siguiente estructura:
 
-2.5 Evaluación
 
-Se mide precisión, recall, IoU y mAP para garantizar una detección confiable.
+dataset/
+├── images/
+│   ├── train/
+│   └── val/
+└── labels/
+    ├── train/
+    └── val/
+Se definió un archivo de configuración placas.yaml:
 
-2.6 Aplicaciones
+train: dataset/images/train
+val: dataset/images/val
+nc: 1
+names: ['placa']
+3.2 Entrenamiento del Modelo YOLOv8
+Se utilizó la librería ultralytics en Python. El modelo base yolov8n.pt (versión "nano") fue elegido por su equilibrio entre velocidad y precisión, aunque se recomienda yolov8s.pt o yolov8m.pt para entornos con mayor capacidad computacional.
 
-Control de accesos, peajes, seguridad ciudadana, estacionamientos inteligentes y gestión de tráfico.
 
-2.7 Retos
+from ultralytics import YOLO
 
-Iluminación variable, placas dañadas o cubiertas, diferentes formatos y necesidad de GPU para tiempo real.
+model = YOLO('yolov8n.pt')
+model.train(
+    data='placas.yaml',
+    epochs=100,
+    imgsz=640,
+    batch=16
+)
+El entrenamiento se realizó en una GPU NVIDIA, logrando convergencia en aproximadamente 2–4 horas, dependiendo del tamaño del dataset.
 
-Entrenamiento de YOLO para Reconocimiento de Placas
-1. Introducción
+3.3 Integración con Tesseract OCR
+Tras la detección, se recorta la región de la placa y se aplica preprocesamiento para mejorar la legibilidad:
 
-El entrenamiento de YOLO permite adaptar un modelo preentrenado a la tarea de detectar placas, asegurando alta velocidad y precisión.
+import cv2
+import pytesseract
 
-2. Preparación del Dataset
+def preprocess_plate(roi):
+    gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+    thresh = cv2.adaptiveThreshold(
+        gray, 255,
+        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        cv2.THRESH_BINARY, 11, 2
+    )
+    return thresh
 
-Recolección de imágenes: vehículos en distintos contextos, iluminaciones y ángulos.
+# Configuración OCR para placas alfanuméricas
+config = '--psm 8 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+text = pytesseract.image_to_string(preprocess_plate(plate_roi), config=config).strip()
+3.4 Sistema Completo de Inferencia
+El flujo completo incluye:
 
-Anotación: delimitación de placas con herramientas como LabelImg o Roboflow.
+Captura de imagen (desde archivo, cámara o stream de video).
+Detección de placa con YOLOv8.
+Recorte y preprocesamiento de la ROI.
+Extracción de texto con Tesseract.
+Validación y registro del resultado.
+Este pipeline puede integrarse con módulos externos de:
 
-3. Organización de Datos
+Gestión de pagos (ej. validación de suscripción en estacionamientos).
+Notificaciones (alertas ante placas en listas negras).
+Almacenamiento (base de datos + respaldo en la nube).
+4. Limitaciones del Sistema
+A pesar de su eficacia, el sistema presenta ciertas limitaciones:
 
-Separar imágenes en entrenamiento y validación e indicar rutas, número de clases y nombres en el archivo de configuración.
+Condiciones de iluminación adversas (reflejos, oscuridad) reducen la precisión tanto en detección como en OCR.
+Placas deterioradas, sucias o parcialmente ocultas pueden no ser detectadas o generar errores de lectura.
+Variabilidad en formatos internacionales exige adaptación del modelo OCR según la región.
+Requisitos de hardware: para operación en tiempo real con múltiples cámaras, se recomienda el uso de GPU o aceleradores dedicados (ej. NVIDIA Jetson).
+5. Aplicaciones y Perspectivas Futuras
+El sistema ALPR propuesto es escalable y adaptable a múltiples escenarios:
 
-4. Configuración del Modelo
+Peajes y accesos controlados: procesamiento automático sin intervención humana.
+Seguridad ciudadana: cruce con bases de datos de vehículos robados o buscados.
+Gestión de flotas: registro automático de entradas y salidas en instalaciones logísticas.
+Ciudades inteligentes: integración con plataformas de movilidad para análisis de tráfico y planificación urbana.
+Futuras mejoras incluyen:
 
-Aprovechar pesos preentrenados de YOLO, definiendo parámetros como épocas, resolución y tasa de aprendizaje.
-
-5. Entrenamiento y Validación
-
-El modelo ajusta sus pesos usando GPU para acelerar el proceso. Una parte del dataset se reserva para validación y evitar sobreajuste.
-
-6. Mejoras
-
-Ampliación del dataset, data augmentation (rotaciones, recortes, cambios de luz) y uso de versiones más robustas de YOLO para mayor precisión.
-
-7. Conclusiones
-
-Con un dataset bien diseñado y una configuración adecuada, YOLO puede detectar placas en tiempo real e integrarse con:
-
-Pagos automáticos (peajes/estacionamientos).
-
-Notificaciones a usuarios o autoridades.
-
-Backups automáticos de registros y evidencias.
-
-3. Limitaciones del Sistema
-
-A pesar de los buenos resultados que ofrece YOLO combinado con OCR, existen factores que pueden afectar la precisión del sistema:
-
-Condiciones de iluminación: exceso de brillo, reflejos o escenas nocturnas dificultan la detección.
-
-Placas deterioradas o sucias: impiden que el OCR extraiga el texto correctamente.
-
-Ocultamiento parcial de la placa: en algunos casos, la detección falla si la matrícula está cubierta por objetos.
-
-Diferentes formatos de placas: tamaños, colores y tipografías variables entre países.
-
-Requerimientos computacionales: para lograr detección en tiempo real se recomienda el uso de GPU.
-
-4. Aplicaciones Futuras
-
-El sistema de detección de placas basado en YOLO y OCR puede evolucionar hacia aplicaciones más avanzadas:
-
-Integración con sistemas de ciudad inteligente: monitoreo de tránsito, conteo de vehículos y control de accesos.
-
-Sistemas de seguridad vial: detección de infracciones, vehículos robados o sin autorización.
-
-Gestión automatizada de estacionamientos: ingreso y salida de vehículos sin intervención humana.
-
-Control fronterizo y peajes inteligentes: procesamiento automático de grandes volúmenes de tránsito.
-
-Análisis predictivo de tráfico: integración con Big Data para generar reportes y tendencias en movilidad urbana.
-
-5. Conclusiones Generales
-
-El uso de YOLO como modelo de detección de objetos, en conjunto con motores de OCR como Tesseract, constituye una solución robusta y eficiente para el reconocimiento automático de placas vehiculares.
-
-La efectividad del sistema depende principalmente de:
-
-La calidad y variedad del dataset utilizado.
-
-La correcta anotación de los datos.
-
-La optimización del modelo con técnicas de aumento y ajuste de hiperparámetros.
-
-Este enfoque no solo permite detectar y registrar placas en tiempo real, sino que también abre la posibilidad de integrar la tecnología en sistemas de seguridad, gestión de tráfico, control de accesos y ciudades inteligentes.
+Uso de EasyOCR o modelos OCR entrenados específicamente para fuentes de placas.
+Implementación de corrección de perspectiva automática para placas inclinadas.
+Despliegue en dispositivos edge mediante cuantización del modelo y uso de TensorRT.
+6. Conclusiones
+La combinación de YOLOv8 para detección de objetos y Tesseract OCR para reconocimiento de texto constituye una solución robusta, eficiente y de bajo costo para el reconocimiento automático de placas vehiculares. Su desempeño depende críticamente de la calid
