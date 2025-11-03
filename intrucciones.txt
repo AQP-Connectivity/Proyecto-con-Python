@@ -1,8 +1,13 @@
-pip install opencv-python
-pip install opencv-python-headless
+Instalación de Dependencias
+Para el desarrollo del sistema de detección y reconocimiento de placas vehiculares, se requiere la instalación de las siguientes bibliotecas de Python. Se recomienda utilizar un entorno virtual para evitar conflictos de dependencias.
+# OpenCV (seleccionar una de las dos opciones según el entorno)
+pip install opencv-python          # Para entornos con interfaz gráfica (desarrollo local)
+# O bien:
+pip install opencv-python-headless # Para entornos sin GUI (servidores, Docker, etc.)
 
-- YOLO
+# Bibliotecas complementarias
+pip install pillow                 # Procesamiento y manipulación de imágenes
+pip install easyocr                # Reconocimiento óptico de caracteres (OCR)
+pip install ultralytics            # Framework para modelos YOLOv8 (detección de objetos)
 
-pip install pillow
-pip install easyorc
-pip install ultralytics
+Una vez instaladas las dependencias, el sistema estará listo para ejecutar módulos de procesamiento de imágenes, detección de regiones de interés (placas) mediante YOLOv8 y reconocimiento del texto contenido en ellas mediante EasyOCR.
