@@ -1,0 +1,43 @@
+Herramientas de Integración Continua
+Introducción
+La integración continua (CI, por sus siglas en inglés) es una práctica fundamental en el desarrollo de software moderno. Su objetivo principal es detectar errores de forma temprana mediante la automatización de tareas clave cada vez que se introducen cambios en el código fuente de un repositorio compartido.
+
+Función principal de las herramientas de CI
+Las herramientas de integración continua permiten que, al realizar un commit o push al repositorio, se desencadene un proceso automático que:
+
+Descarga el código actualizado.
+Lo compila.
+Ejecuta pruebas automatizadas.
+Genera un informe sobre el resultado.
+Este flujo permite identificar fallos en cuestión de minutos, evitando que los errores persistan durante días o se propaguen a otras partes del sistema.
+
+Pipeline o flujo de trabajo
+El pipeline es la secuencia de pasos que define el comportamiento de la integración continua. Por ejemplo, en GitHub Actions, se configura mediante un archivo YAML ubicado en .github/workflows/ci.yml, que especifica las acciones a realizar tras cada actualización del código. El resultado del pipeline se muestra directamente en la interfaz del Pull Request, indicando si el cambio es aceptado o rechazado.
+
+Entornos aislados
+Cada ejecución del pipeline se realiza en un entorno limpio y aislado (como un contenedor Docker), lo que garantiza que los resultados no dependan de la configuración local del desarrollador. Esto elimina el problema común de “en mi máquina sí funciona”.
+
+Comprobación de calidad del código
+Además de las tareas básicas de compilación y prueba, las herramientas de CI pueden integrar análisis de calidad del código, como:
+
+Medición de la cobertura de pruebas.
+Detección de vulnerabilidades de seguridad.
+Evaluación de buenas prácticas mediante herramientas como SonarQube.
+Por ejemplo, si la cobertura cae por debajo del 80 % o se detectan fallos críticos, la pipeline falla y se bloquea la posibilidad de fusionar (merge) el código.
+
+Feedback rápido
+Uno de los mayores beneficios de la CI es la rapidez del feedback. En caso de fallo, el equipo recibe notificaciones inmediatas a través de canales como Slack, o mediante marcas visuales en plataformas como Azure DevOps o GitHub. Esto permite al desarrollador corregir el error y volver a subir el código, reiniciando automáticamente el proceso de validación.
+
+Generación de artefactos y entrega continua (CD)
+Una vez que el código pasa todas las validaciones, la CI puede generar artefactos (por ejemplo, un archivo .jar o un .apk) y prepararlos para su distribución. En algunos casos, se integra con procesos de entrega continua (CD), que permiten desplegar automáticamente nuevas versiones en entornos de prueba o producción. Por ejemplo, CircleCI puede firmar una aplicación Android y subirla a Firebase App Distribution para que los testers la reciban en minutos.
+
+Herramientas populares
+Algunas de las herramientas más utilizadas para implementar integración continua son:
+
+GitHub Actions: Integrado en GitHub, configurado mediante archivos YAML en el repositorio.
+GitLab CI: Usa el archivo .gitlab-ci.yml; permite runners compartidos o privados.
+Jenkins: Plataforma autohospedada con amplia personalización mediante pipelines en Groovy y miles de plugins.
+Azure DevOps Pipelines: Ideal para entornos .NET y con soporte para Kubernetes.
+CircleCI, Travis CI y Buildkite: Plataformas en la nube o autohospedadas, enfocadas en velocidad y ejecución paralela.
+Conclusión
+La integración continua es una práctica esencial para equipos de desarrollo que buscan entregar software de alta calidad de forma rápida y confiable. Permite detectar errores temprano, mantener un alto estándar de calidad y facilitar la colaboración en repositorios compartidos.
