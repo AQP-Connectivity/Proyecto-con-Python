@@ -16,7 +16,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def inject_request():
     return dict(request=request)
 
-# Inicializar DB SQLite
+# Inicializar DB SQLite3
 init_db()
 
 # ✅ Redirección al login al iniciar el server
