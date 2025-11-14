@@ -5,9 +5,22 @@ pip install opencv-python          # Para entornos con interfaz gráfica (desarr
 # O bien:
 pip install opencv-python-headless # Para entornos sin GUI (servidores, Docker, etc.)
 
+python -m venv venv
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
+pip install opencv-python           # Para entornos con interfaz gráfica (desarrollo local)
+# O bien:
+pip install opencv-python-headless  # Para entornos sin GUI (servidores, Docker, etc.)
+pip install numpy         # Operaciones matemáticas requeridas por OpenCV y YOLO
+pip install matplotlib    # Visualización de imágenes y resultados (opcional)
+pip install imutils       # Funciones extra para procesamiento de imágenes
+pip install tqdm          # Barra de progreso para procesos largos
+
+
 # Bibliotecas complementarias
 pip install pillow                 # Procesamiento y manipulación de imágenes
 pip install easyocr                # Reconocimiento óptico de caracteres (OCR)
 pip install ultralytics            # Framework para modelos YOLOv8 (detección de objetos)
 
 Una vez instaladas las dependencias, el sistema estará listo para ejecutar módulos de procesamiento de imágenes, detección de regiones de interés (placas) mediante YOLOv8 y reconocimiento del texto contenido en ellas mediante EasyOCR.
+
