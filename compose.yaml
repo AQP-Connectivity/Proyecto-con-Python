@@ -1,0 +1,6 @@
+services:
+  proyectoconpython:
+    image: proyectoconpython
+    build:
+      context: .
+      dockerfile: ./Dockerfile
