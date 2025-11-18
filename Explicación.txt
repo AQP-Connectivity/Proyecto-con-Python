@@ -2,26 +2,26 @@ El sistema de gestión de estacionamiento desarrollado en el repositorio Proyect
 
 El proyecto se estructura mediante una arquitectura que combina:
 
-Backend en Python, encargado del procesamiento de datos, la lógica de negocio y la interacción con la base de datos parking.db.
+- Backend en Python, encargado del procesamiento de datos, la lógica de negocio y la interacción con la base de datos parking.db.
 
-Interfaz web basada en HTML, CSS y JavaScript, que permite la visualización y gestión de la información del estacionamiento por parte de los usuarios y administradores.
+- Interfaz web basada en HTML, CSS y JavaScript, que permite la visualización y gestión de la información del estacionamiento por parte de los usuarios y administradores.
 
-Módulos de Machine Learning, ubicados en el directorio MachineLearning/, utilizados para tareas como el reconocimiento de patrones o la automatización del análisis de datos relacionados con el estacionamiento.
+- Módulos de Machine Learning, ubicados en el directorio MachineLearning/, utilizados para tareas como el reconocimiento de patrones o la automatización del análisis de datos relacionados con el estacionamiento.
 
-Contenedorización mediante Docker y Compose, facilitando la ejecución uniforme del sistema en distintos entornos a través del Dockerfile y el archivo compose.yaml.
+- Contenedorización mediante Docker y Compose, facilitando la ejecución uniforme del sistema en distintos entornos a través del Dockerfile y el archivo compose.yaml.
 
-Base de datos SQLite, que almacena registros de vehículos, tiempos de permanencia y estados de ocupación.
+- Base de datos SQLite, que almacena registros de vehículos, tiempos de permanencia y estados de ocupación.
 
 Este sistema permite controlar de manera automatizada el acceso de vehículos, registrar tiempos de entrada y salida, y gestionar la disponibilidad de espacios. La integración de componentes de Machine Learning contribuye a mejorar la eficiencia operativa mediante procesos automatizados de análisis y reconocimiento.
 
 A nivel funcional, la plataforma proporciona:
 
-Gestión centralizada de información mediante un backend en Python conectado a una base de datos relacional.
+- Gestión centralizada de información mediante un backend en Python conectado a una base de datos relacional.
 
-Automatización de procesos clave, como registro de vehículos o actualización del estado de las plazas.
+- Automatización de procesos clave, como registro de vehículos o actualización del estado de las plazas.
 
-Interfaz web accesible, desarrollada principalmente con HTML y CSS, que actúa como panel visual de administración.
+- Interfaz web accesible, desarrollada principalmente con HTML y CSS, que actúa como panel visual de administración.
 
-Escalabilidad y portabilidad, soportadas por la infraestructura en contenedores.
+- Escalabilidad y portabilidad, soportadas por la infraestructura en contenedores.
 
 En conjunto, el sistema constituye una herramienta orientada a mejorar la seguridad, la eficiencia operativa y la trazabilidad del uso del estacionamiento, aprovechando tecnologías modernas presentes en el repositorio.
