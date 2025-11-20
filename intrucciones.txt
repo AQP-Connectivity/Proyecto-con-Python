@@ -1,26 +1,51 @@
-Instalación de Dependencias
-Para el desarrollo del sistema de detección y reconocimiento de placas vehiculares, se requiere la instalación de las siguientes bibliotecas de Python. Se recomienda utilizar un entorno virtual para evitar conflictos de dependencias.
-# OpenCV (seleccionar una de las dos opciones según el entorno)
-pip install opencv-python          # Para entornos con interfaz gráfica (desarrollo local)
-# O bien:
-pip install opencv-python-headless # Para entornos sin GUI (servidores, Docker, etc.)
+Gestión del Proyecto con Trello
 
-python -m venv venv
-source venv/bin/activate   # Linux / macOS
-venv\Scripts\activate      # Windows
-pip install opencv-python           # Para entornos con interfaz gráfica (desarrollo local)
-# O bien:
-pip install opencv-python-headless  # Para entornos sin GUI (servidores, Docker, etc.)
-pip install numpy         # Operaciones matemáticas requeridas por OpenCV y YOLO
-pip install matplotlib    # Visualización de imágenes y resultados (opcional)
-pip install imutils       # Funciones extra para procesamiento de imágenes
-pip install tqdm          # Barra de progreso para procesos largos
+Para la organización, seguimiento y control de tareas del proyecto, se utiliza el tablero oficial en Trello:
+🔗 Trello del Proyecto: https://trello.com/b/a8AxFHIB/proyecto-de-python
 
+En este tablero se encuentra:
+- Backlog de tareas: listado de funcionalidades, mejoras y pendientes por desarrollar.
+- Planificación por columnas: Por hacer, En progreso, En revisión y Completado.
+- Asignación de responsables según roles del equipo.
+- Checklist y subtareas para dividir actividades complejas.
+- Documentación breve de decisiones técnicas, avances y bloqueadores.
 
-# Bibliotecas complementarias
-pip install pillow                 # Procesamiento y manipulación de imágenes
-pip install easyocr                # Reconocimiento óptico de caracteres (OCR)
-pip install ultralytics            # Framework para modelos YOLOv8 (detección de objetos)
+El Trello es obligatorio para coordinar el trabajo:
 
-Una vez instaladas las dependencias, el sistema estará listo para ejecutar módulos de procesamiento de imágenes, detección de regiones de interés (placas) mediante YOLOv8 y reconocimiento del texto contenido en ellas mediante EasyOCR.
+- Cada integrante debe mover sus tareas según el progreso real.
+- Toda actividad desarrollada debe estar registrada en el tablero.
+- Las tareas deben incluir evidencias: capturas, commits relacionados y notas técnicas.
 
+Instalación de Dependencias del Sistema
+
+Para el desarrollo del sistema de detección y reconocimiento de placas vehiculares, es necesario instalar las siguientes bibliotecas de Python.
+Se recomienda crear un entorno virtual para evitar conflictos y mantener un entorno aislado.
+
+1. Crear entorno virtual: python -m venv venv
+Activación del entorno:
+Linux / macOS: source venv/bin/activate
+Windows: venv\Scripts\activate
+
+2. Instalación de OpenCV (seleccionar según el entorno)
+Para entornos con interfaz gráfica (desarrollo local): pip install opencv-python
+Para entornos sin GUI (Docker, servidores, etc.): pip install opencv-python-headless
+
+3. Instalación de bibliotecas esenciales
+pip install numpy          # Operaciones matemáticas requeridas por OpenCV y YOLO
+pip install matplotlib     # Visualización de imágenes (opcional)
+pip install imutils        # Funciones adicionales de procesamiento
+pip install tqdm           # Barra de progreso para procesos largos
+
+4. Bibliotecas complementarias para detección y OCR
+pip install pillow         # Manipulación de imágenes
+pip install easyocr        # Reconocimiento óptico de caracteres (OCR)
+pip install ultralytics    # Framework YOLOv8 para detección de objetos
+
+Final de Instalación
+
+Una vez instaladas las dependencias, el sistema queda preparado para ejecutar:
+
+- detección de regiones de interés (placas vehiculares) mediante YOLOv8,
+- procesamiento y filtrado de imágenes con OpenCV,
+- reconocimiento del texto de la placa mediante EasyOCR,
+- y visualización o depuración de resultados con Matplotlib.
