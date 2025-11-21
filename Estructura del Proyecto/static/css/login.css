@@ -1,98 +1,216 @@
+/* ===========================
+   CSS FINAL: Glass + Centrado
+   =========================== */
+
 :root {
-  --primary: #0d6efd;
-  --primary-light: #0d6efd10;
-  --bg-gradient: radial-gradient(1200px 600px at 100% 0%, #eef2ff 0%, #ffffff 40%);
-  --text-muted: #6c757d;
-  --border-color: #e9ecef;
+  --primary: #00c6ff;
+  --primary-dark: #0072ff;
+  --primary-light: rgba(0, 198, 255, 0.25);
+  --bg-dark-1: #0f2027;
+  --bg-dark-2: #203a43;
+  --bg-dark-3: #2c5364;
+  --text-muted: #c9d6df;
+  --border-glass: rgba(255, 255, 255, 0.12);
 }
 
-/* Fondo general */
+/* Reset importantes */
+html, body {
+  height: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fondo general (mantiene tu glass/azul) */
 body {
-  min-height: 100vh;
-  background: var(--bg-gradient);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  color: #212529;
+  font-family: "Poppins", sans-serif;
+  color: #f5f5f5;
+  background: linear-gradient(135deg, var(--bg-dark-1), var(--bg-dark-2), var(--bg-dark-3));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Card principal */
+/* MAIN: ocupa la altura del viewport y centra el contenido
+   Esto evita márgenes de Bootstrap que empujaban el formulario */
+main.container {
+  min-height: 100vh;                 /* garantiza centrar respecto a la pantalla */
+  display: flex;
+  align-items: center;               /* centra verticalmente */
+  justify-content: center;           /* centra horizontalmente */
+  padding: 24px !important;          /* padding para móviles */
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* Row y columna limpias para evitar desplazamientos laterales */
+.row.justify-content-center {
+  width: 100%;
+  margin: 0;
+}
+
+/* ===========================
+   Card (glassmorphism)
+   =========================== */
 .auth-card {
-  border: none;
-  border-radius: 1.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 420px;
+  max-width: calc(100% - 48px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 4px 4px 18px rgba(0,0,0,0.35), -4px -4px 12px rgba(255,255,255,0.04);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);    /* evita salirse del viewport */
+}
+
+/* Si el contenido es muy alto, permite scroll interno en la tarjeta */
+.auth-card .card-body {
+  overflow: auto;
+  padding: 0;                        /* la tarjeta ya tiene padding */
+}
+
+/* Efecto reflejo */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(125deg, rgba(255,255,255,0.35), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease, left 1s ease;
+  pointer-events: none;
+}
+.auth-card:hover::before {
+  opacity: 1;
+  left: 100%;
 }
 
 .auth-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.45);
 }
 
 /* Logo circular */
 .brand-circle {
-  width: 56px;
-  height: 56px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--primary-light);
+  background: rgba(0, 198, 255, 0.12);
   color: var(--primary);
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  box-shadow: 0 0 12px rgba(0, 198, 255, 0.28);
 }
 
-/* Inputs */
+/* Títulos dentro de la cabecera */
+.card h1, .card h3, .card h2 {
+  margin: 0;
+  color: #e6f7ff;
+}
+
+/* ===========================
+   Inputs y formularios
+   =========================== */
 .form-control {
-  border-radius: .75rem;
-  padding: .8rem 1rem;
-  border: 1px solid var(--border-color);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #222;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
 }
 
 .form-control:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+  outline: none;
+  box-shadow: 0 0 10px rgba(0,198,255,0.5);
+  background: rgba(255,255,255,1);
 }
 
-/* Label flotante */
+/* Floating labels: cambia color al focus */
 .form-floating > label {
   color: var(--text-muted);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
-
 .form-floating > .form-control:focus ~ label {
   color: var(--primary);
-}
-
-/* Checkbox */
-.form-check-input:focus {
-  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
-}
-
-/* Botones */
-.btn-lg {
-  border-radius: .9rem;
-  padding: .8rem 1.2rem;
   font-weight: 600;
-  transition: all 0.2s ease-in-out;
+}
+
+/* Grupo input + botón mostrar contraseña */
+.input-group .btn {
+  border-radius: 12px;
+}
+
+/* Checkbox focus */
+.form-check-input:focus {
+  box-shadow: 0 0 8px rgba(0,198,255,0.45);
+}
+
+/* ===========================
+   Botones
+   =========================== */
+.btn-lg {
+  border-radius: 14px;
+  padding: 12px 18px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-lg:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
 }
 
-/* Input group */
-.input-group .btn {
-  border-top-right-radius: .75rem;
-  border-bottom-right-radius: .75rem;
+/* brillo del botón */
+.btn-lg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+  transition: left 0.8s ease;
+}
+.btn-lg:hover::after {
+  left: 100%;
 }
 
-/* Divider con líneas */
+/* Botones secundarios */
+.btn-outline-dark, .btn-outline-primary, .btn-outline-secondary {
+  border-radius: 12px;
+}
+
+/* ===========================
+   Divider central
+   =========================== */
 .divider {
   display: flex;
   align-items: center;
   gap: .75rem;
-  color: var(--text-muted);
-  font-size: .9rem;
+  color: rgba(255,255,255,0.85);
+  font-size: .95rem;
+  margin: 1.25rem 0;
+  position: relative;
 }
 
 .divider::before,
@@ -100,5 +218,63 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--border-color);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ===========================
+   Scrollbar interno (tarjeta)
+   =========================== */
+.auth-card .card-body::-webkit-scrollbar {
+  width: 8px;
+}
+.auth-card .card-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+}
+
+/* CONTENEDOR PRINCIPAL (centra absolutamente todo) */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  padding: 20px;
+}
+
+/* El div que contiene la tarjeta */
+.login-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Ajusta la card */
+.auth-card {
+  width: 420px;
+  margin: auto;
+}
+
+/* ===========================
+   Responsivo
+   =========================== */
+@media (max-width: 540px) {
+  .auth-card {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 14px;
+    padding: 1.2rem;
+    max-height: calc(100vh - 32px);
+  }
+  .brand-circle { width: 56px; height: 56px; font-size: 1.4rem; }
+  .btn-lg { padding: 10px 14px; }
+}
+
+/* Opcional: si el viewport es muy pequeño y la tarjeta supera la pantalla,
+   centramos en eje vertical hacia arriba (comportamiento natural con scroll) */
+@media (max-height: 520px) {
+  main.container {
+    align-items: flex-start;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
 }
