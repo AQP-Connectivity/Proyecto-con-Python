@@ -1,24 +1,29 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3-slim
+# Usa una imagen ligera de Python 3 como base del contenedor
 
-# Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
+# Evita que Python genere archivos .pyc dentro del contenedor
 
-# Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
+# Muestra los logs de Python en tiempo real sin usar buffers
 
-# Install pip requirements
 COPY requirements.txt .
+# Copia el archivo de dependencias al sistema de archivos del contenedor
+
 RUN python -m pip install -r requirements.txt
+# Instala las dependencias listadas en requirements.txt
 
 WORKDIR /app
+# Define /app como el directorio de trabajo dentro del contenedor
+
 COPY . /app
+# Copia todos los archivos del proyecto al directorio /app
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+# Crea un usuario no-root llamado appuser y asigna permisos sobre /app
+
 USER appuser
+# A partir de aquí, todos los comandos se ejecutan como appuser
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 CMD ["python", "Estructura del Proyecto/app.py"]
-
+# Comando que se ejecuta al iniciar el contenedor (arranca tu aplicación)
