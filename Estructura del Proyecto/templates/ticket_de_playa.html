@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ticket Estacionamiento Playa</title>
+  <title>Plaza de Estacionamiento</title>
+
   <style>
     :root {
       --color-primary: #0288d1;
@@ -11,10 +12,9 @@
       --color-light: #e0f7fa;
       --color-sand: #fff8e1;
       --color-text: #263238;
-      --color-success: #388e3c;
-      --color-total: #d32f2f;
-      --color-error: #d32f2f;
-      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --color-success: #4CAF50;
+      --color-error: #f44336;
+      --shadow: 0 4px 12px rgba(0,0,0,0.15);
       --radius: 12px;
     }
 
@@ -26,302 +26,138 @@
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: linear-gradient(135deg, #b3e5fc, #e0f7fa);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
       color: var(--color-text);
     }
 
-    .container {
-      background: white;
-      padding: 28px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 420px;
-      width: 100%;
-      transition: transform 0.3s ease;
+    h1 {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 2rem;
     }
 
-    .container:hover {
+    .parking-container {
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 480px;
+      width: 100%;
+      transition: 0.3s ease-in-out;
+    }
+
+    .parking-container:hover {
       transform: translateY(-2px);
     }
 
-    h2 {
-      text-align: center;
-      color: var(--color-primary);
-      margin-bottom: 24px;
-      font-weight: 600;
-      font-size: 1.6rem;
+    .parking-lot {
+      display: grid;
+      grid-template-columns: repeat(5, 80px);
+      gap: 12px;
+      justify-content: center;
+      margin-top: 15px;
     }
 
-    input, button {
-      width: 100%;
-      padding: 12px 16px;
-      margin: 10px 0;
-      border: 1px solid #bdbdbd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.2s ease;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.2);
-    }
-
-    button {
-      background-color: var(--color-secondary);
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-size: 1.05rem;
-      transition: background 0.3s ease;
-    }
-
-    button:hover:not(:disabled) {
-      background-color: #004d40;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    #salida-section p {
-      background-color: #e8f5e9;
-      padding: 14px;
-      border-radius: 8px;
-      color: var(--color-success);
-      font-weight: 500;
-      white-space: pre-line;
-      text-align: center;
-    }
-
-    #ticket {
-      display: none;
-      margin-top: 24px;
-      padding: 20px;
-      border: 1px dashed var(--color-secondary);
-      background-color: var(--color-sand);
-      border-radius: var(--radius);
-      font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
-    }
-
-    .ticket-line {
+    .spot {
+      width: 80px;
+      height: 80px;
       display: flex;
-      justify-content: space-between;
-      margin: 6px 0;
-    }
-
-    .total {
+      justify-content: center;
+      align-items: center;
       font-weight: bold;
-      font-size: 1.2em;
-      margin-top: 12px;
-      color: var(--color-total);
-      border-top: 1px dashed #aaa;
-      padding-top: 10px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: white;
+      font-size: 1.2rem;
     }
 
-    hr {
-      border: 0;
-      border-top: 1px dashed #999;
-      margin: 12px 0;
+    .spot.free {
+      background-color: var(--color-success);
     }
 
-    .error {
-      color: var(--color-error);
-      font-size: 0.9em;
-      margin-top: -8px;
-      margin-bottom: 8px;
+    .spot.occupied {
+      background-color: var(--color-error);
     }
 
-    @media print {
-      body {
-        background: white;
-        padding: 0;
-      }
-      .container {
-        box-shadow: none;
-        max-width: 100%;
-        padding: 15px;
-        border-radius: 0;
-      }
-      button, .error {
-        display: none !important;
-      }
-      #form-section, #salida-section {
-        display: none !important;
-      }
-      #ticket {
-        display: block !important;
-      }
+    .spot:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
+
+    .legend {
+      margin-top: 25px;
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .legend-color {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+    }
+
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h2>🏖️ Estacionamiento Playa</h2>
 
-    <div id="form-section">
-      <input type="text" id="placa" placeholder="Placa del vehículo (ej. ABC123)" maxlength="10" autocomplete="off" />
-      <div class="error" id="error-placa" style="display:none;">Formato inválido. Solo letras y números (máx. 10 caracteres).</div>
+  <div class="parking-container">
+    <h1>Plaza de Estacionamiento</h1>
 
-      <input type="text" id="puesto" placeholder="Número de puesto (ej. P-05)" maxlength="10" autocomplete="off" />
-      <div class="error" id="error-puesto" style="display:none;">Ingrese un número de puesto válido.</div>
+    <div class="parking-lot" id="parkingLot"></div>
 
-      <input type="number" id="costo" placeholder="Costo por hora ($)" min="0.1" step="0.01" value="2.50" />
-
-      <button id="btn-entrada" onclick="registrarEntrada()">✅ Registrar Entrada</button>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color" style="background-color: var(--color-success);"></div> Libre
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background-color: var(--color-error);"></div> Ocupado
+      </div>
     </div>
-
-    <div id="salida-section" style="display:none;">
-      <p id="mensaje-entrada"></p>
-      <button id="btn-salida" onclick="generarTicket()">🚗 Retirar Vehículo y Generar Ticket</button>
-    </div>
-
-    <div id="ticket"></div>
   </div>
 
   <script>
-    let horaEntrada = null;
+    const totalSpots = 20;
+    const parkingLot = document.getElementById('parkingLot');
 
-    // Validación básica de placa: solo letras y números, sin espacios
-    function validarPlaca(placa) {
-      const regex = /^[A-Z0-9]{1,10}$/;
-      return regex.test(placa);
-    }
+    let spots = Array(totalSpots).fill(false); // false = libre, true = ocupado
 
-    // Validación básica de puesto
-    function validarPuesto(puesto) {
-      return puesto.length > 0 && puesto.trim().length > 0;
-    }
-
-    function registrarEntrada() {
-      const placaInput = document.getElementById("placa");
-      const puestoInput = document.getElementById("puesto");
-      const costoInput = document.getElementById("costo");
-      const btn = document.getElementById("btn-entrada");
-
-      // Limpiar errores
-      document.getElementById("error-placa").style.display = "none";
-      document.getElementById("error-puesto").style.display = "none";
-
-      let placa = placaInput.value.trim().toUpperCase().replace(/\s+/g, '');
-      let puesto = puestoInput.value.trim();
-      const costo = parseFloat(costoInput.value);
-
-      // Validaciones
-      if (!placa) {
-        document.getElementById("error-placa").textContent = "La placa es obligatoria.";
-        document.getElementById("error-placa").style.display = "block";
-        return;
-      }
-      if (!validarPlaca(placa)) {
-        document.getElementById("error-placa").textContent = "Formato inválido. Solo letras y números (máx. 10 caracteres).";
-        document.getElementById("error-placa").style.display = "block";
-        return;
-      }
-      if (!validarPuesto(puesto)) {
-        document.getElementById("error-puesto").textContent = "El número de puesto es obligatorio.";
-        document.getElementById("error-puesto").style.display = "block";
-        return;
-      }
-      if (isNaN(costo) || costo <= 0) {
-        alert("⚠️ El costo por hora debe ser un número válido mayor que 0.");
-        return;
-      }
-
-      // Desactivar botón para evitar doble envío
-      btn.disabled = true;
-
-      horaEntrada = new Date();
-      const entradaStr = horaEntrada.toLocaleString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      document.getElementById("mensaje-entrada").textContent = 
-        `✅ Entrada registrada\nPlaca: ${placa} | Puesto: ${puesto}\nHora: ${entradaStr}`;
+    function renderParking() {
+      parkingLot.innerHTML = '';
       
-      document.getElementById("form-section").style.display = "none";
-      document.getElementById("salida-section").style.display = "block";
+      spots.forEach((isOccupied, index) => {
+        const spot = document.createElement('div');
+        spot.className = `spot ${isOccupied ? 'occupied' : 'free'}`;
+        spot.textContent = index + 1;
 
-      // Actualizar valores en campos (para uso posterior)
-      placaInput.value = placa;
-      puestoInput.value = puesto;
+        spot.onclick = () => {
+          spots[index] = !spots[index]; 
+          renderParking();
+        };
+
+        parkingLot.appendChild(spot);
+      });
     }
 
-    function generarTicket() {
-      if (!horaEntrada) {
-        alert("⚠️ No hay entrada registrada.");
-        return;
-      }
-
-      const btn = document.getElementById("btn-salida");
-      btn.disabled = true;
-
-      const placa = document.getElementById("placa").value.trim().toUpperCase();
-      const puesto = document.getElementById("puesto").value.trim();
-      const costoPorHora = parseFloat(document.getElementById("costo").value);
-
-      const horaSalida = new Date();
-      const diffMs = horaSalida - horaEntrada;
-      const minutos = Math.floor(diffMs / 60000);
-      const horasTotales = diffMs / (1000 * 60 * 60);
-      const horasCobradas = Math.ceil(horasTotales);
-      const total = (horasCobradas * costoPorHora).toFixed(2);
-
-      const entradaStr = horaEntrada.toLocaleString('es-ES', {
-        day: '2-digit', month: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-      });
-      const salidaStr = horaSalida.toLocaleString('es-ES', {
-        day: '2-digit', month: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-      });
-
-      const ticketHTML = `
-        <h3 style="text-align:center; margin-top:0; margin-bottom:12px;">🎫 TICKET DE ESTACIONAMIENTO</h3>
-        <div class="ticket-line"><span>Placa:</span><span>${placa}</span></div>
-        <div class="ticket-line"><span>Puesto:</span><span>${puesto}</span></div>
-        <div class="ticket-line"><span>Entrada:</span><span>${entradaStr}</span></div>
-        <div class="ticket-line"><span>Salida:</span><span>${salidaStr}</span></div>
-        <div class="ticket-line"><span>Tiempo:</span><span>${minutos} min (${horasCobradas} h cobradas)</span></div>
-        <div class="ticket-line"><span>Costo/hora:</span><span>$${costoPorHora.toFixed(2)}</span></div>
-        <div class="ticket-line total"><span>TOTAL A PAGAR:</span><span>$${total}</span></div>
-        <hr>
-        <p style="text-align:center; font-size:0.9em; margin:0;">¡Gracias por su visita! 🌊☀️</p>
-      `;
-
-      const ticketEl = document.getElementById("ticket");
-      ticketEl.innerHTML = ticketHTML;
-      ticketEl.style.display = "block";
-
-      // Imprimir después de un breve retraso
-      setTimeout(() => {
-        window.print();
-        // Opcional: reiniciar formulario tras impresión
-        setTimeout(() => {
-          location.reload(); // o resetear manualmente si prefieres
-        }, 1000);
-      }, 300);
-    }
-
-    // Opcional: evitar recargar accidentalmente
-    // window.addEventListener('beforeunload', function (e) {
-    //   if (horaEntrada && document.getElementById("ticket").style.display !== "block") {
-    //     e.preventDefault();
-    //     e.returnValue = '';
-    //   }
-    // });
+    renderParking();
   </script>
+
 </body>
 </html>
