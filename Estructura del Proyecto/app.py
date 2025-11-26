@@ -32,6 +32,11 @@ def login():
         return redirect(url_for("index"))
     return render_template("login.html")
 
+@app.route('/register')
+def register():
+    return render_template('registerUser.html')
+
+
 # ✅ Página de inicio
 @app.route("/index", methods=["GET", "POST"])
 def index():
