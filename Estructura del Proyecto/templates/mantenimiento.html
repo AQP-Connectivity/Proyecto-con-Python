@@ -1,76 +1,76 @@
 {% extends "base.html" %}
 
-{% block title %}Estacionamiento{% endblock %}
+{% block title %}Mantenimiento{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
   <!-- TÍTULO -->
   <div class="text-center mb-5">
-    <h2 class="fw-bold text-primary">🚗 Registro de Estacionamiento</h2>
-    <p class="text-secondary">Complete los datos para registrar el ingreso del vehículo</p>
+    <h2 class="fw-bold text-primary">🛠️ Registro de Mantenimiento</h2>
+    <p class="text-secondary">Complete los datos del mantenimiento realizado en la playa de estacionamiento</p>
   </div>
 
   <!-- FORMULARIO -->
-  <div class="card shadow-lg border-0 rounded-4 p-4 mx-auto" style="max-width: 620px;">
+  <div class="card shadow-lg border-0 rounded-4 p-4 mx-auto" style="max-width: 650px;">
     <form method="POST" class="needs-validation" novalidate>
 
       <div class="row g-3">
+
         <!-- Fecha -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">📅 Fecha</label>
+          <label class="form-label fw-semibold">📅 Fecha de mantenimiento</label>
           <input type="date" name="fecha" class="form-control" required>
         </div>
 
-        <!-- Hora -->
+        <!-- Técnico -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">⏰ Hora</label>
-          <input type="time" name="hora" class="form-control" required>
+          <label class="form-label fw-semibold">👷 Técnico responsable</label>
+          <input type="text" name="tecnico" class="form-control" placeholder="Nombre del técnico" required>
         </div>
 
-        <!-- Placa -->
+        <!-- Tipo de mantenimiento -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">🚘 Placa</label>
-          <input type="text" name="placa" class="form-control text-uppercase" placeholder="ABC-123" required>
-        </div>
-
-        <!-- Tipo -->
-        <div class="col-md-6">
-          <label class="form-label fw-semibold">🚗 Tipo</label>
+          <label class="form-label fw-semibold">🔧 Tipo de mantenimiento</label>
           <select name="tipo" class="form-select" required>
             <option value="">Seleccione...</option>
-            <option value="auto">Auto</option>
-            <option value="moto">Moto</option>
-            <option value="camioneta">Camioneta</option>
+            <option value="preventivo">Preventivo</option>
+            <option value="correctivo">Correctivo</option>
+            <option value="evolutivo">Evolutivo</option>
           </select>
         </div>
 
-        <!-- Zona -->
+        <!-- Área afectada -->
         <div class="col-md-6">
-          <label class="form-label fw-semibold">📍 Zona / Nivel</label>
-          <select name="zona" class="form-select" required>
-            <option value="Piso 1">Piso 1</option>
-            <option value="Piso 2">Piso 2</option>
-            <option value="Sótano 1">Sótano 1</option>
+          <label class="form-label fw-semibold">📍 Área</label>
+          <select name="area" class="form-select" required>
+            <option value="">Seleccione…</option>
+            <option value="barreras">Barreras de acceso</option>
+            <option value="sensores">Sensores / cámaras</option>
+            <option value="iluminacion">Iluminación</option>
+            <option value="senalizacion">Señalización</option>
+            <option value="sistema">Sistema informático</option>
+            <option value="otros">Otros</option>
           </select>
         </div>
 
-        <!-- Espacio -->
-        <div class="col-md-6">
-          <label class="form-label fw-semibold"># Espacio</label>
-          <input type="number" name="espacio" min="1" class="form-control" required>
-        </div>
-
-        <!-- Precio -->
+        <!-- Descripción -->
         <div class="col-12">
-          <label class="form-label fw-semibold">💰 Precio (S/.)</label>
-          <input type="number" name="precio" step="0.01" min="0" class="form-control" required>
+          <label class="form-label fw-semibold">📝 Descripción del trabajo</label>
+          <textarea name="descripcion" rows="3" class="form-control" placeholder="Detalle del mantenimiento" required></textarea>
         </div>
+
+        <!-- Costo -->
+        <div class="col-12">
+          <label class="form-label fw-semibold">💰 Costo (S/.)</label>
+          <input type="number" name="costo" step="0.01" min="0" class="form-control" required>
+        </div>
+
       </div>
 
       <!-- Botón -->
-      <button type="submit" class="btn btn-success fw-bold w-100 mt-4 py-2">
-        💾 Guardar Registro
+      <button type="submit" class="btn btn-primary fw-bold w-100 mt-4 py-2">
+        💾 Guardar Mantenimiento
       </button>
     </form>
 
@@ -84,7 +84,7 @@
   <!-- TABLA -->
   <div class="card shadow-sm mt-5 border-0 rounded-4 overflow-hidden">
     <div class="card-header bg-primary text-white fw-semibold">
-      📋 Registros Recientes
+      🗂️ Registros de Mantenimiento
     </div>
 
     <div class="table-responsive">
@@ -92,34 +92,31 @@
         <thead class="table-light">
           <tr>
             <th>Fecha</th>
-            <th>Hora</th>
-            <th>Placa</th>
+            <th>Técnico</th>
             <th>Tipo</th>
-            <th>Zona</th>
-            <th>Espacio</th>
-            <th>Precio (S/.)</th>
+            <th>Área</th>
+            <th>Descripción</th>
+            <th>Costo (S/.)</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>2025-09-28</td>
-            <td>10:30</td>
-            <td>ABC-123</td>
-            <td>Auto</td>
-            <td>Piso 1</td>
-            <td>15</td>
-            <td>5.00</td>
+            <td>Juan Pérez</td>
+            <td>Preventivo</td>
+            <td>Barreras</td>
+            <td>Lubricación y prueba de funcionamiento</td>
+            <td>20.00</td>
           </tr>
 
           <tr>
-            <td>2025-09-28</td>
-            <td>11:00</td>
-            <td>XYZ-987</td>
-            <td>Moto</td>
-            <td>Sótano 1</td>
-            <td>3</td>
-            <td>2.50</td>
+            <td>2025-09-29</td>
+            <td>María López</td>
+            <td>Correctivo</td>
+            <td>Iluminación</td>
+            <td>Reemplazo de focos dañados</td>
+            <td>35.00</td>
           </tr>
         </tbody>
 
@@ -129,5 +126,3 @@
 
 </div>
 {% endblock %}
-
-
